@@ -318,6 +318,138 @@
         margin: 0;
       }
 
+      .tech-map-section {
+        background: #ffffff;
+        color: var(--ink);
+        margin: 42px 0 96px;
+        min-height: 760px;
+        overflow: hidden;
+        padding: 72px 24px 64px;
+        position: relative;
+      }
+
+      .tech-map-header {
+        margin: 0 auto;
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .tech-map-header h2 {
+        color: var(--ink-2);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(44px, 7vw, 76px);
+        font-weight: 500;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .tech-map-header p {
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 22px);
+        line-height: 1.6;
+        margin: 26px auto 0;
+        max-width: 680px;
+      }
+
+      .tech-map-canvas {
+        background-image:
+          linear-gradient(rgba(5, 26, 36, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(5, 26, 36, 0.045) 1px, transparent 1px);
+        background-color: #fbfcfb;
+        background-size: 82px 82px;
+        border: 1px solid rgba(5, 26, 36, 0.06);
+        border-radius: 36px;
+        box-shadow: 0 28px 80px rgba(5, 26, 36, 0.08);
+        height: 640px;
+        margin: 58px auto 0;
+        max-width: 1240px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .tech-map-canvas::before {
+        background: radial-gradient(circle at center, rgba(167, 243, 208, 0.48), transparent 44%);
+        content: "";
+        inset: 18% 18%;
+        position: absolute;
+      }
+
+      .tech-dot {
+        background: rgba(5, 26, 36, 0.22);
+        border-radius: 999px;
+        box-shadow: 0 0 18px rgba(5, 26, 36, 0.12);
+        height: 5px;
+        position: absolute;
+        width: 5px;
+      }
+
+      .tech-dot--one { left: 27%; top: 21%; }
+      .tech-dot--two { right: 30%; top: 16%; }
+      .tech-dot--three { left: 46%; top: 48%; }
+      .tech-dot--four { right: 18%; top: 64%; }
+
+      .tech-core,
+      .tech-node {
+        align-items: center;
+        border: 1px solid rgba(5, 26, 36, 0.08);
+        border-radius: 999px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+      }
+
+      .tech-core {
+        background: #ffffff;
+        box-shadow: 0 0 0 8px rgba(167, 243, 208, 0.42), 0 28px 70px rgba(5, 26, 36, 0.13);
+        height: 212px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 212px;
+      }
+
+      .tech-core span,
+      .tech-node span {
+        color: var(--ink);
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .tech-core span {
+        font-size: 34px;
+      }
+
+      .tech-core strong,
+      .tech-node strong {
+        color: var(--muted);
+        font-size: 18px;
+        margin-top: 14px;
+      }
+
+      .tech-core strong {
+        color: var(--ink);
+        font-size: 24px;
+      }
+
+      .tech-node {
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 18px 44px rgba(5, 26, 36, 0.08);
+        height: 118px;
+        width: 118px;
+      }
+
+      .tech-node--rag { left: 11%; top: 11%; }
+      .tech-node--multi { left: 49%; top: 4%; transform: translateX(-50%); }
+      .tech-node--agent { right: 10%; top: 8%; }
+      .tech-node--prompt { left: 5%; top: 58%; }
+      .tech-node--safe { right: 5%; top: 57%; }
+      .tech-node--tune { bottom: 8%; left: 11%; }
+      .tech-node--chain { bottom: -3%; left: 50%; transform: translateX(-50%); }
+      .tech-node--aiops { bottom: 8%; right: 10%; }
+
       .marquee-section {
         margin: 32px 0 96px;
         overflow: hidden;
@@ -521,6 +653,53 @@
         .project-visual {
           min-height: 360px;
         }
+
+        .tech-map-section {
+          min-height: auto;
+        }
+
+        .tech-map-canvas {
+          height: auto;
+          max-width: 560px;
+          padding: 40px 0;
+          text-align: center;
+        }
+
+        .tech-core,
+        .tech-node {
+          position: relative;
+          transform: none;
+        }
+
+        .tech-core {
+          height: 176px;
+          left: auto;
+          margin: 0 auto 28px;
+          top: auto;
+          width: 176px;
+        }
+
+        .tech-node {
+          display: inline-flex;
+          height: 118px;
+          margin: 10px;
+          vertical-align: top;
+          width: 118px;
+        }
+
+        .tech-node--rag,
+        .tech-node--multi,
+        .tech-node--agent,
+        .tech-node--prompt,
+        .tech-node--safe,
+        .tech-node--tune,
+        .tech-node--chain,
+        .tech-node--aiops {
+          bottom: auto;
+          left: auto;
+          right: auto;
+          top: auto;
+        }
       }
 
       @media (max-width: 640px) {
@@ -568,33 +747,37 @@
             <span class="nav-tick-line"></span>
             <span class="nav-card"><span>01</span><strong>关于我</strong><em>学习能力与 AI 落地能力</em></span>
           </a>
+          <a class="nav-tick" href="#tech-map" aria-label="跳转到 AI 技术图谱">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>02</span><strong>AI 技术图谱</strong><em>AI 技术探索路径与实践积累</em></span>
+          </a>
           <a class="nav-tick" href="#assistant" aria-label="跳转到个人助手">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>02</span><strong>个人助手</strong><em>重点作品：个人助手系统</em></span>
+            <span class="nav-card"><span>03</span><strong>个人助手</strong><em>重点作品：个人助手系统</em></span>
           </a>
           <a class="nav-tick" href="#ops" aria-label="跳转到运维平台 Demo">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>03</span><strong>运维平台 Demo</strong><em>Agent 产品与运维流程</em></span>
+            <span class="nav-card"><span>04</span><strong>运维平台 Demo</strong><em>Agent 产品与运维流程</em></span>
           </a>
           <a class="nav-tick" href="#news" aria-label="跳转到 AI 资讯 Agent">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>04</span><strong>AI 资讯 Agent</strong><em>近期完成的信息收集工具</em></span>
+            <span class="nav-card"><span>05</span><strong>AI 资讯 Agent</strong><em>近期完成的信息收集工具</em></span>
           </a>
           <a class="nav-tick" href="#botc" aria-label="跳转到血染钟楼问答">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>05</span><strong>血染钟楼问答</strong><em>规则问答与兴趣场景应用</em></span>
+            <span class="nav-card"><span>06</span><strong>血染钟楼问答</strong><em>规则问答与兴趣场景应用</em></span>
           </a>
           <a class="nav-tick" href="#travel" aria-label="跳转到出行准备工具">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>06</span><strong>出行准备工具</strong><em>场景化清单 MVP</em></span>
+            <span class="nav-card"><span>07</span><strong>出行准备工具</strong><em>场景化清单 MVP</em></span>
           </a>
           <a class="nav-tick" href="#toolbox" aria-label="跳转到去 AI 工具">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>07</span><strong>去 AI 工具</strong><em>vibe coding 小产品</em></span>
+            <span class="nav-card"><span>08</span><strong>去 AI 工具</strong><em>vibe coding 小产品</em></span>
           </a>
           <a class="nav-tick" href="#contact" aria-label="跳转到联系我">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>08</span><strong>联系我</strong><em>微信、邮箱与电话</em></span>
+            <span class="nav-card"><span>09</span><strong>联系我</strong><em>微信、邮箱与电话</em></span>
           </a>
         </nav>
       </aside>
@@ -618,6 +801,28 @@
           <article><span>01</span><h3>学习能力</h3><p>从数据分析、数仓和运维场景一路延展到 RAG、Multi-Agent、Skill 与 Tool Calling。</p></article>
           <article><span>02</span><h3>AI 落地能力</h3><p>关注的不只是模型效果，而是任务边界、确认机制、异常兜底和真实使用链路。</p></article>
           <article><span>03</span><h3>复杂流程产品化</h3><p>擅长把散落的经验、规则和操作流程拆成状态、节点、权限与可验证结果。</p></article>
+        </div>
+      </section>
+
+      <section id="tech-map" class="tech-map-section">
+        <div class="tech-map-header">
+          <h2>AI 技术图谱</h2>
+          <p>我的 AI 技术探索路径与实践积累，展示我如何把学习过的技术概念转化为可落地的产品能力。</p>
+        </div>
+        <div class="tech-map-canvas" aria-label="AI 技术图谱">
+          <span class="tech-dot tech-dot--one"></span>
+          <span class="tech-dot tech-dot--two"></span>
+          <span class="tech-dot tech-dot--three"></span>
+          <span class="tech-dot tech-dot--four"></span>
+          <div class="tech-core"><span>LLM</span><strong>LLM</strong></div>
+          <div class="tech-node tech-node--rag"><span>DB</span><strong>RAG</strong></div>
+          <div class="tech-node tech-node--multi"><span>IMG</span><strong>多模态</strong></div>
+          <div class="tech-node tech-node--agent"><span>BOT</span><strong>Agent</strong></div>
+          <div class="tech-node tech-node--prompt"><span>T</span><strong>Prompt</strong></div>
+          <div class="tech-node tech-node--safe"><span>SEC</span><strong>安全</strong></div>
+          <div class="tech-node tech-node--tune"><span>FT</span><strong>微调</strong></div>
+          <div class="tech-node tech-node--chain"><span>LC</span><strong>LangChain</strong></div>
+          <div class="tech-node tech-node--aiops"><span>OPS</span><strong>AIOps</strong></div>
         </div>
       </section>
 

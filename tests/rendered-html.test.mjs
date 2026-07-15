@@ -32,6 +32,7 @@ test("server-renders the portfolio shell", async () => {
   assert.match(html, /冯涛/);
   assert.match(html, /Theo/);
   assert.match(html, /AI 产品经理/);
+  assert.match(html, /AI 技术图谱/);
   assert.match(html, /个人助手/);
   assert.match(html, /运维平台 Demo/);
   assert.match(html, /AI 资讯收集 Agent|AI 资讯 Agent/);

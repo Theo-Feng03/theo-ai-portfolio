@@ -3,13 +3,14 @@
 const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "回到首屏身份介绍" },
   { id: "about", label: "关于我", short: "01", hint: "学习能力与 AI 落地能力" },
-  { id: "assistant", label: "个人助手", short: "02", hint: "重点作品：个人助手系统" },
-  { id: "ops", label: "运维平台 Demo", short: "03", hint: "Agent 产品与运维流程" },
-  { id: "news", label: "AI 资讯 Agent", short: "04", hint: "近期完成的信息收集工具" },
-  { id: "botc", label: "血染钟楼问答", short: "05", hint: "规则问答与兴趣场景应用" },
-  { id: "travel", label: "出行准备工具", short: "06", hint: "场景化清单 MVP" },
-  { id: "toolbox", label: "去 AI 工具", short: "07", hint: "vibe coding 小产品" },
-  { id: "contact", label: "联系我", short: "08", hint: "微信、邮箱与电话" },
+  { id: "tech-map", label: "AI 技术图谱", short: "02", hint: "AI 技术探索路径与实践积累" },
+  { id: "assistant", label: "个人助手", short: "03", hint: "重点作品：个人助手系统" },
+  { id: "ops", label: "运维平台 Demo", short: "04", hint: "Agent 产品与运维流程" },
+  { id: "news", label: "AI 资讯 Agent", short: "05", hint: "近期完成的信息收集工具" },
+  { id: "botc", label: "血染钟楼问答", short: "06", hint: "规则问答与兴趣场景应用" },
+  { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
+  { id: "toolbox", label: "去 AI 工具", short: "08", hint: "vibe coding 小产品" },
+  { id: "contact", label: "联系我", short: "09", hint: "微信、邮箱与电话" },
 ];
 
 const projects = [
@@ -69,6 +70,17 @@ const projects = [
   },
 ];
 
+const techNodes = [
+  { label: "RAG", icon: "DB", className: "tech-node--rag" },
+  { label: "多模态", icon: "IMG", className: "tech-node--multi" },
+  { label: "Agent", icon: "BOT", className: "tech-node--agent" },
+  { label: "Prompt", icon: "T", className: "tech-node--prompt" },
+  { label: "安全", icon: "SEC", className: "tech-node--safe" },
+  { label: "微调", icon: "FT", className: "tech-node--tune" },
+  { label: "LangChain", icon: "LC", className: "tech-node--chain" },
+  { label: "AIOps", icon: "OPS", className: "tech-node--aiops" },
+];
+
 function SideNav() {
   return (
     <aside className="side-nav">
@@ -90,6 +102,33 @@ function SideNav() {
         ))}
       </nav>
     </aside>
+  );
+}
+
+function TechMap() {
+  return (
+    <section id="tech-map" className="tech-map-section">
+      <div className="tech-map-header">
+        <h2>AI 技术图谱</h2>
+        <p>我的 AI 技术探索路径与实践积累</p>
+      </div>
+      <div className="tech-map-canvas" aria-label="AI 技术图谱">
+        <span className="tech-dot tech-dot--one" />
+        <span className="tech-dot tech-dot--two" />
+        <span className="tech-dot tech-dot--three" />
+        <span className="tech-dot tech-dot--four" />
+        <div className="tech-core">
+          <span>LLM</span>
+          <strong>LLM</strong>
+        </div>
+        {techNodes.map((node) => (
+          <div className={`tech-node ${node.className}`} key={node.label}>
+            <span>{node.icon}</span>
+            <strong>{node.label}</strong>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -166,6 +205,8 @@ export default function Home() {
           </article>
         </div>
       </section>
+
+      <TechMap />
 
       <section className="marquee-section" aria-label="作品集视觉节奏">
         <div className="marquee-track">
