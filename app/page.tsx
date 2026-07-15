@@ -154,6 +154,20 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         <figure className="project-screenshot">
           <img src={project.image} alt={project.imageAlt} />
           <figcaption>Vault 目录结构 + Agent Rules 治理规则</figcaption>
+          <div className="screenshot-notes" aria-label="截图解读">
+            <span>
+              <strong>左侧不是普通文件夹</strong>
+              我把项目、经验、技能和待审核内容分区管理，让助手能按场景调用材料。
+            </span>
+            <span>
+              <strong>右侧不是随手写的说明</strong>
+              它是助手运行规则，用来约束能读什么、何时要确认、怎样避免越权。
+            </span>
+            <span>
+              <strong>这张图想表达的价值</strong>
+              把零散 AI 使用经验沉淀成可复用系统，让后续项目更快、更稳、更可控。
+            </span>
+          </div>
         </figure>
       ) : (
         <div className="project-visual" aria-label={`${project.title} 内容占位`}>

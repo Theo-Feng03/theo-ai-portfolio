@@ -585,6 +585,30 @@ main {
   padding: 12px 6px 4px;
 }
 
+.screenshot-notes {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 10px 2px 2px;
+}
+
+.screenshot-notes span {
+  background: #ffffff;
+  border: 1px solid rgba(5, 26, 36, 0.08);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.55;
+  padding: 10px 12px;
+}
+
+.screenshot-notes strong {
+  display: block;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
 .project-section--mint .project-visual { background: #e7fff4; }
 .project-section--ink .project-visual { background: #071f2b; }
 .project-section--amber .project-visual { background: #fff4c9; }
@@ -684,6 +708,10 @@ main {
 
   .project-visual {
     min-height: 360px;
+  }
+
+  .screenshot-notes {
+    grid-template-columns: 1fr;
   }
 
   .tech-map-section {
