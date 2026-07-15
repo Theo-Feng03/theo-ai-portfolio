@@ -51,9 +51,8 @@ test("keeps the custom navigation and metadata in source", async () => {
   assert.match(css, /\.side-nav/);
   assert.match(css, /\.nav-rail/);
   assert.match(css, /\.nav-card/);
-  assert.match(css, /\.nav-tick--featured/);
   assert.match(page, /跳转到/);
-  assert.doesNotMatch(page, /固定导航|取消固定|side-nav--pinned/);
+  assert.doesNotMatch(page, /固定导航|取消固定|side-nav--pinned|nav-tick--featured/);
   assert.match(layout, /冯涛 Theo \| AI 产品经理作品集/);
   assert.match(packageJson, /"name": "theo-ai-product-portfolio"/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);

@@ -76,7 +76,7 @@ function SideNav() {
         {navItems.map((item) => (
           <a
             key={item.id}
-            className={item.id === "assistant" ? "nav-tick nav-tick--featured" : "nav-tick"}
+            className="nav-tick"
             href={`#${item.id}`}
             aria-label={`跳转到${item.label}`}
           >

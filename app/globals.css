@@ -102,11 +102,6 @@ main {
   width: 12px;
 }
 
-.nav-tick--featured .nav-tick-line {
-  background: var(--ink);
-  width: 52px;
-}
-
 .nav-card {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(5, 26, 36, 0.08);
