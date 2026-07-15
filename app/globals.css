@@ -76,7 +76,7 @@ main {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
   justify-content: center;
   left: 34px;
   pointer-events: auto;
@@ -88,9 +88,46 @@ main {
 .nav-tick {
   align-items: center;
   display: flex;
-  height: 14px;
+  height: 8px;
   position: relative;
   width: 190px;
+}
+
+.nav-tick::before,
+.nav-tick::after {
+  background: #cfd5d8;
+  content: "";
+  display: block;
+  height: 4px;
+  left: 0;
+  opacity: 0.9;
+  position: absolute;
+  transition: opacity 180ms ease, transform 180ms ease, width 180ms ease;
+}
+
+.nav-tick::before {
+  top: -14px;
+  width: 26px;
+}
+
+.nav-tick::after {
+  bottom: -14px;
+  width: 34px;
+}
+
+.nav-tick:first-child::before,
+.nav-tick:last-child::after {
+  display: none;
+}
+
+.nav-tick:nth-child(3n + 1)::before,
+.nav-tick:nth-child(3n + 2)::after {
+  width: 18px;
+}
+
+.nav-tick:nth-child(3n)::before,
+.nav-tick:nth-child(3n + 1)::after {
+  width: 38px;
 }
 
 .nav-tick-line {
@@ -126,6 +163,22 @@ main {
   opacity: 1;
   transform: translateX(8px);
   width: 64px;
+}
+
+.nav-tick:hover::before,
+.nav-tick:hover::after,
+.nav-tick:focus-visible::before,
+.nav-tick:focus-visible::after {
+  opacity: 1;
+  transform: translateX(4px);
+  width: 42px;
+}
+
+.nav-tick:first-child:hover::after,
+.nav-tick:first-child:focus-visible::after,
+.nav-tick:last-child:hover::before,
+.nav-tick:last-child:focus-visible::before {
+  width: 32px;
 }
 
 .nav-tick:hover .nav-card,
