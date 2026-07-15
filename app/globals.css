@@ -100,34 +100,23 @@ main {
   display: block;
   height: 4px;
   left: 0;
-  opacity: 0.9;
+  opacity: 0;
   position: absolute;
   transition: opacity 180ms ease, transform 180ms ease, width 180ms ease;
+  width: 34px;
 }
 
 .nav-tick::before {
   top: -14px;
-  width: 26px;
 }
 
 .nav-tick::after {
   bottom: -14px;
-  width: 34px;
 }
 
 .nav-tick:first-child::before,
 .nav-tick:last-child::after {
   display: none;
-}
-
-.nav-tick:nth-child(3n + 1)::before,
-.nav-tick:nth-child(3n + 2)::after {
-  width: 18px;
-}
-
-.nav-tick:nth-child(3n)::before,
-.nav-tick:nth-child(3n + 1)::after {
-  width: 38px;
 }
 
 .nav-tick-line {
@@ -136,7 +125,7 @@ main {
   height: 4px;
   opacity: 0.9;
   transition: background 180ms ease, transform 180ms ease, width 180ms ease, opacity 180ms ease;
-  width: 12px;
+  width: 22px;
 }
 
 .nav-card {
@@ -171,7 +160,7 @@ main {
 .nav-tick:focus-visible::after {
   opacity: 1;
   transform: translateX(4px);
-  width: 42px;
+  width: 38px;
 }
 
 .nav-tick:first-child:hover::after,
