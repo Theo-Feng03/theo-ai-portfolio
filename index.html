@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>冯涛 Theo | AI 产品经理作品集</title>
+    <meta
+      name="description"
+      content="AI 产品经理冯涛 Theo 的作品案例展示，聚焦学习能力、AI 落地能力与 Agent 产品实践。"
+    />
+    <style>
+      :root {
+        --background: #ffffff;
+        --foreground: #051a24;
+        --muted: #52636c;
+        --soft: #f5f7f6;
+        --ink: #051a24;
+        --ink-2: #0d212c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--background);
+        color: var(--foreground);
+        font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      main {
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .side-nav {
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        width: 260px;
+        z-index: 50;
+      }
+
+      .nav-rail {
+        align-items: center;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        justify-content: center;
+        left: 34px;
+        pointer-events: auto;
+        position: absolute;
+        top: 0;
+        width: 44px;
+      }
+
+      .tick {
+        background: #cfd5d8;
+        display: block;
+        height: 4px;
+        opacity: 0.9;
+        transition: background 180ms ease, transform 180ms ease, width 180ms ease;
+        width: 12px;
+      }
+
+      .tick--active {
+        background: var(--ink);
+        width: 52px;
+      }
+
+      .nav-panel {
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid rgba(5, 26, 36, 0.08);
+        border-radius: 0 28px 28px 0;
+        box-shadow: 0 18px 50px rgba(5, 26, 36, 0.14);
+        left: 0;
+        min-height: 520px;
+        padding: 24px 22px 24px 34px;
+        pointer-events: auto;
+        position: absolute;
+        top: 50%;
+        transform: translate(-224px, -50%);
+        transition: transform 280ms ease;
+        width: 238px;
+      }
+
+      .side-nav:hover .nav-panel,
+      .side-nav.pinned .nav-panel {
+        transform: translate(0, -50%);
+      }
+
+      .side-nav:hover .tick,
+      .side-nav.pinned .tick {
+        background: #a8b0b5;
+        transform: translateX(8px);
+      }
+
+      .side-nav:hover .tick--active,
+      .side-nav.pinned .tick--active {
+        background: var(--ink);
+        transform: translateX(18px);
+      }
+
+      .pin-button {
+        background: var(--ink);
+        border: 0;
+        border-radius: 999px;
+        box-shadow: 0 1px 2px rgba(5, 26, 36, 0.1), 0 9px 20px rgba(5, 26, 36, 0.18),
+          inset 0 2px 8px rgba(255, 255, 255, 0.38);
+        color: white;
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        margin-bottom: 26px;
+        padding: 10px 16px;
+      }
+
+      .nav-title,
+      .hero-kicker,
+      .eyebrow,
+      .nav-links span,
+      .visual-index {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      .nav-title {
+        color: var(--muted);
+        font-size: 12px;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: grid;
+        gap: 8px;
+      }
+
+      .nav-links a {
+        align-items: center;
+        border-radius: 14px;
+        display: flex;
+        font-size: 14px;
+        gap: 10px;
+        padding: 9px 10px;
+        transition: background 180ms ease, transform 180ms ease;
+      }
+
+      .nav-links a:hover {
+        background: #f0f3f2;
+        transform: translateX(4px);
+      }
+
+      .nav-links span {
+        color: #8d979c;
+        font-size: 11px;
+        min-width: 24px;
+      }
+
+      .hero-section {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 560px;
+        min-height: 92vh;
+        padding: 72px 24px 40px;
+        text-align: center;
+      }
+
+      .hero-kicker,
+      .eyebrow {
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0;
+        margin: 0 0 16px;
+        text-transform: uppercase;
+      }
+
+      .hero-section h1 {
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(44px, 8vw, 86px);
+        font-weight: 500;
+        line-height: 0.96;
+        margin: 0;
+      }
+
+      .hero-section h1 span {
+        color: var(--ink-2);
+        display: block;
+        font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-size: clamp(38px, 7vw, 76px);
+        margin-top: 14px;
+      }
+
+      .hero-lead {
+        color: var(--ink);
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.72;
+        margin: 28px 0 0;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+        margin-top: 34px;
+      }
+
+      .primary-action,
+      .secondary-action {
+        border-radius: 999px;
+        font-size: 15px;
+        padding: 13px 24px;
+      }
+
+      .primary-action {
+        background: var(--ink);
+        box-shadow: 0 1px 2px rgba(5, 26, 36, 0.1), 0 4px 4px rgba(5, 26, 36, 0.09),
+          0 9px 6px rgba(5, 26, 36, 0.05), inset 0 2px 8px rgba(255, 255, 255, 0.44);
+        color: white;
+      }
+
+      .secondary-action {
+        background: white;
+        box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.05), 0 4px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .about-section,
+      .contact-section {
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 96px 24px;
+      }
+
+      .about-section h2,
+      .contact-section h2 {
+        color: var(--ink-2);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(36px, 6vw, 72px);
+        font-weight: 500;
+        line-height: 1.05;
+        margin: 0;
+        max-width: 900px;
+      }
+
+      .ability-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 48px;
+      }
+
+      .ability-grid article {
+        background: white;
+        border: 1px solid rgba(5, 26, 36, 0.08);
+        border-radius: 8px;
+        box-shadow: 0 16px 40px rgba(5, 26, 36, 0.08);
+        min-height: 232px;
+        padding: 26px;
+      }
+
+      .ability-grid span,
+      .visual-index {
+        color: #97a1a6;
+        font-size: 12px;
+      }
+
+      .ability-grid h3 {
+        font-size: 22px;
+        font-weight: 500;
+        margin: 28px 0 12px;
+      }
+
+      .ability-grid p {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.68;
+        margin: 0;
+      }
+
+      .marquee-section {
+        margin: 32px 0 96px;
+        overflow: hidden;
+        padding: 34px 0;
+        white-space: nowrap;
+      }
+
+      .marquee-track {
+        animation: marquee 30s linear infinite;
+        display: inline-flex;
+        gap: 18px;
+      }
+
+      .marquee-track span {
+        background: var(--soft);
+        border: 1px solid rgba(5, 26, 36, 0.06);
+        border-radius: 999px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(28px, 4vw, 56px);
+        padding: 18px 34px;
+      }
+
+      .project-stack {
+        display: grid;
+        gap: 72px;
+        margin: 0 auto;
+        max-width: 1180px;
+        padding: 0 24px 80px;
+      }
+
+      .project-section {
+        align-items: stretch;
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 0.88fr 1.12fr;
+        min-height: 520px;
+      }
+
+      .project-copy {
+        align-self: center;
+        padding: 24px 0 24px 72px;
+      }
+
+      .project-heading {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .project-heading h2 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(38px, 6vw, 76px);
+        font-weight: 500;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .project-heading span {
+        background: var(--ink);
+        border-radius: 999px;
+        color: white;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+
+      .project-copy p:not(.eyebrow) {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+        margin: 22px 0 0;
+        max-width: 460px;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .tag-row span {
+        background: white;
+        border: 1px solid rgba(5, 26, 36, 0.08);
+        border-radius: 999px;
+        box-shadow: 0 8px 22px rgba(5, 26, 36, 0.06);
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+
+      .project-visual {
+        border-radius: 36px;
+        box-shadow: 0 28px 80px rgba(5, 26, 36, 0.13);
+        display: grid;
+        min-height: 520px;
+        overflow: hidden;
+        padding: 30px;
+        position: relative;
+      }
+
+      .mint { background: #e7fff4; }
+      .ink { background: #071f2b; }
+      .amber { background: #fff4c9; }
+      .rose { background: #ffe7ec; }
+      .sky { background: #e6f6ff; }
+      .lime { background: #f1ffd8; }
+
+      .ink .visual-index {
+        color: #e0ebf0;
+      }
+
+      .visual-lines {
+        align-self: end;
+        display: grid;
+        gap: 16px;
+        max-width: 420px;
+      }
+
+      .visual-lines span {
+        background: rgba(5, 26, 36, 0.28);
+        display: block;
+        height: 8px;
+      }
+
+      .ink .visual-lines span {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .visual-lines span:nth-child(1) { width: 78%; }
+      .visual-lines span:nth-child(2) { width: 56%; }
+      .visual-lines span:nth-child(3) { width: 88%; }
+
+      .visual-window {
+        background: rgba(255, 255, 255, 0.72);
+        border-radius: 24px;
+        bottom: 34px;
+        box-shadow: 0 20px 45px rgba(5, 26, 36, 0.14);
+        display: grid;
+        gap: 12px;
+        padding: 22px;
+        position: absolute;
+        right: 34px;
+        width: min(44%, 280px);
+      }
+
+      .visual-window span {
+        background: rgba(5, 26, 36, 0.18);
+        border-radius: 999px;
+        height: 10px;
+      }
+
+      .visual-window span:nth-child(2) { width: 70%; }
+      .visual-window span:nth-child(3) { width: 44%; }
+
+      .contact-section {
+        padding-bottom: 120px;
+      }
+
+      .contact-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 42px;
+      }
+
+      .contact-grid a,
+      .contact-grid span {
+        background: var(--ink);
+        border-radius: 8px;
+        color: white;
+        display: block;
+        font-size: 17px;
+        min-height: 86px;
+        padding: 28px;
+      }
+
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+      }
+
+      @media (max-width: 900px) {
+        .side-nav {
+          width: 210px;
+        }
+
+        .nav-rail {
+          left: 14px;
+        }
+
+        .nav-panel {
+          transform: translate(-218px, -50%);
+        }
+
+        .ability-grid,
+        .project-section,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .project-copy {
+          padding-left: 0;
+        }
+
+        .project-visual {
+          min-height: 360px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero-section {
+          min-height: 86vh;
+          padding-top: 58px;
+        }
+
+        .side-nav {
+          display: none;
+        }
+
+        .about-section,
+        .contact-section {
+          padding: 72px 20px;
+        }
+
+        .project-stack {
+          gap: 54px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        .project-heading h2 {
+          font-size: 42px;
+        }
+
+        .visual-window {
+          bottom: 24px;
+          right: 24px;
+          width: 62%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <aside class="side-nav" id="sideNav">
+        <div class="nav-rail" aria-hidden="true">
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick tick--active"></span>
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
+          <span class="tick"></span>
+        </div>
+        <nav class="nav-panel" aria-label="作品导航">
+          <button type="button" class="pin-button" id="pinButton">固定导航</button>
+          <div class="nav-title">Theo Portfolio</div>
+          <div class="nav-links">
+            <a href="#intro"><span>00</span>冯涛 | Theo</a>
+            <a href="#about"><span>01</span>关于我</a>
+            <a href="#assistant"><span>02</span>个人助手</a>
+            <a href="#ops"><span>03</span>运维平台 Demo</a>
+            <a href="#news"><span>04</span>AI 资讯 Agent</a>
+            <a href="#botc"><span>05</span>血染钟楼问答</a>
+            <a href="#travel"><span>06</span>出行准备工具</a>
+            <a href="#toolbox"><span>07</span>去 AI 工具</a>
+            <a href="#contact"><span>08</span>联系我</a>
+          </div>
+        </nav>
+      </aside>
+
+      <section id="intro" class="hero-section">
+        <p class="hero-kicker">Portfolio / AI Product Manager</p>
+        <h1>冯涛｜Theo<span>AI 产品经理</span></h1>
+        <p class="hero-lead">
+          我希望通过这个作品集展示两件事：持续学习新技术的速度，以及把 AI 真正落到流程、工具和业务场景里的能力。
+        </p>
+        <div class="hero-actions">
+          <a href="#assistant" class="primary-action">查看作品</a>
+          <a href="#contact" class="secondary-action">联系我</a>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <p class="eyebrow">About</p>
+        <h2>学习快，动手深，能把 AI 从想法推进到可用产品。</h2>
+        <div class="ability-grid">
+          <article><span>01</span><h3>学习能力</h3><p>从数据分析、数仓和运维场景一路延展到 RAG、Multi-Agent、Skill 与 Tool Calling。</p></article>
+          <article><span>02</span><h3>AI 落地能力</h3><p>关注的不只是模型效果，而是任务边界、确认机制、异常兜底和真实使用链路。</p></article>
+          <article><span>03</span><h3>复杂流程产品化</h3><p>擅长把散落的经验、规则和操作流程拆成状态、节点、权限与可验证结果。</p></article>
+        </div>
+      </section>
+
+      <section class="marquee-section" aria-label="作品集视觉节奏">
+        <div class="marquee-track">
+          <span>个人助手</span><span>运维平台 Demo</span><span>AI 资讯收集 Agent</span><span>血染钟楼问答助手</span><span>出行准备工具</span><span>去 AI 工具</span>
+          <span>个人助手</span><span>运维平台 Demo</span><span>AI 资讯收集 Agent</span><span>血染钟楼问答助手</span><span>出行准备工具</span><span>去 AI 工具</span>
+        </div>
+      </section>
+
+      <div class="project-stack">
+        <section id="assistant" class="project-section"><div class="project-copy"><p class="eyebrow">Featured Project</p><div class="project-heading"><h2>个人助手</h2><span>已完成</span></div><p>长期自用的个人知识、任务和协作系统，后续会整理为首页最重点案例。</p><div class="tag-row"><span>个人知识库</span><span>任务协作</span><span>Agent 化工作流</span></div></div><div class="project-visual mint"><div class="visual-index">01</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="ops" class="project-section"><div class="project-copy"><p class="eyebrow">Agent Product</p><div class="project-heading"><h2>运维平台 Demo</h2><span>已完成</span></div><p>面向运维流程的 AI Agent 产品 Demo，重点展示流程拆解、人机协作与安全边界。</p><div class="tag-row"><span>工单流转</span><span>多 Agent 编排</span><span>人工确认</span></div></div><div class="project-visual ink"><div class="visual-index">02</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="news" class="project-section"><div class="project-copy"><p class="eyebrow">Upcoming</p><div class="project-heading"><h2>AI 资讯收集 Agent</h2><span>近期完成</span></div><p>网页版信息收集与筛选 Agent，预留为这两天补齐的新增作品。</p><div class="tag-row"><span>信息聚合</span><span>筛选摘要</span><span>网页版体验</span></div></div><div class="project-visual amber"><div class="visual-index">03</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="botc" class="project-section"><div class="project-copy"><p class="eyebrow">Upcoming</p><div class="project-heading"><h2>血染钟楼问答助手</h2><span>近期完成</span></div><p>兴趣场景驱动的 AI 问答助手，用来展示把 AI 能力落进具体使用场景的能力。</p><div class="tag-row"><span>规则问答</span><span>场景检索</span><span>低门槛使用</span></div></div><div class="project-visual rose"><div class="visual-index">04</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="travel" class="project-section"><div class="project-copy"><p class="eyebrow">MVP</p><div class="project-heading"><h2>出行准备工具</h2><span>已完成</span></div><p>AI 辅助的场景化打包清单 MVP，用作作品集里的可运行产品案例。</p><div class="tag-row"><span>场景清单</span><span>外部信息</span><span>可运行 MVP</span></div></div><div class="project-visual sky"><div class="visual-index">05</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="toolbox" class="project-section"><div class="project-copy"><p class="eyebrow">Vibe Coding</p><div class="project-heading"><h2>去 AI 工具</h2><span>已完成</span></div><p>基于 vibe coding 开发的小产品，支持复制和截图，作为快速构建能力展示。</p><div class="tag-row"><span>轻量工具</span><span>复制截图</span><span>快速交付</span></div></div><div class="project-visual lime"><div class="visual-index">06</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+      </div>
+
+      <section id="contact" class="contact-section">
+        <p class="eyebrow">Contact</p>
+        <h2>欢迎联系我聊 AI 产品经理机会。</h2>
+        <div class="contact-grid">
+          <a href="mailto:18910212897@163.com">18910212897@163.com</a>
+          <a href="tel:18910212897">18910212897</a>
+          <span>微信：fengtao97071</span>
+        </div>
+      </section>
+    </main>
+    <script>
+      const sideNav = document.getElementById("sideNav");
+      const pinButton = document.getElementById("pinButton");
+      pinButton.addEventListener("click", () => {
+        const pinned = sideNav.classList.toggle("pinned");
+        pinButton.textContent = pinned ? "取消固定" : "固定导航";
+      });
+    </script>
+  </body>
+</html>
