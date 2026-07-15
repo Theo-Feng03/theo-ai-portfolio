@@ -19,9 +19,11 @@ const projects = [
     eyebrow: "Featured Project",
     title: "个人助手",
     status: "已完成",
-    summary: "长期自用的个人知识、任务和协作系统，后续会整理为首页最重点案例。",
-    points: ["个人知识库", "任务协作", "Agent 化工作流"],
+    summary: "一个 local-first 的个人 Agent Vault，用目录、规则、权限、记忆和 Skill 治理，把长期学习和项目经验沉淀成可复用的个人助手系统。",
+    points: ["记忆治理", "权限分级", "Skill 方法库"],
     accent: "mint",
+    image: "/assets/personal-agent-rules.png",
+    imageAlt: "个人助手 Agent Rules 与 Vault 目录结构截图",
   },
   {
     id: "ops",
@@ -148,19 +150,26 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
           ))}
         </div>
       </div>
-      <div className="project-visual" aria-label={`${project.title} 内容占位`}>
-        <div className="visual-index">{String(index + 1).padStart(2, "0")}</div>
-        <div className="visual-lines">
-          <span />
-          <span />
-          <span />
+      {project.image ? (
+        <figure className="project-screenshot">
+          <img src={project.image} alt={project.imageAlt} />
+          <figcaption>Vault 目录结构 + Agent Rules 治理规则</figcaption>
+        </figure>
+      ) : (
+        <div className="project-visual" aria-label={`${project.title} 内容占位`}>
+          <div className="visual-index">{String(index + 1).padStart(2, "0")}</div>
+          <div className="visual-lines">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="visual-window">
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
-        <div className="visual-window">
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
+      )}
     </section>
   );
 }
