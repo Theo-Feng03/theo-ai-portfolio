@@ -49,124 +49,101 @@
         pointer-events: none;
         position: fixed;
         top: 0;
-        width: 260px;
+        width: 240px;
         z-index: 50;
       }
 
       .nav-rail {
-        align-items: center;
+        align-items: flex-start;
         bottom: 0;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
         justify-content: center;
         left: 34px;
         pointer-events: auto;
         position: absolute;
         top: 0;
-        width: 44px;
+        width: 190px;
       }
 
-      .tick {
+      .nav-tick {
+        align-items: center;
+        display: flex;
+        height: 14px;
+        position: relative;
+        width: 190px;
+      }
+
+      .nav-tick-line {
         background: #cfd5d8;
         display: block;
         height: 4px;
         opacity: 0.9;
-        transition: background 180ms ease, transform 180ms ease, width 180ms ease;
+        transition: background 180ms ease, transform 180ms ease, width 180ms ease, opacity 180ms ease;
         width: 12px;
       }
 
-      .tick--active {
+      .nav-tick--featured .nav-tick-line {
         background: var(--ink);
         width: 52px;
       }
 
-      .nav-panel {
+      .nav-card {
         background: rgba(255, 255, 255, 0.94);
         border: 1px solid rgba(5, 26, 36, 0.08);
-        border-radius: 0 28px 28px 0;
-        box-shadow: 0 18px 50px rgba(5, 26, 36, 0.14);
-        left: 0;
-        min-height: 520px;
-        padding: 24px 22px 24px 34px;
-        pointer-events: auto;
+        border-radius: 18px;
+        box-shadow: 0 18px 48px rgba(5, 26, 36, 0.13);
+        display: grid;
+        gap: 5px;
+        left: 76px;
+        opacity: 0;
+        padding: 14px 16px;
+        pointer-events: none;
         position: absolute;
         top: 50%;
-        transform: translate(-224px, -50%);
-        transition: transform 280ms ease;
+        transform: translate(-8px, -50%) scale(0.98);
+        transition: opacity 180ms ease, transform 180ms ease;
         width: 238px;
       }
 
-      .side-nav:hover .nav-panel,
-      .side-nav.pinned .nav-panel {
-        transform: translate(0, -50%);
-      }
-
-      .side-nav:hover .tick,
-      .side-nav.pinned .tick {
-        background: #a8b0b5;
+      .nav-tick:hover .nav-tick-line,
+      .nav-tick:focus-visible .nav-tick-line {
+        background: var(--ink);
+        opacity: 1;
         transform: translateX(8px);
+        width: 64px;
       }
 
-      .side-nav:hover .tick--active,
-      .side-nav.pinned .tick--active {
-        background: var(--ink);
-        transform: translateX(18px);
+      .nav-tick:hover .nav-card,
+      .nav-tick:focus-visible .nav-card {
+        opacity: 1;
+        transform: translate(0, -50%) scale(1);
       }
 
-      .pin-button {
-        background: var(--ink);
-        border: 0;
-        border-radius: 999px;
-        box-shadow: 0 1px 2px rgba(5, 26, 36, 0.1), 0 9px 20px rgba(5, 26, 36, 0.18),
-          inset 0 2px 8px rgba(255, 255, 255, 0.38);
-        color: white;
-        cursor: pointer;
-        font: inherit;
-        font-size: 13px;
-        margin-bottom: 26px;
-        padding: 10px 16px;
-      }
-
-      .nav-title,
+      .nav-card span,
       .hero-kicker,
       .eyebrow,
-      .nav-links span,
       .visual-index {
         font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       }
 
-      .nav-title {
-        color: var(--muted);
-        font-size: 12px;
-        margin-bottom: 18px;
-        text-transform: uppercase;
-      }
-
-      .nav-links {
-        display: grid;
-        gap: 8px;
-      }
-
-      .nav-links a {
-        align-items: center;
-        border-radius: 14px;
-        display: flex;
-        font-size: 14px;
-        gap: 10px;
-        padding: 9px 10px;
-        transition: background 180ms ease, transform 180ms ease;
-      }
-
-      .nav-links a:hover {
-        background: #f0f3f2;
-        transform: translateX(4px);
-      }
-
-      .nav-links span {
+      .nav-card span {
         color: #8d979c;
         font-size: 11px;
-        min-width: 24px;
+      }
+
+      .nav-card strong {
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .nav-card em {
+        color: var(--muted);
+        font-size: 13px;
+        font-style: normal;
+        line-height: 1.45;
       }
 
       .hero-section {
@@ -476,15 +453,11 @@
 
       @media (max-width: 900px) {
         .side-nav {
-          width: 210px;
+          width: 200px;
         }
 
         .nav-rail {
           left: 14px;
-        }
-
-        .nav-panel {
-          transform: translate(-218px, -50%);
         }
 
         .ability-grid,
@@ -537,31 +510,44 @@
   </head>
   <body>
     <main>
-      <aside class="side-nav" id="sideNav">
-        <div class="nav-rail" aria-hidden="true">
-          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          <span class="tick tick--active"></span>
-          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          <span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span>
-          <span class="tick"></span>
-        </div>
-        <nav class="nav-panel" aria-label="作品导航">
-          <button type="button" class="pin-button" id="pinButton">固定导航</button>
-          <div class="nav-title">Theo Portfolio</div>
-          <div class="nav-links">
-            <a href="#intro"><span>00</span>冯涛 | Theo</a>
-            <a href="#about"><span>01</span>关于我</a>
-            <a href="#assistant"><span>02</span>个人助手</a>
-            <a href="#ops"><span>03</span>运维平台 Demo</a>
-            <a href="#news"><span>04</span>AI 资讯 Agent</a>
-            <a href="#botc"><span>05</span>血染钟楼问答</a>
-            <a href="#travel"><span>06</span>出行准备工具</a>
-            <a href="#toolbox"><span>07</span>去 AI 工具</a>
-            <a href="#contact"><span>08</span>联系我</a>
-          </div>
+      <aside class="side-nav">
+        <nav class="nav-rail" aria-label="作品导航">
+          <a class="nav-tick" href="#intro" aria-label="跳转到冯涛 Theo">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>00</span><strong>冯涛 | Theo</strong><em>回到首屏身份介绍</em></span>
+          </a>
+          <a class="nav-tick" href="#about" aria-label="跳转到关于我">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>01</span><strong>关于我</strong><em>学习能力与 AI 落地能力</em></span>
+          </a>
+          <a class="nav-tick nav-tick--featured" href="#assistant" aria-label="跳转到个人助手">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>02</span><strong>个人助手</strong><em>重点作品：个人助手系统</em></span>
+          </a>
+          <a class="nav-tick" href="#ops" aria-label="跳转到运维平台 Demo">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>03</span><strong>运维平台 Demo</strong><em>Agent 产品与运维流程</em></span>
+          </a>
+          <a class="nav-tick" href="#news" aria-label="跳转到 AI 资讯 Agent">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>04</span><strong>AI 资讯 Agent</strong><em>近期完成的信息收集工具</em></span>
+          </a>
+          <a class="nav-tick" href="#botc" aria-label="跳转到血染钟楼问答">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>05</span><strong>血染钟楼问答</strong><em>规则问答与兴趣场景应用</em></span>
+          </a>
+          <a class="nav-tick" href="#travel" aria-label="跳转到出行准备工具">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>06</span><strong>出行准备工具</strong><em>场景化清单 MVP</em></span>
+          </a>
+          <a class="nav-tick" href="#toolbox" aria-label="跳转到去 AI 工具">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>07</span><strong>去 AI 工具</strong><em>vibe coding 小产品</em></span>
+          </a>
+          <a class="nav-tick" href="#contact" aria-label="跳转到联系我">
+            <span class="nav-tick-line"></span>
+            <span class="nav-card"><span>08</span><strong>联系我</strong><em>微信、邮箱与电话</em></span>
+          </a>
         </nav>
       </aside>
 
@@ -613,13 +599,5 @@
         </div>
       </section>
     </main>
-    <script>
-      const sideNav = document.getElementById("sideNav");
-      const pinButton = document.getElementById("pinButton");
-      pinButton.addEventListener("click", () => {
-        const pinned = sideNav.classList.toggle("pinned");
-        pinButton.textContent = pinned ? "取消固定" : "固定导航";
-      });
-    </script>
   </body>
 </html>

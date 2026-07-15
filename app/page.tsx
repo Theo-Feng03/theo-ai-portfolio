@@ -1,17 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
 const navItems = [
-  { id: "intro", label: "冯涛 | Theo", short: "00" },
-  { id: "about", label: "关于我", short: "01" },
-  { id: "assistant", label: "个人助手", short: "02" },
-  { id: "ops", label: "运维平台 Demo", short: "03" },
-  { id: "news", label: "AI 资讯 Agent", short: "04" },
-  { id: "botc", label: "血染钟楼问答", short: "05" },
-  { id: "travel", label: "出行准备工具", short: "06" },
-  { id: "toolbox", label: "去 AI 工具", short: "07" },
-  { id: "contact", label: "联系我", short: "08" },
+  { id: "intro", label: "冯涛 | Theo", short: "00", hint: "回到首屏身份介绍" },
+  { id: "about", label: "关于我", short: "01", hint: "学习能力与 AI 落地能力" },
+  { id: "assistant", label: "个人助手", short: "02", hint: "重点作品：个人助手系统" },
+  { id: "ops", label: "运维平台 Demo", short: "03", hint: "Agent 产品与运维流程" },
+  { id: "news", label: "AI 资讯 Agent", short: "04", hint: "近期完成的信息收集工具" },
+  { id: "botc", label: "血染钟楼问答", short: "05", hint: "规则问答与兴趣场景应用" },
+  { id: "travel", label: "出行准备工具", short: "06", hint: "场景化清单 MVP" },
+  { id: "toolbox", label: "去 AI 工具", short: "07", hint: "vibe coding 小产品" },
+  { id: "contact", label: "联系我", short: "08", hint: "微信、邮箱与电话" },
 ];
 
 const projects = [
@@ -72,34 +70,24 @@ const projects = [
 ];
 
 function SideNav() {
-  const [pinned, setPinned] = useState(false);
-  const tickRows = useMemo(() => Array.from({ length: 26 }), []);
-
   return (
-    <aside className={`side-nav ${pinned ? "side-nav--pinned" : ""}`}>
-      <div className="nav-rail" aria-hidden="true">
-        {tickRows.map((_, index) => (
-          <span key={index} className={index === 16 ? "tick tick--active" : "tick"} />
-        ))}
-      </div>
-      <nav className="nav-panel" aria-label="作品导航">
-        <button
-          type="button"
-          className="pin-button"
-          onClick={() => setPinned((value) => !value)}
-          aria-pressed={pinned}
-        >
-          {pinned ? "取消固定" : "固定导航"}
-        </button>
-        <div className="nav-title">Theo Portfolio</div>
-        <div className="nav-links">
-          {navItems.map((item) => (
-            <a key={item.id} href={`#${item.id}`}>
+    <aside className="side-nav">
+      <nav className="nav-rail" aria-label="作品导航">
+        {navItems.map((item) => (
+          <a
+            key={item.id}
+            className={item.id === "assistant" ? "nav-tick nav-tick--featured" : "nav-tick"}
+            href={`#${item.id}`}
+            aria-label={`跳转到${item.label}`}
+          >
+            <span className="nav-tick-line" />
+            <span className="nav-card">
               <span>{item.short}</span>
-              {item.label}
-            </a>
-          ))}
-        </div>
+              <strong>{item.label}</strong>
+              <em>{item.hint}</em>
+            </span>
+          </a>
+        ))}
       </nav>
     </aside>
   );
