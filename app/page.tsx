@@ -7,7 +7,7 @@ const navItems = [
   { id: "assistant", label: "个人助手", short: "03", hint: "重点作品：个人助手系统" },
   { id: "ops", label: "运维平台 Demo", short: "04", hint: "Agent 产品与运维流程" },
   { id: "news", label: "AI Learning Pulse", short: "05", hint: "AI 资讯到本人学习的闭环工具" },
-  { id: "botc", label: "血染钟楼问答", short: "06", hint: "规则问答与兴趣场景应用" },
+  { id: "botc", label: "血染钟楼 RAG Agent", short: "06", hint: "本地知识库与规则问答" },
   { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
   { id: "toolbox", label: "SnipClip", short: "08", hint: "剪贴板历史与截图标注工具" },
   { id: "contact", label: "联系我", short: "09", hint: "微信、邮箱与电话" },
@@ -76,12 +76,36 @@ const projects = [
   },
   {
     id: "botc",
-    eyebrow: "Upcoming",
-    title: "血染钟楼问答助手",
-    status: "近期完成",
-    summary: "兴趣场景驱动的 AI 问答助手，用来展示把 AI 能力落进具体使用场景的能力。",
-    points: ["规则问答", "场景检索", "低门槛使用"],
+    eyebrow: "RAG Agent",
+    title: "血染钟楼 RAG Agent",
+    status: "已完成",
+    summary: "一个面向复杂桌游规则的本地 RAG 问答 Agent：基于官方中文 Wiki 构建知识库，通过多层检索与受限生成回答规则问题，并显式展示证据、不确定点和已知边界。",
+    points: ["本地知识库", "引用溯源", "保守回答"],
     accent: "rose",
+    showcase: {
+      heroImage: "/assets/projects/botc-answer-philosopher.png",
+      caption: "复杂问题不会直接拍脑袋回答，而是识别歧义、分支说明，并给出引用证据。",
+      evidence: [
+        {
+          title: "分支回答",
+          body: "哲学家与贤者的复杂交互会被拆成不同前提，系统明确标注“存在歧义”。",
+          image: "/assets/projects/botc-answer-philosopher.png",
+          alt: "血染钟楼 RAG Agent 哲学家问题完整回答截图",
+        },
+        {
+          title: "知识库来源",
+          body: "3019 个 chunks、362 个词条，按角色、规则、能力、剧本等类型分层入库。",
+          image: "/assets/projects/botc-knowledge-base.png",
+          alt: "血染钟楼 RAG Agent 知识库概览截图",
+        },
+        {
+          title: "复杂题边界",
+          body: "遇到证据不足的选项会保守标注，不强行编造答案，也保留已知缺陷用于迭代。",
+          image: "/assets/projects/botc-hard-question.png",
+          alt: "血染钟楼 RAG Agent 复杂选择题回答截图",
+        },
+      ],
+    },
   },
   {
     id: "travel",
@@ -215,14 +239,18 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
       {"showcase" in project && project.showcase ? (
         <div className="project-showcase" aria-label={`${project.title} 作品展示`}>
           <figure className="showcase-main">
-            <video
-              src={project.showcase.video}
-              poster={project.showcase.poster}
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
+            {"video" in project.showcase ? (
+              <video
+                src={project.showcase.video}
+                poster={project.showcase.poster}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            ) : (
+              <img src={project.showcase.heroImage} alt={`${project.title} 主展示截图`} />
+            )}
             <figcaption>{project.showcase.caption}</figcaption>
           </figure>
           <div className="evidence-grid">

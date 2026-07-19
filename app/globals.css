@@ -625,7 +625,8 @@ main {
   padding: 12px;
 }
 
-.showcase-main video {
+.showcase-main video,
+.showcase-main img {
   background: #eef2f0;
   border-radius: 18px;
   display: block;
