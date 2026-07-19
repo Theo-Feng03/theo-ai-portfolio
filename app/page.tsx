@@ -133,11 +133,12 @@ function ScrollGalleryMotion() {
       const viewportHeight = window.innerHeight || 1;
 
       sections.forEach((section, index) => {
+        const pin = section.querySelector<HTMLElement>(".case-pin");
         const media = section.querySelector<HTMLElement>(".case-media");
         const strip = section.querySelector<HTMLElement>(".evidence-strip");
-        if (!media || !strip) return;
+        if (!pin || !media || !strip) return;
 
-        const rect = section.getBoundingClientRect();
+        const rect = pin.getBoundingClientRect();
         const travel = Math.max(1, rect.height - viewportHeight);
         const progress = clamp(-rect.top / travel);
         const maxX = Math.max(0, strip.scrollWidth - media.clientWidth + 80);
@@ -303,25 +304,27 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
           ))}
         </div>
       </div>
-      <div className="case-media">
-        <figure className="media-main">
-          <MediaFrame project={project} />
-          <figcaption>{project.caption}</figcaption>
-        </figure>
-        <div className="carousel-header">
-          <span>向下滚动时斜向掠过截图</span>
-          <span>{project.evidence.length} 张</span>
-        </div>
-        <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
-          {project.evidence.map(([title, body, image, alt]) => (
-            <article className="evidence-item" key={title}>
-              <img src={image} alt={alt} loading="lazy" />
-              <div>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </div>
-            </article>
-          ))}
+      <div className="case-pin">
+        <div className="case-media">
+          <figure className="media-main">
+            <MediaFrame project={project} />
+            <figcaption>{project.caption}</figcaption>
+          </figure>
+          <div className="carousel-header">
+            <span>向下滚动时斜向掠过截图</span>
+            <span>{project.evidence.length} 张</span>
+          </div>
+          <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
+            {project.evidence.map(([title, body, image, alt]) => (
+              <article className="evidence-item" key={title}>
+                <img src={image} alt={alt} loading="lazy" />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

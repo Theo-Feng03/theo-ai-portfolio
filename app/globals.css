@@ -50,6 +50,7 @@ body {
   font-family: "PP Neue Montreal", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
   font-feature-settings: "calt", "kern", "liga", "ss03";
   margin: 0;
+  overflow-x: clip;
 }
 
 a {
@@ -64,7 +65,7 @@ video {
 
 main {
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .side-nav {
@@ -614,8 +615,7 @@ main {
 }
 
 .case-section {
-  min-height: var(--story-height, 438vh);
-  padding: 0 28px 16vh;
+  padding: 0 28px;
   position: relative;
 }
 
@@ -627,6 +627,11 @@ main {
   min-height: 64vh;
   max-width: 980px;
   padding: 8vh 0 5vh;
+  position: relative;
+}
+
+.case-pin {
+  min-height: calc(var(--story-height, 438vh) - 64vh);
   position: relative;
 }
 
@@ -649,7 +654,7 @@ main {
   background: var(--ink);
   border-radius: var(--radius-lg);
   color: white;
-  height: 100vh;
+  height: 100svh;
   margin: 0 auto;
   max-width: min(1240px, calc(100vw - 56px));
   min-width: 0;
