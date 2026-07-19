@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "首屏身份与作品入口" },
   { id: "about", label: "关于我", short: "01", hint: "学习速度与落地方式" },
@@ -115,6 +117,58 @@ const projects = [
 const techNodes = ["LLM", "RAG", "Agent", "Prompt", "多模态", "安全", "LangChain", "AIOps", "微调"];
 
 type Project = (typeof projects)[number];
+
+function ScrollGalleryMotion() {
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (prefersReducedMotion.matches) return;
+
+    const sections = Array.from(document.querySelectorAll<HTMLElement>(".case-section"));
+    let frame = 0;
+
+    const clamp = (value: number) => Math.min(1, Math.max(0, value));
+
+    const update = () => {
+      frame = 0;
+      const viewportHeight = window.innerHeight || 1;
+
+      sections.forEach((section, index) => {
+        const strip = section.querySelector<HTMLElement>(".evidence-strip");
+        if (!strip) return;
+
+        const rect = section.getBoundingClientRect();
+        const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height));
+        const isLeft = index % 2 === 0;
+        const startX = isLeft ? 16 : -44;
+        const endX = isLeft ? -46 : 12;
+        const x = startX + (endX - startX) * progress;
+        const y = -24 + 58 * progress;
+        const rotate = isLeft ? -1.8 : 1.8;
+
+        strip.style.transform = `translate3d(${x}%, ${y}px, 0) rotate(${rotate}deg)`;
+      });
+    };
+
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    window.addEventListener("load", requestUpdate);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      window.removeEventListener("load", requestUpdate);
+    };
+  }, []);
+
+  return null;
+}
 
 function SideNav() {
   return (
@@ -270,6 +324,7 @@ export default function Home() {
 
   return (
     <main>
+      <ScrollGalleryMotion />
       <SideNav />
       <section id="intro" className="hero-section">
         <div className="hero-copy">

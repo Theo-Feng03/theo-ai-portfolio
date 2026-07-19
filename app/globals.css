@@ -685,11 +685,11 @@ main {
 }
 
 .case-section:nth-child(odd) .evidence-strip {
-  transform: translate3d(-6%, 10px, 0) rotate(-1.8deg);
+  transform: translate3d(16%, -24px, 0) rotate(-1.8deg);
 }
 
 .case-section:nth-child(even) .evidence-strip {
-  transform: translate3d(-28%, 10px, 0) rotate(1.8deg);
+  transform: translate3d(-44%, -24px, 0) rotate(1.8deg);
 }
 
 .evidence-item {
@@ -715,40 +715,6 @@ main {
 
 .evidence-item div {
   padding: 0 4px 4px;
-}
-
-@supports (animation-timeline: view()) {
-  .case-section:nth-child(odd) .evidence-strip {
-    animation: diagonal-pan-left linear both;
-    animation-timeline: view();
-    animation-range: entry 12% exit 82%;
-  }
-
-  .case-section:nth-child(even) .evidence-strip {
-    animation: diagonal-pan-right linear both;
-    animation-timeline: view();
-    animation-range: entry 12% exit 82%;
-  }
-}
-
-@keyframes diagonal-pan-left {
-  from {
-    transform: translate3d(12%, -18px, 0) rotate(-1.8deg);
-  }
-
-  to {
-    transform: translate3d(-38%, 30px, 0) rotate(-1.8deg);
-  }
-}
-
-@keyframes diagonal-pan-right {
-  from {
-    transform: translate3d(-38%, -18px, 0) rotate(1.8deg);
-  }
-
-  to {
-    transform: translate3d(8%, 30px, 0) rotate(1.8deg);
-  }
 }
 
 .contact-section {
