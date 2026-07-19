@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, type CSSProperties } from "react";
 
 const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "首屏身份与作品入口" },
@@ -133,19 +133,23 @@ function ScrollGalleryMotion() {
       const viewportHeight = window.innerHeight || 1;
 
       sections.forEach((section, index) => {
+        const media = section.querySelector<HTMLElement>(".case-media");
         const strip = section.querySelector<HTMLElement>(".evidence-strip");
-        if (!strip) return;
+        if (!media || !strip) return;
 
         const rect = section.getBoundingClientRect();
-        const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height));
+        const travel = Math.max(1, rect.height - viewportHeight);
+        const progress = clamp(-rect.top / travel);
+        const maxX = Math.max(0, strip.scrollWidth - media.clientWidth + 80);
         const isLeft = index % 2 === 0;
-        const startX = isLeft ? 16 : -44;
-        const endX = isLeft ? -46 : 12;
+        const startX = isLeft ? media.clientWidth * 0.18 : -maxX;
+        const endX = isLeft ? -maxX : media.clientWidth * 0.12;
         const x = startX + (endX - startX) * progress;
-        const y = -24 + 58 * progress;
-        const rotate = isLeft ? -1.8 : 1.8;
+        const y = isLeft ? -30 + 70 * progress : 28 - 68 * progress;
+        const rotate = isLeft ? -2.2 : 2.2;
 
-        strip.style.transform = `translate3d(${x}%, ${y}px, 0) rotate(${rotate}deg)`;
+        media.style.setProperty("--story-progress", progress.toFixed(3));
+        strip.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg)`;
       });
     };
 
@@ -279,9 +283,14 @@ function FeaturedAssistant({ project }: { project: Project }) {
 
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
+  const storyHeight = `${126 + project.evidence.length * 78}vh`;
 
   return (
-    <section id={project.id} className="case-section">
+    <section
+      id={project.id}
+      className="case-section"
+      style={{ "--story-height": storyHeight } as CSSProperties}
+    >
       <div className="case-copy">
         <span className="case-index">{String(index).padStart(2, "0")}</span>
         <p className="eyebrow">{project.eyebrow}</p>
@@ -372,8 +381,8 @@ export default function Home() {
       <section className="work-section" aria-label="作品案例">
         <div className="section-intro">
           <p className="eyebrow">Case Studies</p>
-          <h2>每个作品先给主画面，再用滑动截图展开细节。</h2>
-          <p>我把重点放在产品闭环、AI 协作边界和可验证结果上。页面正常向下滚动，截图会以斜向动线展示每个项目的关键证据。</p>
+          <h2>每个作品先介绍，再进入固定展示框看完整截图动线。</h2>
+          <p>页面仍然正常向下滚动。进入项目展示后，大框会固定在屏幕里，截图轨道在框内移动，展示完一组后再进入下一个项目。</p>
         </div>
         <div className="case-stack">
           {caseProjects.map((project, index) => (
