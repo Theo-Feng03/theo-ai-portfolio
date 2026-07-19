@@ -84,6 +84,7 @@ const projects = [
     eyebrow: "Mobile MVP",
     title: "出行清单工具",
     status: "已完成",
+    display: "phone",
     summary: "手机端出行准备 MVP，通过对话补全目的地、时间、天数和出行目的，结合天气、交通与周边信息生成场景化清单。",
     points: ["多轮补全", "天气交通", "场景清单"],
     heroImage: "/assets/projects/travel-demo.gif",
@@ -136,11 +137,28 @@ function ScrollGalleryMotion() {
         const pin = section.querySelector<HTMLElement>(".case-pin");
         const media = section.querySelector<HTMLElement>(".case-media");
         const strip = section.querySelector<HTMLElement>(".evidence-strip");
-        if (!pin || !media || !strip) return;
+        const phoneTrack = section.querySelector<HTMLElement>(".phone-track");
+        const phoneShell = section.querySelector<HTMLElement>(".phone-shell");
+        const phoneScreen = section.querySelector<HTMLElement>(".phone-screen");
+        if (!pin || !media) return;
 
         const rect = pin.getBoundingClientRect();
         const travel = Math.max(1, rect.height - viewportHeight);
         const progress = clamp(-rect.top / travel);
+        media.style.setProperty("--story-progress", progress.toFixed(3));
+
+        if (phoneTrack && phoneShell && phoneScreen) {
+          const maxX = Math.max(0, phoneTrack.scrollWidth - phoneScreen.clientWidth);
+          const sway = Math.sin(progress * Math.PI * 3) * 10;
+          const shellTilt = -2 + progress * 4;
+
+          phoneTrack.style.transform = `translate3d(${-maxX * progress + sway}px, 0, 0)`;
+          phoneShell.style.transform = `translate3d(${sway * 0.32}px, 0, 0) rotate(${shellTilt}deg)`;
+          return;
+        }
+
+        if (!strip) return;
+
         const maxX = Math.max(0, strip.scrollWidth - media.clientWidth + 80);
         const isLeft = index % 2 === 0;
         const startX = isLeft ? media.clientWidth * 0.18 : -maxX;
@@ -149,7 +167,6 @@ function ScrollGalleryMotion() {
         const y = isLeft ? -30 + 70 * progress : 28 - 68 * progress;
         const rotate = isLeft ? -2.2 : 2.2;
 
-        media.style.setProperty("--story-progress", progress.toFixed(3));
         strip.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg)`;
       });
     };
@@ -250,6 +267,52 @@ function MediaFrame({ project }: { project: Project }) {
   return <img src={project.image} alt={project.imageAlt} loading="lazy" />;
 }
 
+function isPhoneProject(project: Project) {
+  return "display" in project && project.display === "phone";
+}
+
+function PhoneCaseMedia({ project }: { project: Project }) {
+  if (!("evidence" in project)) return null;
+
+  return (
+    <div className="phone-case-layout">
+      <div className="phone-case-copy">
+        <span>手机端证据流</span>
+        <h3>把手机截图放回手机场景里看。</h3>
+        <p>{project.caption}</p>
+        <div className="phone-case-steps">
+          {project.evidence.map(([title], index) => (
+            <span key={title}>{String(index + 1).padStart(2, "0")} · {title}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="phone-stage" aria-label={`${project.title} 手机截图展示`}>
+        <div className="phone-shell">
+          <div className="phone-speaker" />
+          <div className="phone-screen">
+            <div
+              className="phone-track"
+              style={{ "--phone-count": project.evidence.length } as CSSProperties}
+            >
+              {project.evidence.map(([title, body, image, alt]) => (
+                <article className="phone-shot" key={title}>
+                  <img src={image} alt={alt} loading="lazy" />
+                  <div>
+                    <strong>{title}</strong>
+                    <span>{body}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+        <p className="phone-caption">继续向下滚动，手机屏内截图会横向切换。</p>
+      </div>
+    </div>
+  );
+}
+
 function FeaturedAssistant({ project }: { project: Project }) {
   if (!("notes" in project)) return null;
 
@@ -285,11 +348,12 @@ function FeaturedAssistant({ project }: { project: Project }) {
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
   const storyHeight = `${126 + project.evidence.length * 78}vh`;
+  const phoneProject = isPhoneProject(project);
 
   return (
     <section
       id={project.id}
-      className="case-section"
+      className={phoneProject ? "case-section case-section--phone" : "case-section"}
       style={{ "--story-height": storyHeight } as CSSProperties}
     >
       <div className="case-copy">
@@ -306,25 +370,31 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
       </div>
       <div className="case-pin">
         <div className="case-media">
-          <figure className="media-main">
-            <MediaFrame project={project} />
-            <figcaption>{project.caption}</figcaption>
-          </figure>
-          <div className="carousel-header">
-            <span>向下滚动时斜向掠过截图</span>
-            <span>{project.evidence.length} 张</span>
-          </div>
-          <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
-            {project.evidence.map(([title, body, image, alt]) => (
-              <article className="evidence-item" key={title}>
-                <img src={image} alt={alt} loading="lazy" />
-                <div>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+          {phoneProject ? (
+            <PhoneCaseMedia project={project} />
+          ) : (
+            <>
+              <figure className="media-main">
+                <MediaFrame project={project} />
+                <figcaption>{project.caption}</figcaption>
+              </figure>
+              <div className="carousel-header">
+                <span>向下滚动时斜向掠过截图</span>
+                <span>{project.evidence.length} 张</span>
+              </div>
+              <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
+                {project.evidence.map(([title, body, image, alt]) => (
+                  <article className="evidence-item" key={title}>
+                    <img src={image} alt={alt} loading="lazy" />
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{body}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>

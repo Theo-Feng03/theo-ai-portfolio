@@ -141,14 +141,14 @@
             </div></div></div>
           </section>
 
-          <section id="travel" class="case-section">
+          <section id="travel" class="case-section case-section--phone">
             <div class="case-copy"><span class="case-index">05</span><p class="eyebrow">Mobile MVP</p><h2>出行清单工具</h2><span class="status-pill">已完成</span><p>手机端出行准备 MVP，通过对话补全目的地、时间、天数和出行目的，结合天气、交通与周边信息生成场景化清单。</p><div class="tag-row"><span>多轮补全</span><span>天气交通</span><span>场景清单</span></div></div>
-            <div class="case-pin"><div class="case-media"><figure class="media-main"><img src="assets/projects/travel-demo.gif" alt="出行清单工具主流程动图" /><figcaption>从一句自然语言出发，补全信息后生成出行清单，并支持车票、周边和出发前核对。</figcaption></figure><div class="carousel-header"><span>向下滚动时斜向掠过截图</span><span>4 张</span></div><div class="evidence-strip" aria-label="出行清单工具 滚动截图带">
-              <article class="evidence-item"><img src="assets/projects/travel-home.png" alt="出行清单工具首页入口截图" loading="lazy" /><div><h3>轻量入口</h3><p>首页给出示例场景和输入框，降低从空白开始描述行程的成本。</p></div></article>
-              <article class="evidence-item"><img src="assets/projects/travel-dialog.png" alt="出行清单工具对话追问补全截图" loading="lazy" /><div><h3>对话补全</h3><p>当目的地、时间或目的不完整时，先追问关键信息，再生成清单。</p></div></article>
-              <article class="evidence-item"><img src="assets/projects/travel-weather-list.png" alt="出行清单工具天气影响清单截图" loading="lazy" /><div><h3>天气影响清单</h3><p>把天气、温度和降雨概率直接转化为物品建议。</p></div></article>
-              <article class="evidence-item"><img src="assets/projects/travel-scenario-compare.png" alt="出行清单工具亲子度假和商务出差场景对比截图" loading="lazy" /><div><h3>场景差异</h3><p>支持 12306 查询，也能对亲子度假和商务出差生成不同清单。</p></div></article>
-            </div></div></div>
+            <div class="case-pin"><div class="case-media"><div class="phone-case-layout"><div class="phone-case-copy"><span>手机端证据流</span><h3>把手机截图放回手机场景里看。</h3><p>从一句自然语言出发，补全信息后生成出行清单，并支持车票、周边和出发前核对。</p><div class="phone-case-steps"><span>01 · 轻量入口</span><span>02 · 对话补全</span><span>03 · 天气影响清单</span><span>04 · 场景差异</span></div></div><div class="phone-stage" aria-label="出行清单工具 手机截图展示"><div class="phone-shell"><div class="phone-speaker"></div><div class="phone-screen"><div class="phone-track" style="--phone-count: 4">
+              <article class="phone-shot"><img src="assets/projects/travel-home.png" alt="出行清单工具首页入口截图" loading="lazy" /><div><strong>轻量入口</strong><span>首页给出示例场景和输入框，降低从空白开始描述行程的成本。</span></div></article>
+              <article class="phone-shot"><img src="assets/projects/travel-dialog.png" alt="出行清单工具对话追问补全截图" loading="lazy" /><div><strong>对话补全</strong><span>当目的地、时间或目的不完整时，先追问关键信息，再生成清单。</span></div></article>
+              <article class="phone-shot"><img src="assets/projects/travel-weather-list.png" alt="出行清单工具天气影响清单截图" loading="lazy" /><div><strong>天气影响清单</strong><span>把天气、温度和降雨概率直接转化为物品建议。</span></div></article>
+              <article class="phone-shot"><img src="assets/projects/travel-scenario-compare.png" alt="出行清单工具亲子度假和商务出差场景对比截图" loading="lazy" /><div><strong>场景差异</strong><span>支持 12306 查询，也能对亲子度假和商务出差生成不同清单。</span></div></article>
+            </div></div></div><p class="phone-caption">继续向下滚动，手机屏内截图会横向切换。</p></div></div></div></div>
           </section>
 
           <section id="toolbox" class="case-section">
@@ -179,7 +179,7 @@
 
         const sections = Array.from(document.querySelectorAll(".case-section"));
         sections.forEach((section) => {
-          const slideCount = section.querySelectorAll(".evidence-item").length;
+          const slideCount = section.querySelectorAll(".evidence-item, .phone-shot").length;
           section.style.setProperty("--story-height", `${126 + slideCount * 78}vh`);
         });
         let frame = 0;
@@ -193,11 +193,28 @@
             const pin = section.querySelector(".case-pin");
             const media = section.querySelector(".case-media");
             const strip = section.querySelector(".evidence-strip");
-            if (!pin || !media || !strip) return;
+            const phoneTrack = section.querySelector(".phone-track");
+            const phoneShell = section.querySelector(".phone-shell");
+            const phoneScreen = section.querySelector(".phone-screen");
+            if (!pin || !media) return;
 
             const rect = pin.getBoundingClientRect();
             const travel = Math.max(1, rect.height - viewportHeight);
             const progress = clamp(-rect.top / travel);
+            media.style.setProperty("--story-progress", progress.toFixed(3));
+
+            if (phoneTrack && phoneShell && phoneScreen) {
+              const maxX = Math.max(0, phoneTrack.scrollWidth - phoneScreen.clientWidth);
+              const sway = Math.sin(progress * Math.PI * 3) * 10;
+              const shellTilt = -2 + progress * 4;
+
+              phoneTrack.style.transform = `translate3d(${-maxX * progress + sway}px, 0, 0)`;
+              phoneShell.style.transform = `translate3d(${sway * 0.32}px, 0, 0) rotate(${shellTilt}deg)`;
+              return;
+            }
+
+            if (!strip) return;
+
             const maxX = Math.max(0, strip.scrollWidth - media.clientWidth + 80);
             const isLeft = index % 2 === 0;
             const startX = isLeft ? media.clientWidth * 0.18 : -maxX;
@@ -206,7 +223,6 @@
             const y = isLeft ? -30 + 70 * progress : 28 - 68 * progress;
             const rotate = isLeft ? -2.2 : 2.2;
 
-            media.style.setProperty("--story-progress", progress.toFixed(3));
             strip.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg)`;
           });
         };

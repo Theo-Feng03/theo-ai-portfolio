@@ -770,6 +770,192 @@ main {
   padding: 16px 8px 8px;
 }
 
+.case-section--phone .case-media {
+  background:
+    radial-gradient(circle at 72% 46%, rgba(122, 199, 178, 0.2), transparent 30%),
+    linear-gradient(135deg, #07171d 0%, #11242a 58%, #07171d 100%);
+  display: grid;
+  gap: clamp(24px, 4vw, 72px);
+  grid-template-columns: minmax(280px, 0.82fr) minmax(360px, 1.18fr);
+  place-items: center;
+}
+
+.phone-case-layout {
+  align-items: center;
+  display: grid;
+  gap: clamp(24px, 4vw, 72px);
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.phone-case-copy {
+  align-self: center;
+  max-width: 430px;
+  padding-left: clamp(4px, 2vw, 26px);
+  position: relative;
+  z-index: 2;
+}
+
+.phone-case-copy > span {
+  color: var(--accent);
+  display: block;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+
+.phone-case-copy h3 {
+  color: white;
+  font-size: clamp(28px, 4vw, 54px);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.phone-case-copy p {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.8;
+  margin: 22px 0 0;
+  max-width: 38ch;
+  text-wrap: pretty;
+}
+
+.phone-case-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.phone-case-steps span {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  padding-top: 10px;
+}
+
+.phone-stage {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+}
+
+.phone-stage::before {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  content: "";
+  filter: blur(18px);
+  height: 32%;
+  position: absolute;
+  right: 4%;
+  top: 16%;
+  transform: rotate(-18deg);
+  width: 72%;
+}
+
+.phone-shell {
+  aspect-ratio: 440 / 952;
+  background: #f6f8f8;
+  border: 10px solid #0b171c;
+  border-radius: 38px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
+  max-height: min(74svh, 760px);
+  overflow: hidden;
+  padding: 12px;
+  position: relative;
+  transform: rotate(-2deg);
+  transform-origin: center;
+  transition: transform 120ms ease-out;
+  width: min(34vw, 390px);
+  will-change: transform;
+  z-index: 2;
+}
+
+.phone-speaker {
+  background: #0b171c;
+  border-radius: 999px;
+  height: 5px;
+  left: 50%;
+  position: absolute;
+  top: 12px;
+  transform: translateX(-50%);
+  width: 64px;
+  z-index: 4;
+}
+
+.phone-screen {
+  background: white;
+  border-radius: 27px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.phone-track {
+  display: flex;
+  height: 100%;
+  width: calc(var(--phone-count, 4) * 100%);
+  will-change: transform;
+}
+
+.phone-shot {
+  background: white;
+  flex: 0 0 calc(100% / var(--phone-count, 4));
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.phone-shot img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+}
+
+.phone-shot div {
+  background: linear-gradient(180deg, transparent, rgba(5, 16, 20, 0.78));
+  bottom: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  left: 0;
+  padding: 72px 20px 20px;
+  position: absolute;
+  right: 0;
+}
+
+.phone-shot strong {
+  font-size: 18px;
+}
+
+.phone-shot span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.phone-caption {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  margin: 18px 0 0;
+  position: relative;
+  z-index: 2;
+}
+
 .contact-section {
   padding-bottom: 120px;
 }
@@ -806,6 +992,21 @@ main {
 
   .case-copy {
     position: static;
+  }
+
+  .case-section--phone .case-media,
+  .phone-case-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-case-copy {
+    max-width: 680px;
+    padding-left: 0;
+  }
+
+  .phone-shell {
+    max-height: min(62svh, 640px);
+    width: min(58vw, 360px);
   }
 
   .proof-board,
@@ -858,6 +1059,26 @@ main {
     flex-basis: 300px;
   }
 
+  .case-section--phone .case-media {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .phone-case-layout {
+    gap: 22px;
+  }
+
+  .phone-case-copy h3 {
+    font-size: 30px;
+  }
+
+  .phone-shell {
+    border-radius: 30px;
+    border-width: 8px;
+    max-height: 560px;
+    width: min(76vw, 320px);
+  }
+
   .hero-shot--primary img,
   .assistant-shot img {
     height: auto;
@@ -878,6 +1099,8 @@ main {
   }
 
   .evidence-strip,
+  .phone-track,
+  .phone-shell,
   .case-section:nth-child(odd) .evidence-strip,
   .case-section:nth-child(even) .evidence-strip,
   .evidence-item,
