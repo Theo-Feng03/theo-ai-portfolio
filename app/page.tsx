@@ -245,7 +245,11 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
           <MediaFrame project={project} />
           <figcaption>{project.caption}</figcaption>
         </figure>
-        <div className="evidence-strip">
+        <div className="carousel-header">
+          <span>向下滚动时斜向掠过截图</span>
+          <span>{project.evidence.length} 张</span>
+        </div>
+        <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
           {project.evidence.map(([title, body, image, alt]) => (
             <article className="evidence-item" key={title}>
               <img src={image} alt={alt} loading="lazy" />
@@ -313,8 +317,8 @@ export default function Home() {
       <section className="work-section" aria-label="作品案例">
         <div className="section-intro">
           <p className="eyebrow">Case Studies</p>
-          <h2>每个作品都用截图说话，再补一句为什么它重要。</h2>
-          <p>我把重点放在产品闭环、AI 协作边界和可验证结果上。文案只负责解释截图，不抢作品本身的戏。</p>
+          <h2>每个作品先给主画面，再用滑动截图展开细节。</h2>
+          <p>我把重点放在产品闭环、AI 协作边界和可验证结果上。页面正常向下滚动，截图会以斜向动线展示每个项目的关键证据。</p>
         </div>
         <div className="case-stack">
           {caseProjects.map((project, index) => (
