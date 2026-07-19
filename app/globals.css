@@ -757,12 +757,23 @@ main {
   transform: rotate(-2.2deg);
 }
 
-.evidence-item img {
+.evidence-item img,
+.evidence-item video {
   border-radius: var(--radius-md);
+  display: block;
   height: min(58vh, 520px);
   object-fit: cover;
   object-position: top left;
   width: 100%;
+}
+
+.evidence-item--main {
+  background: #eef4f2;
+}
+
+.evidence-item--main img,
+.evidence-item--main video {
+  filter: saturate(1.02) contrast(1.02);
 }
 
 .evidence-item div {
@@ -917,12 +928,18 @@ main {
   position: relative;
 }
 
-.phone-shot img {
+.phone-shot img,
+.phone-shot video {
   display: block;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   width: 100%;
+}
+
+.phone-shot--main img,
+.phone-shot--main video {
+  object-position: top center;
 }
 
 .phone-shot div {

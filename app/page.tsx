@@ -273,6 +273,7 @@ function isPhoneProject(project: Project) {
 
 function PhoneCaseMedia({ project }: { project: Project }) {
   if (!("evidence" in project)) return null;
+  const phoneCount = project.evidence.length + 1;
 
   return (
     <div className="phone-case-layout">
@@ -281,8 +282,9 @@ function PhoneCaseMedia({ project }: { project: Project }) {
         <h3>把手机截图放回手机场景里看。</h3>
         <p>{project.caption}</p>
         <div className="phone-case-steps">
+          <span>01 · 主流程</span>
           {project.evidence.map(([title], index) => (
-            <span key={title}>{String(index + 1).padStart(2, "0")} · {title}</span>
+            <span key={title}>{String(index + 2).padStart(2, "0")} · {title}</span>
           ))}
         </div>
       </div>
@@ -293,8 +295,15 @@ function PhoneCaseMedia({ project }: { project: Project }) {
           <div className="phone-screen">
             <div
               className="phone-track"
-              style={{ "--phone-count": project.evidence.length } as CSSProperties}
+              style={{ "--phone-count": phoneCount } as CSSProperties}
             >
+              <article className="phone-shot phone-shot--main">
+                <MediaFrame project={project} />
+                <div>
+                  <strong>主流程</strong>
+                  <span>{project.caption}</span>
+                </div>
+              </article>
               {project.evidence.map(([title, body, image, alt]) => (
                 <article className="phone-shot" key={title}>
                   <img src={image} alt={alt} loading="lazy" />
@@ -310,6 +319,20 @@ function PhoneCaseMedia({ project }: { project: Project }) {
         <p className="phone-caption">继续向下滚动，手机屏内截图会横向切换。</p>
       </div>
     </div>
+  );
+}
+
+function MainEvidenceCard({ project }: { project: Project }) {
+  if (!("caption" in project)) return null;
+
+  return (
+    <article className="evidence-item evidence-item--main">
+      <MediaFrame project={project} />
+      <div>
+        <h3>主流程</h3>
+        <p>{project.caption}</p>
+      </div>
+    </article>
   );
 }
 
@@ -347,7 +370,8 @@ function FeaturedAssistant({ project }: { project: Project }) {
 
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
-  const storyHeight = `${126 + project.evidence.length * 78}vh`;
+  const displayCount = project.evidence.length + 1;
+  const storyHeight = `${126 + displayCount * 78}vh`;
   const phoneProject = isPhoneProject(project);
 
   return (
@@ -380,9 +404,10 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
               </figure>
               <div className="carousel-header">
                 <span>向下滚动时斜向掠过截图</span>
-                <span>{project.evidence.length} 张</span>
+                <span>{displayCount} 张</span>
               </div>
               <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
+                <MainEvidenceCard project={project} />
                 {project.evidence.map(([title, body, image, alt]) => (
                   <article className="evidence-item" key={title}>
                     <img src={image} alt={alt} loading="lazy" />
