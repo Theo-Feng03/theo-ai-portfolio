@@ -37,6 +37,7 @@ test("server-renders the portfolio shell", async () => {
   assert.match(html, /StorageOps Agent Demo|运维平台 Demo/);
   assert.match(html, /AI Learning Pulse|AI 资讯收集 Agent|AI 资讯 Agent/);
   assert.match(html, /血染钟楼 RAG Agent|血染钟楼问答助手|血染钟楼问答/);
+  assert.match(html, /出行清单工具|出行准备工具/);
   assert.match(html, /fengtao97071/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
 });

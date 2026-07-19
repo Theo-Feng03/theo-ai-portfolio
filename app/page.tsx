@@ -139,12 +139,42 @@ const projects = [
   },
   {
     id: "travel",
-    eyebrow: "MVP",
-    title: "出行准备工具",
+    eyebrow: "Mobile MVP",
+    title: "出行清单工具",
     status: "已完成",
-    summary: "AI 辅助的场景化打包清单 MVP，用作作品集里的可运行产品案例。",
-    points: ["场景清单", "外部信息", "可运行 MVP"],
+    summary: "一个手机端出行准备 MVP：通过对话补全目的地、时间、天数和出行目的，结合天气、交通与周边信息生成可勾选、可编辑、可复用的场景化清单。",
+    points: ["多轮补全", "天气交通", "场景清单"],
     accent: "sky",
+    showcase: {
+      heroImage: "/assets/projects/travel-demo.gif",
+      caption: "从一句自然语言出发，补全信息后生成出行清单，并支持车票、周边和出发前核对。",
+      evidence: [
+        {
+          title: "轻量入口",
+          body: "首页直接给出示例场景和输入框，降低用户从空白开始描述行程的成本。",
+          image: "/assets/projects/travel-home.png",
+          alt: "出行清单工具首页入口截图",
+        },
+        {
+          title: "对话补全",
+          body: "当目的地、时间或目的不完整时，先追问关键信息，再生成清单。",
+          image: "/assets/projects/travel-dialog.png",
+          alt: "出行清单工具对话追问补全截图",
+        },
+        {
+          title: "天气影响清单",
+          body: "把天气、温度和降雨概率直接转化为物品建议，而不是生成通用模板。",
+          image: "/assets/projects/travel-weather-list.png",
+          alt: "出行清单工具天气影响清单截图",
+        },
+        {
+          title: "交通与场景差异",
+          body: "支持 12306 查询，也能对亲子度假和商务出差生成不同清单。",
+          image: "/assets/projects/travel-scenario-compare.png",
+          alt: "出行清单工具亲子度假和商务出差场景对比截图",
+        },
+      ],
+    },
   },
   {
     id: "toolbox",
