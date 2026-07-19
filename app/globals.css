@@ -722,7 +722,7 @@ main {
   overflow: visible;
   padding: 0;
   position: absolute;
-  top: 23vh;
+  top: clamp(72px, 11svh, 112px);
   transform-origin: 10% 50%;
   width: max-content;
   will-change: transform;
@@ -761,7 +761,7 @@ main {
 .evidence-item video {
   border-radius: var(--radius-md);
   display: block;
-  height: min(58vh, 520px);
+  height: clamp(320px, 48svh, 460px);
   object-fit: cover;
   object-position: top left;
   width: 100%;
@@ -778,7 +778,7 @@ main {
 
 .evidence-item div {
   background: var(--surface);
-  padding: 16px 8px 8px;
+  padding: 14px 8px 8px;
 }
 
 .case-section--phone .case-media {
