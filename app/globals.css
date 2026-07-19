@@ -10,6 +10,7 @@
   --accent: #ff4d2e;
   --accent-soft: #fff0ec;
   --ink: #07171d;
+  --nav-space: 76px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -66,15 +67,17 @@ video {
 main {
   min-height: 100vh;
   overflow-x: clip;
+  padding-left: var(--nav-space);
 }
 
 .side-nav {
+  background: rgba(247, 248, 245, 0.84);
   bottom: 0;
   left: 0;
   pointer-events: none;
   position: fixed;
   top: 0;
-  width: 220px;
+  width: var(--nav-space);
   z-index: 50;
 }
 
@@ -83,21 +86,21 @@ main {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 23px;
+  gap: 21px;
   justify-content: center;
-  left: 30px;
+  left: 25px;
   pointer-events: auto;
   position: absolute;
   top: 0;
-  width: 184px;
+  width: 44px;
 }
 
 .nav-tick {
   align-items: center;
   display: flex;
-  height: 9px;
+  height: 7px;
   position: relative;
-  width: 184px;
+  width: 44px;
 }
 
 .nav-tick::before,
@@ -105,20 +108,20 @@ main {
   background: #cbd2d2;
   content: "";
   display: block;
-  height: 4px;
+  height: 3px;
   left: 0;
   opacity: 0;
   position: absolute;
   transition: opacity 180ms ease, transform 180ms ease;
-  width: 28px;
+  width: 18px;
 }
 
 .nav-tick::before {
-  top: -13px;
+  top: -12px;
 }
 
 .nav-tick::after {
-  bottom: -13px;
+  bottom: -12px;
 }
 
 .nav-tick:first-child::before,
@@ -129,10 +132,10 @@ main {
 .nav-tick-line {
   background: #cbd2d2;
   display: block;
-  height: 4px;
+  height: 3px;
   opacity: 0.95;
   transition: background 180ms ease, transform 180ms ease, width 180ms ease;
-  width: 22px;
+  width: 16px;
 }
 
 .nav-card {
@@ -142,7 +145,7 @@ main {
   box-shadow: 0 8px 14px rgba(7, 23, 29, 0.08);
   display: grid;
   gap: 5px;
-  left: 72px;
+  left: 48px;
   opacity: 0;
   padding: 14px 16px;
   pointer-events: none;
@@ -156,8 +159,8 @@ main {
 .nav-tick:hover .nav-tick-line,
 .nav-tick:focus-visible .nav-tick-line {
   background: var(--ink);
-  transform: translateX(8px);
-  width: 64px;
+  transform: translateX(4px);
+  width: 34px;
 }
 
 .nav-tick:hover::before,
@@ -1039,6 +1042,10 @@ main {
 }
 
 @media (max-width: 720px) {
+  main {
+    padding-left: 0;
+  }
+
   .side-nav {
     display: none;
   }
