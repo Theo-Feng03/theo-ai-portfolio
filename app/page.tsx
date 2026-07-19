@@ -28,11 +28,41 @@ const projects = [
   {
     id: "ops",
     eyebrow: "Agent Product",
-    title: "运维平台 Demo",
+    title: "StorageOps Agent Demo",
     status: "已完成",
-    summary: "面向运维流程的 AI Agent 产品 Demo，重点展示流程拆解、人机协作与安全边界。",
-    points: ["工单流转", "多 Agent 编排", "人工确认"],
+    summary: "一个面向 HDFS/HBase 场景的多 Agent 运维平台 Demo：从风险预测、诊断、方案生成、人工 Review 到执行验证和审计沉淀，完整展示 AI 运维产品里的安全边界与闭环设计。",
+    points: ["风险预测", "人工门禁", "执行验证"],
     accent: "ink",
+    showcase: {
+      heroImage: "/assets/projects/storageops-replay.gif",
+      caption: "风险中心 → Agent 诊断 → 方案生成 → Review 门禁 → 人工执行回填 → 自动验证与审计。",
+      evidence: [
+        {
+          title: "平台总览",
+          body: "把 HDFS/HBase 存储 Agent 放进多 Agent 运维平台框架里，明确 Demo 边界和人机协作闭环。",
+          image: "/assets/projects/storageops-overview.png",
+          alt: "StorageOps Agent Demo 平台总览截图",
+        },
+        {
+          title: "风险中心",
+          body: "围绕容量、阈值和趋势预测生成风险项，让运维问题先进入可追踪的事件流。",
+          image: "/assets/projects/storageops-risk-center.png",
+          alt: "StorageOps Agent Demo 风险中心截图",
+        },
+        {
+          title: "运维方案",
+          body: "Agent 输出命令草案、前置条件、适用范围和回滚计划；命令只作为建议文本，不自动执行。",
+          image: "/assets/projects/storageops-operation-plan.png",
+          alt: "StorageOps Agent Demo 运维方案截图",
+        },
+        {
+          title: "执行验证",
+          body: "人工执行后回填结果，系统再做验证与状态更新，避免 AI 建议停在“看起来合理”。",
+          image: "/assets/projects/storageops-execution.png",
+          alt: "StorageOps Agent Demo 执行验证截图",
+        },
+      ],
+    },
   },
   {
     id: "news",
