@@ -587,6 +587,82 @@
         margin-bottom: 4px;
       }
 
+      .project-showcase {
+        align-self: center;
+        display: grid;
+        gap: 14px;
+      }
+
+      .showcase-main {
+        background: #f7faf8;
+        border: 1px solid rgba(5, 26, 36, 0.08);
+        border-radius: 28px;
+        box-shadow: 0 28px 80px rgba(5, 26, 36, 0.12);
+        margin: 0;
+        overflow: hidden;
+        padding: 12px;
+      }
+
+      .showcase-main video {
+        background: #eef2f0;
+        border-radius: 18px;
+        display: block;
+        height: auto;
+        width: 100%;
+      }
+
+      .showcase-main figcaption {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+        padding: 12px 6px 2px;
+      }
+
+      .evidence-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .evidence-card {
+        background: #ffffff;
+        border: 1px solid rgba(5, 26, 36, 0.08);
+        border-radius: 18px;
+        box-shadow: 0 14px 34px rgba(5, 26, 36, 0.07);
+        display: grid;
+        gap: 12px;
+        overflow: hidden;
+        padding: 10px;
+      }
+
+      .evidence-card img {
+        background: #f5f7f6;
+        border-radius: 12px;
+        display: block;
+        height: 118px;
+        object-fit: cover;
+        object-position: top left;
+        width: 100%;
+      }
+
+      .evidence-card div {
+        padding: 0 4px 4px;
+      }
+
+      .evidence-card h3 {
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 500;
+        margin: 0 0 6px;
+      }
+
+      .evidence-card p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+        margin: 0;
+      }
+
       .mint { background: #e7fff4; }
       .ink { background: #071f2b; }
       .amber { background: #fff4c9; }
@@ -695,6 +771,10 @@
           grid-template-columns: 1fr;
         }
 
+        .evidence-grid {
+          grid-template-columns: 1fr;
+        }
+
         .tech-map-section {
           min-height: auto;
         }
@@ -800,9 +880,9 @@
             <span class="nav-tick-line"></span>
             <span class="nav-card"><span>04</span><strong>运维平台 Demo</strong><em>Agent 产品与运维流程</em></span>
           </a>
-          <a class="nav-tick" href="#news" aria-label="跳转到 AI 资讯 Agent">
+          <a class="nav-tick" href="#news" aria-label="跳转到 AI Learning Pulse">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>05</span><strong>AI 资讯 Agent</strong><em>近期完成的信息收集工具</em></span>
+            <span class="nav-card"><span>05</span><strong>AI Learning Pulse</strong><em>AI 资讯到本人学习的闭环工具</em></span>
           </a>
           <a class="nav-tick" href="#botc" aria-label="跳转到血染钟楼问答">
             <span class="nav-tick-line"></span>
@@ -812,9 +892,9 @@
             <span class="nav-tick-line"></span>
             <span class="nav-card"><span>07</span><strong>出行准备工具</strong><em>场景化清单 MVP</em></span>
           </a>
-          <a class="nav-tick" href="#toolbox" aria-label="跳转到去 AI 工具">
+          <a class="nav-tick" href="#toolbox" aria-label="跳转到 SnipClip">
             <span class="nav-tick-line"></span>
-            <span class="nav-card"><span>08</span><strong>去 AI 工具</strong><em>vibe coding 小产品</em></span>
+            <span class="nav-card"><span>08</span><strong>SnipClip</strong><em>剪贴板历史与截图标注工具</em></span>
           </a>
           <a class="nav-tick" href="#contact" aria-label="跳转到联系我">
             <span class="nav-tick-line"></span>
@@ -869,18 +949,18 @@
 
       <section class="marquee-section" aria-label="作品集视觉节奏">
         <div class="marquee-track">
-          <span>个人助手</span><span>运维平台 Demo</span><span>AI 资讯收集 Agent</span><span>血染钟楼问答助手</span><span>出行准备工具</span><span>去 AI 工具</span>
-          <span>个人助手</span><span>运维平台 Demo</span><span>AI 资讯收集 Agent</span><span>血染钟楼问答助手</span><span>出行准备工具</span><span>去 AI 工具</span>
+          <span>个人助手</span><span>运维平台 Demo</span><span>AI Learning Pulse</span><span>血染钟楼问答助手</span><span>出行准备工具</span><span>SnipClip</span>
+          <span>个人助手</span><span>运维平台 Demo</span><span>AI Learning Pulse</span><span>血染钟楼问答助手</span><span>出行准备工具</span><span>SnipClip</span>
         </div>
       </section>
 
       <div class="project-stack">
-        <section id="assistant" class="project-section"><div class="project-copy"><p class="eyebrow">Featured Project</p><div class="project-heading"><h2>个人助手</h2><span>已完成</span></div><p>一个 local-first 的个人 Agent Vault，用目录、规则、权限、记忆和 Skill 治理，把长期学习和项目经验沉淀成可复用的个人助手系统。</p><div class="tag-row"><span>记忆治理</span><span>权限分级</span><span>Skill 方法库</span></div></div><figure class="project-screenshot"><img src="assets/personal-agent-rules.png" alt="个人助手 Agent Rules 与 Vault 目录结构截图"><figcaption>Vault 目录结构 + Agent Rules 治理规则</figcaption><div class="screenshot-notes" aria-label="截图解读"><span><strong>左侧不是普通文件夹</strong>我把项目、经验、技能和待审核内容分区管理，让助手能按场景调用材料。</span><span><strong>右侧不是随手写的说明</strong>它是助手运行规则，用来约束能读什么、何时要确认、怎样避免越权。</span><span><strong>这张图想表达的价值</strong>把零散 AI 使用经验沉淀成可复用系统，让后续项目更快、更稳、更可控。</span></div></figure></section>
+        <section id="assistant" class="project-section"><div class="project-copy"><p class="eyebrow">Featured Project</p><div class="project-heading"><h2>个人助手</h2><span>持续迭代中</span></div><p>一个本地 Demo 阶段的个人 AI 工作系统原型，用来验证项目复盘、手机控制、记忆治理和规则约束如何组合成长期可进化的个人助手。</p><div class="tag-row"><span>项目复盘</span><span>手机控制</span><span>记忆治理</span></div></div><figure class="project-screenshot"><img src="assets/personal-agent-rules.png" alt="个人助手 Agent Rules 与 Vault 目录结构截图"><figcaption>Vault 目录结构 + Agent Rules 治理规则</figcaption><div class="screenshot-notes" aria-label="截图解读"><span><strong>左侧不是普通文件夹</strong>我把项目、经验、技能和待审核内容分区管理，让助手能按场景调用材料。</span><span><strong>右侧不是随手写的说明</strong>它是助手运行规则，用来约束能读什么、何时要确认、怎样避免越权。</span><span><strong>这张图想表达的价值</strong>把零散 AI 使用经验沉淀成可复用系统，让后续项目更快、更稳、更可控。</span></div></figure></section>
         <section id="ops" class="project-section"><div class="project-copy"><p class="eyebrow">Agent Product</p><div class="project-heading"><h2>运维平台 Demo</h2><span>已完成</span></div><p>面向运维流程的 AI Agent 产品 Demo，重点展示流程拆解、人机协作与安全边界。</p><div class="tag-row"><span>工单流转</span><span>多 Agent 编排</span><span>人工确认</span></div></div><div class="project-visual ink"><div class="visual-index">02</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
-        <section id="news" class="project-section"><div class="project-copy"><p class="eyebrow">Upcoming</p><div class="project-heading"><h2>AI 资讯收集 Agent</h2><span>近期完成</span></div><p>网页版信息收集与筛选 Agent，预留为这两天补齐的新增作品。</p><div class="tag-row"><span>信息聚合</span><span>筛选摘要</span><span>网页版体验</span></div></div><div class="project-visual amber"><div class="visual-index">03</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="news" class="project-section"><div class="project-copy"><p class="eyebrow">Learning System</p><div class="project-heading"><h2>AI Learning Pulse</h2><span>已完成</span></div><p>一个网页版 AI 资讯学习工具：自动采集多类信源，先由 AI 做筛选和摘要，再强制进入本人学习结论与脱敏展示闭环。</p><div class="tag-row"><span>自动采集</span><span>AI 筛选</span><span>学习闭环</span></div></div><div class="project-showcase" aria-label="AI Learning Pulse 作品展示"><figure class="showcase-main"><video src="assets/projects/ai-learning-loop.mp4" poster="assets/projects/ai-learning-dashboard.png" autoplay loop muted playsinline></video><figcaption>从资讯收件箱保存草稿 → 写本人结论 → 确认已学习 → 发布到公开预览。</figcaption></figure><div class="evidence-grid"><article class="evidence-card"><img src="assets/projects/ai-learning-architecture.png" alt="AI Learning Pulse 数据流架构图" loading="lazy"><div><h3>数据流架构</h3><p>从 RSS、GitHub Release、公众号与视频转写进入采集、去重、AI 分析和脱敏导出。</p></div></article><article class="evidence-card"><img src="assets/projects/ai-learning-dashboard.png" alt="AI Learning Pulse 总览仪表盘截图" loading="lazy"><div><h3>总览仪表盘</h3><p>用统计瓦片、90 天热力图和主题分布展示学习节奏，而不是只展示资讯数量。</p></div></article><article class="evidence-card"><img src="assets/projects/ai-learning-inbox.png" alt="AI Learning Pulse 资讯收件箱截图" loading="lazy"><div><h3>资讯收件箱</h3><p>AI 生成中文标题、摘要、评分和标签，让信息筛选从人工扫标题变成可排序的处理流。</p></div></article><article class="evidence-card"><img src="assets/projects/ai-learning-timeline.png" alt="AI Learning Pulse 学习时间线截图" loading="lazy"><div><h3>学习时间线</h3><p>每条记录必须有本人结论才能发布，强调自动抓取不等于学习。</p></div></article></div></div></section>
         <section id="botc" class="project-section"><div class="project-copy"><p class="eyebrow">Upcoming</p><div class="project-heading"><h2>血染钟楼问答助手</h2><span>近期完成</span></div><p>兴趣场景驱动的 AI 问答助手，用来展示把 AI 能力落进具体使用场景的能力。</p><div class="tag-row"><span>规则问答</span><span>场景检索</span><span>低门槛使用</span></div></div><div class="project-visual rose"><div class="visual-index">04</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
         <section id="travel" class="project-section"><div class="project-copy"><p class="eyebrow">MVP</p><div class="project-heading"><h2>出行准备工具</h2><span>已完成</span></div><p>AI 辅助的场景化打包清单 MVP，用作作品集里的可运行产品案例。</p><div class="tag-row"><span>场景清单</span><span>外部信息</span><span>可运行 MVP</span></div></div><div class="project-visual sky"><div class="visual-index">05</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
-        <section id="toolbox" class="project-section"><div class="project-copy"><p class="eyebrow">Vibe Coding</p><div class="project-heading"><h2>去 AI 工具</h2><span>已完成</span></div><p>基于 vibe coding 开发的小产品，支持复制和截图，作为快速构建能力展示。</p><div class="tag-row"><span>轻量工具</span><span>复制截图</span><span>快速交付</span></div></div><div class="project-visual lime"><div class="visual-index">06</div><div class="visual-lines"><span></span><span></span><span></span></div><div class="visual-window"><span></span><span></span><span></span></div></div></section>
+        <section id="toolbox" class="project-section"><div class="project-copy"><p class="eyebrow">Vibe Coding</p><div class="project-heading"><h2>SnipClip</h2><span>已完成</span></div><p>一个 macOS 菜单栏小工具：把剪贴板历史、区域截图、标注和贴图悬浮连成一个轻量工作流，用 vibe coding 快速推进到可用形态。</p><div class="tag-row"><span>剪贴板历史</span><span>截图标注</span><span>贴图悬浮</span></div></div><div class="project-showcase" aria-label="SnipClip 作品展示"><figure class="showcase-main"><video src="assets/projects/snipclip-flow.mp4" poster="assets/projects/snipclip-pin.png" autoplay loop muted playsinline></video><figcaption>F1 触发框选 → 标注 → 隐藏工具栏贴图 → 拖动悬浮 → 双击关闭。</figcaption></figure><div class="evidence-grid"><article class="evidence-card"><img src="assets/projects/snipclip-clipboard.png" alt="SnipClip 剪贴板历史菜单截图" loading="lazy"><div><h3>剪贴板历史</h3><p>文本、链接、代码和图片都能被记住，菜单栏里随时取回。</p></div></article><article class="evidence-card"><img src="assets/projects/snipclip-annotation.png" alt="SnipClip 截图标注工具截图" loading="lazy"><div><h3>截图标注</h3><p>矩形、箭头、文字、序号和马赛克等常用标注工具集中在截图窗口里。</p></div></article><article class="evidence-card"><img src="assets/projects/snipclip-pin.png" alt="SnipClip 贴图悬浮截图" loading="lazy"><div><h3>贴图悬浮</h3><p>截图可以钉在所有窗口之上，用来对照资料、写文档或复盘问题。</p></div></article><article class="evidence-card"><img src="assets/projects/snipclip-history.png" alt="SnipClip 截图复制到历史记录截图" loading="lazy"><div><h3>复制闭环</h3><p>标注后复制的图片会进入历史记录，让截图和剪贴板能力真正打通。</p></div></article></div></div></section>
       </div>
 
       <section id="contact" class="contact-section">

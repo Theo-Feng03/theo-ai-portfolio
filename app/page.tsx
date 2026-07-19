@@ -6,10 +6,10 @@ const navItems = [
   { id: "tech-map", label: "AI 技术图谱", short: "02", hint: "AI 技术探索路径与实践积累" },
   { id: "assistant", label: "个人助手", short: "03", hint: "重点作品：个人助手系统" },
   { id: "ops", label: "运维平台 Demo", short: "04", hint: "Agent 产品与运维流程" },
-  { id: "news", label: "AI 资讯 Agent", short: "05", hint: "近期完成的信息收集工具" },
+  { id: "news", label: "AI Learning Pulse", short: "05", hint: "AI 资讯到本人学习的闭环工具" },
   { id: "botc", label: "血染钟楼问答", short: "06", hint: "规则问答与兴趣场景应用" },
   { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
-  { id: "toolbox", label: "去 AI 工具", short: "08", hint: "vibe coding 小产品" },
+  { id: "toolbox", label: "SnipClip", short: "08", hint: "剪贴板历史与截图标注工具" },
   { id: "contact", label: "联系我", short: "09", hint: "微信、邮箱与电话" },
 ];
 
@@ -18,9 +18,9 @@ const projects = [
     id: "assistant",
     eyebrow: "Featured Project",
     title: "个人助手",
-    status: "已完成",
-    summary: "一个 local-first 的个人 Agent Vault，用目录、规则、权限、记忆和 Skill 治理，把长期学习和项目经验沉淀成可复用的个人助手系统。",
-    points: ["记忆治理", "权限分级", "Skill 方法库"],
+    status: "持续迭代中",
+    summary: "一个本地 Demo 阶段的个人 AI 工作系统原型，用来验证项目复盘、手机控制、记忆治理和规则约束如何组合成长期可进化的个人助手。",
+    points: ["项目复盘", "手机控制", "记忆治理"],
     accent: "mint",
     image: "/assets/personal-agent-rules.png",
     imageAlt: "个人助手 Agent Rules 与 Vault 目录结构截图",
@@ -36,12 +36,43 @@ const projects = [
   },
   {
     id: "news",
-    eyebrow: "Upcoming",
-    title: "AI 资讯收集 Agent",
-    status: "近期完成",
-    summary: "网页版信息收集与筛选 Agent，预留为这两天补齐的新增作品。",
-    points: ["信息聚合", "筛选摘要", "网页版体验"],
+    eyebrow: "Learning System",
+    title: "AI Learning Pulse",
+    status: "已完成",
+    summary: "一个网页版 AI 资讯学习工具：自动采集多类信源，先由 AI 做筛选和摘要，再强制进入本人学习结论与脱敏展示闭环。",
+    points: ["自动采集", "AI 筛选", "学习闭环"],
     accent: "amber",
+    showcase: {
+      video: "/assets/projects/ai-learning-loop.mp4",
+      poster: "/assets/projects/ai-learning-dashboard.png",
+      caption: "从资讯收件箱保存草稿 → 写本人结论 → 确认已学习 → 发布到公开预览。",
+      evidence: [
+        {
+          title: "数据流架构",
+          body: "从 RSS、GitHub Release、公众号与视频转写进入采集、去重、AI 分析和脱敏导出。",
+          image: "/assets/projects/ai-learning-architecture.png",
+          alt: "AI Learning Pulse 数据流架构图",
+        },
+        {
+          title: "总览仪表盘",
+          body: "用统计瓦片、90 天热力图和主题分布展示学习节奏，而不是只展示资讯数量。",
+          image: "/assets/projects/ai-learning-dashboard.png",
+          alt: "AI Learning Pulse 总览仪表盘截图",
+        },
+        {
+          title: "资讯收件箱",
+          body: "AI 生成中文标题、摘要、评分和标签，让信息筛选从人工扫标题变成可排序的处理流。",
+          image: "/assets/projects/ai-learning-inbox.png",
+          alt: "AI Learning Pulse 资讯收件箱截图",
+        },
+        {
+          title: "学习时间线",
+          body: "每条记录必须有本人结论才能发布，强调自动抓取不等于学习。",
+          image: "/assets/projects/ai-learning-timeline.png",
+          alt: "AI Learning Pulse 学习时间线截图",
+        },
+      ],
+    },
   },
   {
     id: "botc",
@@ -64,11 +95,42 @@ const projects = [
   {
     id: "toolbox",
     eyebrow: "Vibe Coding",
-    title: "去 AI 工具",
+    title: "SnipClip",
     status: "已完成",
-    summary: "基于 vibe coding 开发的小产品，支持复制和截图，作为快速构建能力展示。",
-    points: ["轻量工具", "复制截图", "快速交付"],
+    summary: "一个 macOS 菜单栏小工具：把剪贴板历史、区域截图、标注和贴图悬浮连成一个轻量工作流，用 vibe coding 快速推进到可用形态。",
+    points: ["剪贴板历史", "截图标注", "贴图悬浮"],
     accent: "lime",
+    showcase: {
+      video: "/assets/projects/snipclip-flow.mp4",
+      poster: "/assets/projects/snipclip-pin.png",
+      caption: "F1 触发框选 → 标注 → 隐藏工具栏贴图 → 拖动悬浮 → 双击关闭。",
+      evidence: [
+        {
+          title: "剪贴板历史",
+          body: "文本、链接、代码和图片都能被记住，菜单栏里随时取回。",
+          image: "/assets/projects/snipclip-clipboard.png",
+          alt: "SnipClip 剪贴板历史菜单截图",
+        },
+        {
+          title: "截图标注",
+          body: "矩形、箭头、文字、序号和马赛克等常用标注工具集中在截图窗口里。",
+          image: "/assets/projects/snipclip-annotation.png",
+          alt: "SnipClip 截图标注工具截图",
+        },
+        {
+          title: "贴图悬浮",
+          body: "截图可以钉在所有窗口之上，用来对照资料、写文档或复盘问题。",
+          image: "/assets/projects/snipclip-pin.png",
+          alt: "SnipClip 贴图悬浮截图",
+        },
+        {
+          title: "复制闭环",
+          body: "标注后复制的图片会进入历史记录，让截图和剪贴板能力真正打通。",
+          image: "/assets/projects/snipclip-history.png",
+          alt: "SnipClip 截图复制到历史记录截图",
+        },
+      ],
+    },
   },
 ];
 
@@ -150,7 +212,32 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
           ))}
         </div>
       </div>
-      {project.image ? (
+      {"showcase" in project && project.showcase ? (
+        <div className="project-showcase" aria-label={`${project.title} 作品展示`}>
+          <figure className="showcase-main">
+            <video
+              src={project.showcase.video}
+              poster={project.showcase.poster}
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            <figcaption>{project.showcase.caption}</figcaption>
+          </figure>
+          <div className="evidence-grid">
+            {project.showcase.evidence.map((item) => (
+              <article className="evidence-card" key={item.title}>
+                <img src={item.image} alt={item.alt} loading="lazy" />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ) : project.image ? (
         <figure className="project-screenshot">
           <img src={project.image} alt={project.imageAlt} />
           <figcaption>Vault 目录结构 + Agent Rules 治理规则</figcaption>
