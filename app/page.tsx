@@ -5,9 +5,9 @@ import { useEffect, type CSSProperties } from "react";
 const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "首屏身份与作品入口" },
   { id: "assistant", label: "个人助手", short: "01", hint: "重点作品：个人助手系统" },
-  { id: "about", label: "关于我", short: "02", hint: "学习速度与落地方式" },
-  { id: "tech-map", label: "AI 技术图谱", short: "03", hint: "我的 AI 技术实践版图" },
-  { id: "ops", label: "运维平台 Demo", short: "04", hint: "Agent 产品与运维闭环" },
+  { id: "ops", label: "运维平台 Demo", short: "02", hint: "Agent 产品与运维闭环" },
+  { id: "about", label: "关于我", short: "03", hint: "学习速度与落地方式" },
+  { id: "tech-map", label: "AI 技术图谱", short: "04", hint: "我的 AI 技术实践版图" },
   { id: "news", label: "AI Learning Pulse", short: "05", hint: "AI 资讯到学习闭环" },
   { id: "botc", label: "血染钟楼 RAG Agent", short: "06", hint: "本地知识库与规则问答" },
   { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
@@ -129,6 +129,7 @@ function ScrollGalleryMotion() {
     const heroStory = document.querySelector<HTMLElement>(".hero-story");
     const heroSection = document.querySelector<HTMLElement>(".hero-section");
     const assistantStory = document.querySelector<HTMLElement>(".assistant-feature");
+    const opsStory = document.querySelector<HTMLElement>(".ops-feature");
     let frame = 0;
 
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -149,6 +150,13 @@ function ScrollGalleryMotion() {
         const assistantTravel = Math.max(1, assistantStory.offsetHeight - viewportHeight);
         const assistantProgress = clamp(-assistantRect.top / assistantTravel);
         assistantStory.style.setProperty("--assistant-progress", assistantProgress.toFixed(3));
+      }
+
+      if (opsStory) {
+        const opsRect = opsStory.getBoundingClientRect();
+        const opsTravel = Math.max(1, opsStory.offsetHeight - viewportHeight);
+        const opsProgress = clamp(-opsRect.top / opsTravel);
+        opsStory.style.setProperty("--ops-progress", opsProgress.toFixed(3));
       }
 
       sections.forEach((section, index) => {
@@ -401,6 +409,42 @@ function FeaturedAssistant({ project }: { project: Project }) {
   );
 }
 
+function StorageOpsFeature({ project }: { project: Project }) {
+  if (!("evidence" in project)) return null;
+  const demos = [
+    ["多 Agent 运维平台", "把监控、诊断、方案和验证串成一个协作闭环。", "/assets/projects/storageops-overview.png", "StorageOps 多 Agent 运维平台总览"],
+    ["风险识别", "提前发现容量与阈值风险，让问题先进入可追踪队列。", "/assets/projects/storageops-risk-center.png", "StorageOps 风险中心"],
+    ["操作计划", "AI 先给出命令草案、前置条件和回滚方案，再由人工确认。", "/assets/projects/storageops-operation-plan.png", "StorageOps 操作计划"],
+    ["执行与复盘", "执行结果自动验证并留痕，下一次处理可以复用经验。", "/assets/projects/storageops-execution.png", "StorageOps 执行验证与复盘"],
+  ];
+
+  return (
+    <section id="ops" className="ops-feature">
+      <div className="ops-stage">
+        <header className="ops-heading">
+          <span>02 / OPERATIONS COMMAND CENTER</span>
+          <h2>StorageOps<br />Agent Demo</h2>
+          <p>把高风险运维从“人盯告警”变成可判断、可确认、可验证的 Agent 协作流程。</p>
+          <div className="ops-signal"><i /> SYSTEM ONLINE</div>
+        </header>
+        <div className="ops-console">
+          <div className="ops-console-bar"><span>STORAGEOPS / LIVE WORKSPACE</span><strong>HUMAN REVIEW ENABLED</strong></div>
+          <div className="ops-track">
+            {demos.map(([title, body, image, alt], index) => (
+              <figure className="ops-shot" key={title}>
+                <img src={image} alt={alt} />
+                <div className={`ops-callout ops-callout--${index + 1}`}><span>0{index + 1}</span><strong>{title}</strong><p>{body}</p></div>
+                <figcaption>{title}：{body}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+        <div className="ops-progress" aria-hidden="true"><span /><span /><span /><span /></div>
+      </div>
+    </section>
+  );
+}
+
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
   const displayCount = project.evidence.length + 1;
@@ -460,7 +504,7 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Home() {
-  const [assistant, ...caseProjects] = projects;
+  const [assistant, ops, ...caseProjects] = projects;
 
   return (
     <main>
@@ -487,6 +531,7 @@ export default function Home() {
       </div>
 
       <FeaturedAssistant project={assistant} />
+      <StorageOpsFeature project={ops} />
 
       <section id="about" className="about-section">
         <div className="section-intro">
@@ -522,7 +567,7 @@ export default function Home() {
         </div>
         <div className="case-stack">
           {caseProjects.map((project, index) => (
-            <ProjectCase key={project.id} project={project} index={index + 2} />
+            <ProjectCase key={project.id} project={project} index={index + 3} />
           ))}
         </div>
       </section>
