@@ -1044,6 +1044,202 @@ main {
 
 .ops-progress span:first-child { background: #dfff00; }
 
+.learning-feature {
+  --learning-progress: 0;
+  background:
+    linear-gradient(rgba(7, 23, 29, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7, 23, 29, .055) 1px, transparent 1px),
+    #efffd8;
+  background-size: 42px 42px;
+  color: var(--ink);
+  height: 365dvh;
+  position: relative;
+}
+
+.learning-stage {
+  align-items: center;
+  display: grid;
+  gap: clamp(24px, 3vw, 48px);
+  grid-template-columns: minmax(270px, .34fr) minmax(0, .66fr);
+  height: 100dvh;
+  margin: 0 auto;
+  max-width: 1380px;
+  overflow: hidden;
+  padding: 44px 28px 64px;
+  position: sticky;
+  top: 0;
+}
+
+.learning-heading {
+  position: relative;
+  transform: translate3d(0, calc((.45 - var(--learning-progress)) * 9vh), 0);
+  z-index: 3;
+}
+
+.learning-heading > span {
+  color: #557164;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.learning-heading h2 {
+  font-size: clamp(46px, 5.6vw, 78px);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .92;
+  margin: 18px 0 24px;
+}
+
+.learning-heading p {
+  color: #496259;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 390px;
+}
+
+.learning-loop {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 28px;
+}
+
+.learning-loop i {
+  background: var(--ink);
+  border-radius: 999px;
+  color: white;
+  font-size: 12px;
+  font-style: normal;
+  padding: 8px 12px;
+}
+
+.learning-loop b {
+  color: #4c7060;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.learning-workspace {
+  background: white;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 18px 20px 0 #8ee6b4;
+  min-width: 0;
+  overflow: hidden;
+  transform: rotate(calc(-2.5deg + var(--learning-progress) * 5deg)) scale(calc(.93 + var(--learning-progress) * .07));
+  z-index: 2;
+}
+
+.learning-workspace-bar {
+  align-items: center;
+  background: white;
+  border-bottom: 2px solid var(--ink);
+  display: flex;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 0 16px;
+}
+
+.learning-workspace-bar strong { color: #087a4c; font-size: 9px; }
+
+.learning-track {
+  display: flex;
+  gap: 18px;
+  padding: 14px;
+  transform: translate3d(calc(var(--learning-progress) * -246%), calc(var(--learning-progress) * -10px), 0) rotate(calc(var(--learning-progress) * 1.2deg));
+  will-change: transform;
+}
+
+.learning-shot {
+  background: #f4f7f5;
+  border: 1px solid rgba(7,23,29,.14);
+  border-radius: 12px;
+  flex: 0 0 82%;
+  margin: 0;
+  overflow: hidden;
+  padding: 8px;
+  position: relative;
+}
+
+.learning-shot img {
+  border-radius: 8px;
+  display: block;
+  height: min(65dvh, 600px);
+  object-fit: cover;
+  object-position: top left;
+  width: 100%;
+}
+
+.learning-shot figcaption {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.learning-callout {
+  background: rgba(255,255,255,.96);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 7px 8px 0 #8ee6b4;
+  color: var(--ink);
+  display: grid;
+  gap: 5px;
+  max-width: 280px;
+  padding: 15px 17px;
+  position: absolute;
+}
+
+.learning-callout::after {
+  background: #087a4c;
+  content: "";
+  height: 2px;
+  position: absolute;
+  width: 72px;
+}
+
+.learning-callout span { color: #087a4c; font-family: "SFMono-Regular", Consolas, monospace; font-size: 10px; }
+.learning-callout strong { font-size: 18px; font-weight: 500; }
+.learning-callout p { color: #496259; font-size: 13px; line-height: 1.5; margin: 0; }
+.learning-callout--1 { left: 6%; top: 10%; }
+.learning-callout--1::after { left: 100%; top: 58%; transform: rotate(12deg); }
+.learning-callout--2 { bottom: 9%; right: 6%; }
+.learning-callout--2::after { right: 100%; top: 48%; transform: rotate(188deg); }
+.learning-callout--3 { right: 7%; top: 11%; }
+.learning-callout--3::after { right: 100%; top: 62%; transform: rotate(170deg); }
+.learning-callout--4 { bottom: 9%; left: 7%; }
+.learning-callout--4::after { left: 100%; top: 44%; transform: rotate(-10deg); }
+
+.learning-radar {
+  border: 1px solid rgba(8,122,76,.26);
+  border-radius: 50%;
+  height: 320px;
+  position: absolute;
+  right: -110px;
+  top: -110px;
+  width: 320px;
+  z-index: 1;
+}
+
+.learning-radar i {
+  border: 1px solid rgba(8,122,76,.22);
+  border-radius: 50%;
+  inset: 18%;
+  position: absolute;
+}
+
+.learning-radar i:nth-child(2) { inset: 36%; }
+.learning-radar i:nth-child(3) { background: #087a4c; border: 0; inset: 49%; }
+
 .assistant-notes h3,
 .evidence-item h3 {
   color: var(--ink);
@@ -1668,6 +1864,24 @@ main {
   .ops-callout p { font-size: 11px; }
   .ops-progress { bottom: 18px; }
   .ops-progress span { width: 28px; }
+
+  .learning-feature { height: 330dvh; }
+  .learning-stage {
+    align-content: center;
+    gap: 18px;
+    grid-template-columns: 1fr;
+    padding: 24px 20px 54px;
+  }
+  .learning-heading { transform: translate3d(calc(var(--learning-progress) * -6vw), 0, 0); }
+  .learning-heading h2 { font-size: clamp(40px, 10vw, 58px); margin: 10px 0 12px; }
+  .learning-heading p { font-size: 13px; line-height: 1.5; }
+  .learning-loop { margin-top: 12px; }
+  .learning-workspace { box-shadow: 10px 12px 0 #8ee6b4; }
+  .learning-shot img { height: min(42dvh, 360px); }
+  .learning-callout { max-width: min(230px, 72%); padding: 11px 13px; }
+  .learning-callout strong { font-size: 16px; }
+  .learning-callout p { font-size: 11px; }
+  .learning-radar { height: 190px; right: -80px; top: -70px; width: 190px; }
 
   .evidence-strip {
     margin-left: -10px;

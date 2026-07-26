@@ -6,9 +6,9 @@ const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "首屏身份与作品入口" },
   { id: "assistant", label: "个人助手", short: "01", hint: "重点作品：个人助手系统" },
   { id: "ops", label: "运维平台 Demo", short: "02", hint: "Agent 产品与运维闭环" },
-  { id: "about", label: "关于我", short: "03", hint: "学习速度与落地方式" },
-  { id: "tech-map", label: "AI 技术图谱", short: "04", hint: "我的 AI 技术实践版图" },
-  { id: "news", label: "AI Learning Pulse", short: "05", hint: "AI 资讯到学习闭环" },
+  { id: "news", label: "AI Learning Pulse", short: "03", hint: "AI 资讯到学习闭环" },
+  { id: "about", label: "关于我", short: "04", hint: "学习速度与落地方式" },
+  { id: "tech-map", label: "AI 技术图谱", short: "05", hint: "我的 AI 技术实践版图" },
   { id: "botc", label: "血染钟楼 RAG Agent", short: "06", hint: "本地知识库与规则问答" },
   { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
   { id: "toolbox", label: "SnipClip", short: "08", hint: "截图与剪贴板小工具" },
@@ -130,6 +130,7 @@ function ScrollGalleryMotion() {
     const heroSection = document.querySelector<HTMLElement>(".hero-section");
     const assistantStory = document.querySelector<HTMLElement>(".assistant-feature");
     const opsStory = document.querySelector<HTMLElement>(".ops-feature");
+    const learningStory = document.querySelector<HTMLElement>(".learning-feature");
     let frame = 0;
 
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -157,6 +158,13 @@ function ScrollGalleryMotion() {
         const opsTravel = Math.max(1, opsStory.offsetHeight - viewportHeight);
         const opsProgress = clamp(-opsRect.top / opsTravel);
         opsStory.style.setProperty("--ops-progress", opsProgress.toFixed(3));
+      }
+
+      if (learningStory) {
+        const learningRect = learningStory.getBoundingClientRect();
+        const learningTravel = Math.max(1, learningStory.offsetHeight - viewportHeight);
+        const learningProgress = clamp(-learningRect.top / learningTravel);
+        learningStory.style.setProperty("--learning-progress", learningProgress.toFixed(3));
       }
 
       sections.forEach((section, index) => {
@@ -445,6 +453,42 @@ function StorageOpsFeature({ project }: { project: Project }) {
   );
 }
 
+function LearningPulseFeature({ project }: { project: Project }) {
+  if (!("evidence" in project)) return null;
+  const demos = [
+    ["自动收集 AI 资讯", "持续接入 RSS、产品更新和视频内容，不再依赖手动刷信息。", "/assets/projects/ai-learning-architecture.png", "AI Learning Pulse 自动采集架构"],
+    ["AI 摘要与评分", "AI 先提炼重点、评分和打标签，帮助我判断什么值得深入。", "/assets/projects/ai-learning-inbox.png", "AI Learning Pulse 资讯收件箱"],
+    ["学习记录沉淀", "只有写下自己的结论，内容才会从收藏变成真正学过。", "/assets/projects/ai-learning-dashboard.png", "AI Learning Pulse 学习仪表盘"],
+    ["公开预览与时间线", "把可分享的学习成果整理成时间线，持续展示认知变化。", "/assets/projects/ai-learning-timeline.png", "AI Learning Pulse 学习时间线"],
+  ];
+
+  return (
+    <section id="news" className="learning-feature">
+      <div className="learning-stage">
+        <header className="learning-heading">
+          <span>03 / PERSONAL LEARNING RADAR</span>
+          <h2>AI Learning<br />Pulse</h2>
+          <p>从自动收集到本人结论，把信息消费变成一个持续运转的 AI 学习闭环。</p>
+          <div className="learning-loop"><i>收集</i><b>筛选</b><i>学习</i><b>沉淀</b></div>
+        </header>
+        <div className="learning-workspace">
+          <div className="learning-workspace-bar"><span>LEARNING PULSE / SIGNAL FEED</span><strong>RADAR ACTIVE</strong></div>
+          <div className="learning-track">
+            {demos.map(([title, body, image, alt], index) => (
+              <figure className="learning-shot" key={title}>
+                <img src={image} alt={alt} />
+                <div className={`learning-callout learning-callout--${index + 1}`}><span>0{index + 1}</span><strong>{title}</strong><p>{body}</p></div>
+                <figcaption>{title}：{body}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+        <div className="learning-radar" aria-hidden="true"><i /><i /><i /></div>
+      </div>
+    </section>
+  );
+}
+
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
   const displayCount = project.evidence.length + 1;
@@ -504,7 +548,7 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Home() {
-  const [assistant, ops, ...caseProjects] = projects;
+  const [assistant, ops, learning, ...caseProjects] = projects;
 
   return (
     <main>
@@ -532,6 +576,7 @@ export default function Home() {
 
       <FeaturedAssistant project={assistant} />
       <StorageOpsFeature project={ops} />
+      <LearningPulseFeature project={learning} />
 
       <section id="about" className="about-section">
         <div className="section-intro">
@@ -567,7 +612,7 @@ export default function Home() {
         </div>
         <div className="case-stack">
           {caseProjects.map((project, index) => (
-            <ProjectCase key={project.id} project={project} index={index + 3} />
+            <ProjectCase key={project.id} project={project} index={index + 4} />
           ))}
         </div>
       </section>
