@@ -4,9 +4,9 @@ import { useEffect, type CSSProperties } from "react";
 
 const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "首屏身份与作品入口" },
-  { id: "about", label: "关于我", short: "01", hint: "学习速度与落地方式" },
-  { id: "tech-map", label: "AI 技术图谱", short: "02", hint: "我的 AI 技术实践版图" },
-  { id: "assistant", label: "个人助手", short: "03", hint: "重点作品：个人助手系统" },
+  { id: "assistant", label: "个人助手", short: "01", hint: "重点作品：个人助手系统" },
+  { id: "about", label: "关于我", short: "02", hint: "学习速度与落地方式" },
+  { id: "tech-map", label: "AI 技术图谱", short: "03", hint: "我的 AI 技术实践版图" },
   { id: "ops", label: "运维平台 Demo", short: "04", hint: "Agent 产品与运维闭环" },
   { id: "news", label: "AI Learning Pulse", short: "05", hint: "AI 资讯到学习闭环" },
   { id: "botc", label: "血染钟楼 RAG Agent", short: "06", hint: "本地知识库与规则问答" },
@@ -125,6 +125,9 @@ function ScrollGalleryMotion() {
     if (prefersReducedMotion.matches) return;
 
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".case-section"));
+    const heroStory = document.querySelector<HTMLElement>(".hero-story");
+    const heroSection = document.querySelector<HTMLElement>(".hero-section");
+    const assistantStory = document.querySelector<HTMLElement>(".assistant-feature");
     let frame = 0;
 
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -132,6 +135,20 @@ function ScrollGalleryMotion() {
     const update = () => {
       frame = 0;
       const viewportHeight = window.innerHeight || 1;
+
+      if (heroStory && heroSection) {
+        const heroRect = heroStory.getBoundingClientRect();
+        const heroTravel = Math.max(1, heroStory.offsetHeight - viewportHeight);
+        const heroProgress = clamp(-heroRect.top / heroTravel);
+        heroSection.style.setProperty("--hero-progress", heroProgress.toFixed(3));
+      }
+
+      if (assistantStory) {
+        const assistantRect = assistantStory.getBoundingClientRect();
+        const assistantTravel = Math.max(1, assistantStory.offsetHeight - viewportHeight);
+        const assistantProgress = clamp(-assistantRect.top / assistantTravel);
+        assistantStory.style.setProperty("--assistant-progress", assistantProgress.toFixed(3));
+      }
 
       sections.forEach((section, index) => {
         const pin = section.querySelector<HTMLElement>(".case-pin");
@@ -349,28 +366,32 @@ function FeaturedAssistant({ project }: { project: Project }) {
 
   return (
     <section id={project.id} className="assistant-feature">
-      <div className="feature-copy">
-        <p className="eyebrow">{project.eyebrow}</p>
-        <h2>{project.title}</h2>
-        <span className="status-pill">{project.status}</span>
-        <p>{project.summary}</p>
-        <div className="tag-row">
-          {project.points.map((point) => (
-            <span key={point}>{point}</span>
-          ))}
+      <div className="assistant-stage">
+        <div className="feature-copy">
+          <p className="eyebrow">{project.eyebrow}</p>
+          <h2>{project.title}</h2>
+          <span className="status-pill">{project.status}</span>
+          <p>{project.summary}</p>
+          <div className="tag-row">
+            {project.points.map((point) => (
+              <span key={point}>{point}</span>
+            ))}
+          </div>
         </div>
-      </div>
-      <figure className="assistant-shot">
-        <img src={project.image} alt={project.imageAlt} />
-        <figcaption>Vault 目录结构 + Agent Rules 治理规则</figcaption>
-      </figure>
-      <div className="assistant-notes">
-        {project.notes.map(([title, body]) => (
-          <article key={title}>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </article>
-        ))}
+        <div className="assistant-window">
+          <div className="assistant-window-bar"><span>PERSONAL AGENT / PRODUCT WALKTHROUGH</span><strong>SCROLL TO INSPECT</strong></div>
+          <div className="assistant-track">
+            {project.notes.map(([title, body], index) => (
+              <figure className="assistant-shot" key={title}>
+                <img src={project.image} alt={`${project.imageAlt} - ${title}`} style={{ objectPosition: `${index * 50}% top` }} />
+                <figcaption><strong>{title}</strong><span>{body}</span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+        <div className="assistant-notes">
+          {project.notes.map(([title], index) => <span key={title}>{String(index + 1).padStart(2, "0")} / {title}</span>)}
+        </div>
       </div>
     </section>
   );
@@ -441,20 +462,24 @@ export default function Home() {
     <main>
       <ScrollGalleryMotion />
       <SideNav />
-      <section id="intro" className="hero-section">
-        <div className="hero-copy">
-          <p className="hero-kicker">AI Product Manager Portfolio</p>
-          <h1>我把 AI 想法做成能跑的产品。</h1>
-          <p className="hero-lead">
-            冯涛｜Theo，AI 产品经理。用 6 个作品展示学习速度、动手深度和 AI 落地能力。
-          </p>
-          <div className="hero-actions">
-            <a href="#assistant" className="primary-action">先看个人助手</a>
-            <a href="#contact" className="secondary-action">联系我</a>
+      <div className="hero-story">
+        <section id="intro" className="hero-section">
+          <div className="hero-copy">
+            <p className="hero-kicker">AI Product Manager Portfolio</p>
+            <h1>我把 AI 想法做成能跑的产品。</h1>
+            <p className="hero-lead">
+              冯涛｜Theo，AI 产品经理。用 6 个作品展示学习速度、动手深度和 AI 落地能力。
+            </p>
+            <div className="hero-actions">
+              <a href="#assistant" className="primary-action">先看个人助手</a>
+              <a href="#contact" className="secondary-action">联系我</a>
+            </div>
           </div>
-        </div>
-        <HeroStage />
-      </section>
+          <HeroStage />
+        </section>
+      </div>
+
+      <FeaturedAssistant project={assistant} />
 
       <section id="about" className="about-section">
         <div className="section-intro">
@@ -481,8 +506,6 @@ export default function Home() {
       </section>
 
       <TechMap />
-
-      <FeaturedAssistant project={assistant} />
 
       <section className="work-section" aria-label="作品案例">
         <div className="section-intro">
