@@ -211,24 +211,32 @@ function SideNav() {
   );
 }
 
-function HeroMosaic() {
+function HeroStage() {
   return (
-    <div className="hero-board" aria-label="作品截图预览">
-      <figure className="hero-shot hero-shot--primary">
-        <img src="/assets/personal-agent-rules.png" alt="个人助手规则与知识库截图" />
-        <figcaption>Personal Agent</figcaption>
+    <div className="hero-stage" aria-label="Theo 与 AI 产品作品展示">
+      <div className="hero-orbit hero-orbit--one" aria-hidden="true" />
+      <div className="hero-orbit hero-orbit--two" aria-hidden="true" />
+      <figure className="hero-product-window">
+        <div className="window-bar">
+          <span className="window-controls" aria-hidden="true"><i /><i /><i /></span>
+          <strong>THEO / AI PRODUCT LAB</strong>
+          <span>LIVE</span>
+        </div>
+        <img src="/assets/projects/storageops-overview.png" alt="StorageOps AI Agent 产品总览界面" />
+        <figcaption>从 AI 想法到能跑的产品</figcaption>
       </figure>
-      <figure className="hero-shot hero-shot--ops">
-        <img src="/assets/projects/storageops-overview.png" alt="StorageOps 平台总览截图" />
-        <figcaption>Ops Agent</figcaption>
-      </figure>
-      <figure className="hero-shot hero-shot--news">
-        <img src="/assets/projects/ai-learning-dashboard.png" alt="AI Learning Pulse 仪表盘截图" />
-        <figcaption>Learning Pulse</figcaption>
-      </figure>
-      <div className="hero-console">
-        <span>6 个作品案例</span>
-        <strong>5 个已完成，1 个持续迭代</strong>
+      <div className="hero-character-backdrop" aria-hidden="true" />
+      <img
+        className="hero-character"
+        src="/assets/theo-3d-character.png"
+        alt="3D 卡通人物 Theo 站立并拿着电脑"
+        fetchPriority="high"
+      />
+      <div className="hero-sticker hero-sticker--build">BUILD<br />THE<br />THING!</div>
+      <div className="hero-sticker hero-sticker--role">AI 产品经理<br /><strong>也动手做</strong></div>
+      <div className="hero-stage-caption">
+        <span>06 个产品实验</span>
+        <strong>IDEA → DEMO → PRODUCT</strong>
       </div>
     </div>
   );
@@ -445,7 +453,7 @@ export default function Home() {
             <a href="#contact" className="secondary-action">联系我</a>
           </div>
         </div>
-        <HeroMosaic />
+        <HeroStage />
       </section>
 
       <section id="about" className="about-section">
