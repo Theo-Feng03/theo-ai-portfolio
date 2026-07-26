@@ -203,7 +203,7 @@ main {
 }
 
 .hero-story {
-  height: 178dvh;
+  height: 148dvh;
   position: relative;
 }
 
@@ -224,8 +224,8 @@ main {
 .hero-copy {
   align-self: center;
   min-width: 0;
-  opacity: calc(1 - var(--hero-progress) * 1.32);
-  transform: translate3d(calc(var(--hero-progress) * -8vw), calc(var(--hero-progress) * -4vh), 0);
+  opacity: calc(1 - var(--hero-progress) * 1.08);
+  transform: translate3d(calc(var(--hero-progress) * -5vw), calc(var(--hero-progress) * -2vh), 0);
 }
 
 .hero-kicker,
@@ -346,7 +346,7 @@ main {
   object-fit: contain;
   position: absolute;
   right: -1%;
-  transform: translate3d(calc(var(--hero-progress) * -9vw), calc(var(--hero-progress) * 5vh), 0) rotate(calc(var(--hero-progress) * -4deg)) scale(calc(1 + var(--hero-progress) * .11));
+  transform: translate3d(calc(var(--hero-progress) * -5vw), calc(var(--hero-progress) * 2vh), 0) rotate(calc(var(--hero-progress) * -3deg)) scale(calc(1 + var(--hero-progress) * .08));
   transform-origin: 50% 90%;
   width: 58%;
   z-index: 4;
@@ -363,7 +363,7 @@ main {
   position: absolute;
   top: 18%;
   opacity: calc(1 - var(--hero-progress) * .34);
-  transform: translate3d(calc(var(--hero-progress) * 20vw), calc(var(--hero-progress) * -18vh), 0) rotate(calc(-3deg + var(--hero-progress) * 11deg)) scale(calc(1 + var(--hero-progress) * .08));
+  transform: translate3d(calc(var(--hero-progress) * 13vw), calc(var(--hero-progress) * -10vh), 0) rotate(calc(-3deg + var(--hero-progress) * 8deg)) scale(calc(1 + var(--hero-progress) * .06));
   width: 61%;
   z-index: 3;
 }
@@ -439,6 +439,40 @@ main {
 .hero-stage-caption { bottom: 2%; display: grid; gap: 4px; left: 4%; opacity: calc(1 - var(--hero-progress) * 1.55); position: absolute; transform: translateY(calc(var(--hero-progress) * 7vh)); z-index: 6; }
 .hero-stage-caption span { color: var(--muted); font-family: "SFMono-Regular", Consolas, monospace; font-size: 11px; }
 .hero-stage-caption strong { font-size: 14px; letter-spacing: -.01em; }
+
+.hero-next-chapter {
+  bottom: clamp(34px, 7vh, 76px);
+  color: var(--ink);
+  display: grid;
+  left: clamp(98px, 9vw, 150px);
+  opacity: clamp(0, calc((var(--hero-progress) - .42) * 3.2), 1);
+  position: absolute;
+  transform: translate3d(calc((1 - var(--hero-progress)) * -5vw), calc((1 - var(--hero-progress)) * 4vh), 0);
+  z-index: 8;
+}
+
+.hero-next-chapter span {
+  color: var(--accent);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.hero-next-chapter strong {
+  font-size: clamp(46px, 6.5vw, 88px);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: .95;
+  margin-top: 7px;
+}
+
+.hero-next-chapter em {
+  color: var(--muted);
+  font-size: clamp(15px, 1.4vw, 19px);
+  font-style: normal;
+  margin-top: 10px;
+}
 
 .hero-orbit { border: 2px solid var(--ink); border-radius: 50%; opacity: .22; position: absolute; }
 .hero-orbit--one { height: 35%; right: 34%; top: 2%; width: 35%; }
@@ -635,7 +669,7 @@ main {
 .assistant-feature {
   --assistant-progress: 0;
   background: var(--ink);
-  height: 310dvh;
+  height: 365dvh;
   max-width: none;
   padding: 0 28px;
   position: relative;
@@ -751,7 +785,7 @@ main {
   display: flex;
   gap: 18px;
   padding: 14px;
-  transform: translate3d(calc(var(--assistant-progress) * -133%), 0, 0) rotate(calc(var(--assistant-progress) * -1.5deg));
+  transform: translate3d(calc(var(--assistant-progress) * -246%), 0, 0) rotate(calc(var(--assistant-progress) * -1.5deg));
   will-change: transform;
 }
 
@@ -759,6 +793,7 @@ main {
   align-self: stretch;
   flex: 0 0 82%;
   padding: 10px;
+  position: relative;
 }
 
 .assistant-shot img {
@@ -767,12 +802,54 @@ main {
 }
 
 .assistant-shot figcaption {
-  display: grid;
-  gap: 5px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
-.assistant-shot figcaption strong { color: var(--ink); font-size: 17px; font-weight: 500; }
-.assistant-shot figcaption span { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.assistant-callout {
+  background: rgba(7, 23, 29, .94);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 12px;
+  box-shadow: 7px 8px 0 var(--accent);
+  color: white;
+  display: grid;
+  gap: 5px;
+  max-width: 270px;
+  padding: 15px 17px 16px;
+  position: absolute;
+  z-index: 3;
+}
+
+.assistant-callout::after {
+  background: var(--accent);
+  content: "";
+  height: 2px;
+  position: absolute;
+  transform-origin: left center;
+  width: 68px;
+}
+
+.assistant-callout span {
+  color: #dfff00;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+}
+
+.assistant-callout strong { font-size: 19px; font-weight: 500; }
+.assistant-callout p { color: rgba(255,255,255,.75); font-size: 13px; line-height: 1.5; margin: 0; }
+.assistant-callout--1 { left: 7%; top: 13%; }
+.assistant-callout--1::after { left: 100%; top: 56%; transform: rotate(10deg); }
+.assistant-callout--2 { bottom: 12%; right: 7%; }
+.assistant-callout--2::after { right: 100%; top: 44%; transform: rotate(188deg); }
+.assistant-callout--3 { right: 8%; top: 14%; }
+.assistant-callout--3::after { right: 100%; top: 62%; transform: rotate(170deg); }
+.assistant-callout--4 { bottom: 11%; left: 8%; }
+.assistant-callout--4::after { left: 100%; top: 42%; transform: rotate(-12deg); }
 
 .assistant-notes {
   bottom: 5vh;
@@ -1274,7 +1351,16 @@ main {
   }
 
   .hero-story {
-    height: 165dvh;
+    height: 138dvh;
+  }
+
+  .hero-next-chapter {
+    bottom: 22px;
+    left: 20px;
+  }
+
+  .hero-next-chapter strong {
+    font-size: clamp(40px, 12vw, 58px);
   }
 
   .hero-section h1 {
@@ -1352,7 +1438,7 @@ main {
   }
 
   .assistant-feature {
-    height: 270dvh;
+    height: 320dvh;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -1380,6 +1466,9 @@ main {
   .assistant-window { box-shadow: 10px 12px 0 var(--accent); }
   .assistant-shot img { height: min(38dvh, 330px); }
   .assistant-notes { bottom: 3vh; max-width: calc(100vw - 40px); overflow: hidden; }
+  .assistant-callout { max-width: min(230px, 72%); padding: 11px 13px 12px; }
+  .assistant-callout strong { font-size: 16px; }
+  .assistant-callout p { font-size: 11px; }
 
   .evidence-strip {
     margin-left: -10px;

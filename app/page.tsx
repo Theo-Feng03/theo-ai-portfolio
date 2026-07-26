@@ -22,13 +22,14 @@ const projects = [
     title: "个人助手",
     status: "持续迭代中",
     summary: "一个本地 Demo 阶段的个人 AI 工作系统原型，用来验证项目复盘、手机控制、记忆治理和规则约束如何组合成长期可进化的个人助手。",
-    points: ["项目复盘", "手机控制", "记忆治理"],
+    points: ["规则约束", "结构化记忆", "项目复盘", "手机控制"],
     image: "/assets/personal-agent-rules.png",
     imageAlt: "个人助手 Agent Rules 与 Vault 目录结构截图",
     notes: [
-      ["结构化记忆", "把项目、经验、技能、待审核内容分区管理，让助手能按场景调用材料。"],
-      ["规则约束", "通过 Agent Rules 约束能读什么、何时确认、如何避免越权。"],
-      ["持续复盘", "项目结束后沉淀可复用经验，让下一次 AI 协作更快、更稳。"],
+      ["规则约束", "先规定 AI 能读什么、何时确认，避免助手越权执行。"],
+      ["结构化记忆", "把项目、经验和待审核内容分区保存，需要时能准确调用。"],
+      ["项目复盘", "任务结束后自动整理过程与结论，形成下一次可复用的经验。"],
+      ["手机控制", "把桌面端能力延伸到手机入口，随时发起任务并查看结果。"],
     ],
   },
   {
@@ -383,8 +384,11 @@ function FeaturedAssistant({ project }: { project: Project }) {
           <div className="assistant-track">
             {project.notes.map(([title, body], index) => (
               <figure className="assistant-shot" key={title}>
-                <img src={project.image} alt={`${project.imageAlt} - ${title}`} style={{ objectPosition: `${index * 50}% top` }} />
-                <figcaption><strong>{title}</strong><span>{body}</span></figcaption>
+                <img src={project.image} alt={`${project.imageAlt} - ${title}`} style={{ objectPosition: `${index * 33.33}% top` }} />
+                <div className={`assistant-callout assistant-callout--${index + 1}`}>
+                  <span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><p>{body}</p>
+                </div>
+                <figcaption>{title}：{body}</figcaption>
               </figure>
             ))}
           </div>
@@ -476,6 +480,9 @@ export default function Home() {
             </div>
           </div>
           <HeroStage />
+          <div className="hero-next-chapter" aria-hidden="true">
+            <span>NEXT SCENE</span><strong>个人助手</strong><em>让 AI 有记忆，也有边界。</em>
+          </div>
         </section>
       </div>
 
