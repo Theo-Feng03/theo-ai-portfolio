@@ -975,7 +975,8 @@ main {
   position: relative;
 }
 
-.ops-shot img {
+.ops-shot img,
+.ops-shot video {
   border-radius: 7px;
   display: block;
   height: min(66dvh, 610px);
@@ -1167,7 +1168,8 @@ main {
   position: relative;
 }
 
-.learning-shot img {
+.learning-shot img,
+.learning-shot video {
   border-radius: 8px;
   display: block;
   height: min(65dvh, 600px);
@@ -2532,7 +2534,8 @@ main {
   .ops-heading p { font-size: 13px; line-height: 1.5; }
   .ops-signal { margin-top: 12px; }
   .ops-console { box-shadow: 10px 12px 0 rgba(255,77,46,.82); }
-  .ops-shot img { height: min(42dvh, 360px); }
+  .ops-shot img,
+  .ops-shot video { height: min(42dvh, 360px); }
   .ops-callout { max-width: min(230px, 72%); padding: 11px 13px; }
   .ops-callout strong { font-size: 16px; }
   .ops-callout p { font-size: 11px; }
@@ -2551,7 +2554,8 @@ main {
   .learning-heading p { font-size: 13px; line-height: 1.5; }
   .learning-loop { margin-top: 12px; }
   .learning-workspace { box-shadow: 10px 12px 0 #8ee6b4; }
-  .learning-shot img { height: min(42dvh, 360px); }
+  .learning-shot img,
+  .learning-shot video { height: min(42dvh, 360px); }
   .learning-callout { max-width: min(230px, 72%); padding: 11px 13px; }
   .learning-callout strong { font-size: 16px; }
   .learning-callout p { font-size: 11px; }

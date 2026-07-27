@@ -120,6 +120,10 @@ const techNodes = ["LLM", "RAG", "Agent", "Prompt", "多模态", "安全", "Lang
 
 type Project = (typeof projects)[number];
 
+function isVideoSource(source: string) {
+  return source.endsWith(".mp4") || source.endsWith(".webm");
+}
+
 function ScrollGalleryMotion() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -361,7 +365,7 @@ function FeaturedAssistant({ project }: { project: Project }) {
 function StorageOpsFeature({ project }: { project: Project }) {
   if (!("evidence" in project)) return null;
   const demos = [
-    ["多 Agent 运维平台", "把监控、诊断、方案和验证串成一个协作闭环。", "/assets/projects/storageops-overview.png", "StorageOps 多 Agent 运维平台总览"],
+    ["多 Agent 运维平台", "把监控、诊断、方案和验证串成一个协作闭环。", "/assets/projects/storageops-replay.gif", "StorageOps 多 Agent 运维流程回放动图"],
     ["风险识别", "提前发现容量与阈值风险，让问题先进入可追踪队列。", "/assets/projects/storageops-risk-center.png", "StorageOps 风险中心"],
     ["操作计划", "AI 先给出命令草案、前置条件和回滚方案，再由人工确认。", "/assets/projects/storageops-operation-plan.png", "StorageOps 操作计划"],
     ["执行与复盘", "执行结果自动验证并留痕，下一次处理可以复用经验。", "/assets/projects/storageops-execution.png", "StorageOps 执行验证与复盘"],
@@ -397,7 +401,7 @@ function StorageOpsFeature({ project }: { project: Project }) {
 function LearningPulseFeature({ project }: { project: Project }) {
   if (!("evidence" in project)) return null;
   const demos = [
-    ["自动收集 AI 资讯", "持续接入 RSS、产品更新和视频内容，不再依赖手动刷信息。", "/assets/projects/ai-learning-architecture.png", "AI Learning Pulse 自动采集架构"],
+    ["自动收集 AI 资讯", "持续接入 RSS、产品更新和视频内容，不再依赖手动刷信息。", "/assets/projects/ai-learning-loop.mp4", "AI Learning Pulse 学习闭环演示视频"],
     ["AI 摘要与评分", "AI 先提炼重点、评分和打标签，帮助我判断什么值得深入。", "/assets/projects/ai-learning-inbox.png", "AI Learning Pulse 资讯收件箱"],
     ["学习记录沉淀", "只有写下自己的结论，内容才会从收藏变成真正学过。", "/assets/projects/ai-learning-dashboard.png", "AI Learning Pulse 学习仪表盘"],
     ["公开预览与时间线", "把可分享的学习成果整理成时间线，持续展示认知变化。", "/assets/projects/ai-learning-timeline.png", "AI Learning Pulse 学习时间线"],
@@ -415,9 +419,13 @@ function LearningPulseFeature({ project }: { project: Project }) {
         <div className="learning-workspace">
           <div className="learning-workspace-bar"><span>LEARNING PULSE / SIGNAL FEED</span><strong>RADAR ACTIVE</strong></div>
           <div className="learning-track">
-            {demos.map(([title, body, image, alt], index) => (
+            {demos.map(([title, body, media, alt], index) => (
               <figure className="learning-shot" key={title}>
-                <img src={image} alt={alt} />
+                {isVideoSource(media) ? (
+                  <video src={media} poster={"poster" in project ? project.poster : undefined} aria-label={alt} autoPlay loop muted playsInline />
+                ) : (
+                  <img src={media} alt={alt} />
+                )}
                 <div className={`learning-callout learning-callout--${index + 1}`}><span>0{index + 1}</span><strong>{title}</strong><p>{body}</p></div>
                 <figcaption>{title}：{body}</figcaption>
               </figure>
@@ -524,8 +532,8 @@ function SnipClipFeature({ project }: { project: Project }) {
 
         <div className="snipclip-desktop" aria-label="SnipClip 产品工作流演示">
           <figure className="snipclip-window snipclip-window--main">
-            <div className="snipclip-windowbar"><i /><i /><i /><span>截图与标注</span></div>
-            <img src="/assets/projects/snipclip-annotation.png" alt="SnipClip 截图标注工具截图" loading="lazy" />
+            <div className="snipclip-windowbar"><i /><i /><i /><span>完整操作流程</span></div>
+            <video src="/assets/projects/snipclip-flow.mp4" poster="/assets/projects/snipclip-pin.png" aria-label="SnipClip 完整操作流程演示视频" autoPlay loop muted playsInline />
           </figure>
 
           <figure className="snipclip-window snipclip-window--clipboard">
