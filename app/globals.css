@@ -1433,7 +1433,7 @@ main {
     radial-gradient(circle at 80% 18%, rgba(255,255,255,.8), transparent 28%),
     #dceef2;
   color: var(--ink);
-  height: 365dvh;
+  height: 440dvh;
   position: relative;
 }
 
@@ -2575,7 +2575,7 @@ main {
   .rag-callout p { font-size: 11px; }
   .rag-thread { opacity: .22; }
 
-  .travel-feature { height: 330dvh; }
+  .travel-feature { height: 390dvh; }
   .travel-stage {
     align-content: center;
     gap: 12px;
