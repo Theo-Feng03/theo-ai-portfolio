@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type CSSProperties } from "react";
+import { useEffect } from "react";
 
 const navItems = [
   { id: "intro", label: "冯涛 | Theo", short: "00", hint: "首屏身份与作品入口" },
@@ -133,6 +133,7 @@ function ScrollGalleryMotion() {
     const learningStory = document.querySelector<HTMLElement>(".learning-feature");
     const ragStory = document.querySelector<HTMLElement>(".rag-feature");
     const travelStory = document.querySelector<HTMLElement>(".travel-feature");
+    const snipclipStory = document.querySelector<HTMLElement>(".snipclip-feature");
     let frame = 0;
 
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -181,6 +182,13 @@ function ScrollGalleryMotion() {
         const travelTravel = Math.max(1, travelStory.offsetHeight - viewportHeight);
         const travelProgress = clamp(-travelRect.top / travelTravel);
         travelStory.style.setProperty("--travel-progress", travelProgress.toFixed(3));
+      }
+
+      if (snipclipStory) {
+        const snipclipRect = snipclipStory.getBoundingClientRect();
+        const snipclipTravel = Math.max(1, snipclipStory.offsetHeight - viewportHeight);
+        const snipclipProgress = clamp(-snipclipRect.top / snipclipTravel);
+        snipclipStory.style.setProperty("--snipclip-progress", snipclipProgress.toFixed(3));
       }
 
       sections.forEach((section, index) => {
@@ -308,89 +316,6 @@ function TechMap() {
         ))}
       </div>
     </section>
-  );
-}
-
-function MediaFrame({ project }: { project: Project }) {
-  if ("video" in project && project.video) {
-    return (
-      <video src={project.video} poster={project.poster} autoPlay loop muted playsInline />
-    );
-  }
-
-  if ("heroImage" in project && project.heroImage) {
-    return <img src={project.heroImage} alt={`${project.title} 主展示截图`} loading="lazy" />;
-  }
-
-  return <img src={project.image} alt={project.imageAlt} loading="lazy" />;
-}
-
-function isPhoneProject(project: Project) {
-  return "display" in project && project.display === "phone";
-}
-
-function PhoneCaseMedia({ project }: { project: Project }) {
-  if (!("evidence" in project)) return null;
-  const phoneCount = project.evidence.length + 1;
-
-  return (
-    <div className="phone-case-layout">
-      <div className="phone-case-copy">
-        <span>手机端证据流</span>
-        <h3>把手机截图放回手机场景里看。</h3>
-        <p>{project.caption}</p>
-        <div className="phone-case-steps">
-          <span>01 · 主流程</span>
-          {project.evidence.map(([title], index) => (
-            <span key={title}>{String(index + 2).padStart(2, "0")} · {title}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="phone-stage" aria-label={`${project.title} 手机截图展示`}>
-        <div className="phone-shell">
-          <div className="phone-speaker" />
-          <div className="phone-screen">
-            <div
-              className="phone-track"
-              style={{ "--phone-count": phoneCount } as CSSProperties}
-            >
-              <article className="phone-shot phone-shot--main">
-                <MediaFrame project={project} />
-                <div>
-                  <strong>主流程</strong>
-                  <span>{project.caption}</span>
-                </div>
-              </article>
-              {project.evidence.map(([title, body, image, alt]) => (
-                <article className="phone-shot" key={title}>
-                  <img src={image} alt={alt} loading="lazy" />
-                  <div>
-                    <strong>{title}</strong>
-                    <span>{body}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-        <p className="phone-caption">继续向下滚动，手机屏内截图会横向切换。</p>
-      </div>
-    </div>
-  );
-}
-
-function MainEvidenceCard({ project }: { project: Project }) {
-  if (!("caption" in project)) return null;
-
-  return (
-    <article className="evidence-item evidence-item--main">
-      <MediaFrame project={project} />
-      <div>
-        <h3>主流程</h3>
-        <p>{project.caption}</p>
-      </div>
-    </article>
   );
 }
 
@@ -578,58 +503,56 @@ function TravelFeature({ project }: { project: Project }) {
   );
 }
 
-function ProjectCase({ project, index }: { project: Project; index: number }) {
-  if (!("evidence" in project)) return null;
-  const displayCount = project.evidence.length + 1;
-  const storyHeight = `${126 + displayCount * 78}vh`;
-  const phoneProject = isPhoneProject(project);
-
+function SnipClipFeature({ project }: { project: Project }) {
   return (
-    <section
-      id={project.id}
-      className={phoneProject ? "case-section case-section--phone" : "case-section"}
-      style={{ "--story-height": storyHeight } as CSSProperties}
-    >
-      <div className="case-copy">
-        <span className="case-index">{String(index).padStart(2, "0")}</span>
-        <p className="eyebrow">{project.eyebrow}</p>
-        <h2>{project.title}</h2>
-        <span className="status-pill">{project.status}</span>
-        <p>{project.summary}</p>
-        <div className="tag-row">
-          {project.points.map((point) => (
-            <span key={point}>{point}</span>
-          ))}
-        </div>
-      </div>
-      <div className="case-pin">
-        <div className="case-media">
-          {phoneProject ? (
-            <PhoneCaseMedia project={project} />
-          ) : (
-            <>
-              <figure className="media-main">
-                <MediaFrame project={project} />
-                <figcaption>{project.caption}</figcaption>
-              </figure>
-              <div className="carousel-header">
-                <span>向下滚动时斜向掠过截图</span>
-                <span>{displayCount} 张</span>
-              </div>
-              <div className="evidence-strip" aria-label={`${project.title} 滚动截图带`}>
-                <MainEvidenceCard project={project} />
-                {project.evidence.map(([title, body, image, alt]) => (
-                  <article className="evidence-item" key={title}>
-                    <img src={image} alt={alt} loading="lazy" />
-                    <div>
-                      <h3>{title}</h3>
-                      <p>{body}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </>
-          )}
+    <section id="toolbox" className="snipclip-feature">
+      <div className="snipclip-stage">
+        <header className="snipclip-heading">
+          <span>Vibe Coding 小工具</span>
+          <h2>SnipClip</h2>
+          <p>{project.summary}</p>
+          <div className="tag-row">
+            <span>截图标注</span><span>剪贴板历史</span><span>快速复用</span>
+          </div>
+        </header>
+
+        <div className="snipclip-desktop" aria-label="SnipClip 产品工作流演示">
+          <figure className="snipclip-window snipclip-window--main">
+            <div className="snipclip-windowbar"><i /><i /><i /><span>截图与标注</span></div>
+            <img src="/assets/projects/snipclip-annotation.png" alt="SnipClip 截图标注工具截图" loading="lazy" />
+          </figure>
+
+          <figure className="snipclip-window snipclip-window--clipboard">
+            <div className="snipclip-windowbar"><i /><i /><i /><span>剪贴板历史</span></div>
+            <img src="/assets/projects/snipclip-clipboard.png" alt="SnipClip 剪贴板历史菜单截图" loading="lazy" />
+          </figure>
+
+          <figure className="snipclip-window snipclip-window--reuse">
+            <div className="snipclip-windowbar"><i /><i /><i /><span>复制后快速复用</span></div>
+            <img src="/assets/projects/snipclip-history.png" alt="SnipClip 截图复制到历史记录截图" loading="lazy" />
+          </figure>
+
+          <figure className="snipclip-window snipclip-window--pin">
+            <div className="snipclip-windowbar"><i /><i /><i /><span>贴图悬浮</span></div>
+            <img src="/assets/projects/snipclip-pin.png" alt="SnipClip 贴图悬浮截图" loading="lazy" />
+          </figure>
+
+          <article className="snipclip-callout snipclip-callout--annotation">
+            <span>01</span><strong>截图标注</strong><p>框选后直接加箭头、文字和马赛克，信息当场说清楚。</p>
+          </article>
+          <article className="snipclip-callout snipclip-callout--history">
+            <span>02</span><strong>剪贴板历史</strong><p>文本、链接、代码和图片统一保存，需要时随手取回。</p>
+          </article>
+          <article className="snipclip-callout snipclip-callout--reuse">
+            <span>03</span><strong>快速复用</strong><p>标注结果一键复制并回到历史记录，减少重复操作。</p>
+          </article>
+          <article className="snipclip-callout snipclip-callout--vibe">
+            <span>04</span><strong>快速落地</strong><p>用 vibe coding 把高频小需求快速做成可用的 macOS 工具。</p>
+          </article>
+          <div className="snipclip-finish">
+            <span>想法 → 小工具</span>
+            <strong>把小需求做成真正能用的产品。</strong>
+          </div>
         </div>
       </div>
     </section>
@@ -637,7 +560,7 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Home() {
-  const [assistant, ops, learning, rag, travel, ...caseProjects] = projects;
+  const [assistant, ops, learning, rag, travel, snipclip] = projects;
 
   return (
     <main>
@@ -668,6 +591,7 @@ export default function Home() {
       <LearningPulseFeature project={learning} />
       <RagRulesFeature project={rag} />
       <TravelFeature project={travel} />
+      <SnipClipFeature project={snipclip} />
 
       <section id="about" className="about-section">
         <div className="section-intro">
@@ -694,19 +618,6 @@ export default function Home() {
       </section>
 
       <TechMap />
-
-      <section className="work-section" aria-label="作品案例">
-        <div className="section-intro">
-          <p className="eyebrow">Case Studies</p>
-          <h2>每个作品先介绍，再进入固定展示框看完整截图动线。</h2>
-          <p>页面仍然正常向下滚动。进入项目展示后，大框会固定在屏幕里，截图轨道在框内移动，展示完一组后再进入下一个项目。</p>
-        </div>
-        <div className="case-stack">
-          {caseProjects.map((project, index) => (
-            <ProjectCase key={project.id} project={project} index={index + 6} />
-          ))}
-        </div>
-      </section>
 
       <section id="contact" className="contact-section">
         <p className="eyebrow">Contact</p>
