@@ -469,7 +469,7 @@ function RagRulesFeature({ project }: { project: Project }) {
 function TravelFeature({ project }: { project: Project }) {
   if (!("evidence" in project)) return null;
   const demos = [
-    ["行程信息解析", "从一句话识别出发地、目的地和时间，信息不够时继续追问。", "/assets/projects/travel-dialog.png", "出行准备工具行程信息解析"],
+    ["行程信息解析", "从一句话识别出发地、目的地和时间，信息不够时继续追问。", "/assets/projects/travel-demo.gif", "出行准备工具主流程动图"],
     ["天气与行李建议", "把温度和降雨转成具体物品建议，而不是只展示天气数字。", "/assets/projects/travel-weather-list.png", "出行准备工具天气与行李建议"],
     ["交通与路线准备", "接入车票查询与出发提醒，把路线准备放进同一份清单。", "/assets/projects/travel-rail-query.png", "出行准备工具交通路线准备"],
     ["场景化 Checklist", "亲子度假与商务出差会生成不同清单，避免模板化推荐。", "/assets/projects/travel-scenario-compare.png", "出行准备工具场景化清单"],
