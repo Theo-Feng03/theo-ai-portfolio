@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Theo Personal Space | AI 数字主页</title>
+    <meta name="description" content="冯涛 Theo 的第二版个人数字空间原型，展示我是谁、我在做什么、作品入口和联系方式。" />
+    <link rel="icon" href="../public/favicon.svg" />
+    <link rel="stylesheet" href="../app/globals.css" />
+  </head>
+  <body>
+    <main class="space-page">
+      <nav class="space-dock" aria-label="个人空间导航">
+        <a href="../index.html">作品集版</a>
+        <a href="#identity">我是谁</a>
+        <a href="#works">作品入口</a>
+        <a href="#space-contact">联系</a>
+      </nav>
+
+      <section class="space-room space-room--hero" id="space-intro">
+        <div class="space-copy">
+          <span class="space-label">THEO PERSONAL SPACE</span>
+          <h1>进入我的 AI 工作台。</h1>
+          <p>这里不是项目展板，而是一个更像个人数字房间的主页原型：我是谁、我在做什么、做过什么、怎么联系我。</p>
+          <a class="space-primary" href="#identity">进入空间</a>
+        </div>
+        <div class="space-stage" aria-label="Theo 的数字工作台">
+          <div class="space-portal" aria-hidden="true"></div>
+          <img class="space-character" src="../assets/theo-3d-character.png" alt="3D 卡通人物 Theo 拿着电脑站在数字空间中" />
+          <div class="space-object space-object--browser">
+            <span>WORKBENCH</span>
+            <strong>把 AI 想法做成能跑的 Demo</strong>
+            <img src="../assets/projects/storageops-overview.png" alt="StorageOps 产品总览截图" />
+          </div>
+          <div class="space-object space-object--host">
+            <span>HOST</span>
+            <strong>Theo</strong>
+            <p>这个空间的主人，也负责把想法落地。</p>
+          </div>
+          <div class="space-object space-object--note">
+            <span>NOW</span>
+            <strong>AI 产品经理</strong>
+            <p>快速学习，快速验证，快速落地。</p>
+          </div>
+          <div class="space-object space-object--map">
+            <span>LLM</span><span>RAG</span><span>Agent</span><span>Prompt</span><span>多模态</span><span>AIOps</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-room space-room--identity" id="identity">
+        <div class="space-person-card">
+          <span>PERSON PROFILE</span>
+          <h2>我是一个用 AI 快速学习、快速验证、快速落地产品的人。</h2>
+          <p>我的优势不是只会讲概念，而是能把模糊想法拆成任务边界、交互流程和可运行原型。</p>
+        </div>
+        <div class="space-signal-board" aria-label="个人关键词">
+          <article><strong>学习速度</strong><span>拆新技术</span></article>
+          <article><strong>动手验证</strong><span>跑通 Demo</span></article>
+          <article><strong>AI 落地</strong><span>进入流程</span></article>
+        </div>
+        <img class="space-identity-host" src="../assets/theo-3d-character.png" alt="Theo 站在个人空间中" />
+      </section>
+
+      <section class="space-room space-room--works" id="works">
+        <div class="space-room-heading">
+          <h2>作品不重复展开，只留下几个入口。</h2>
+          <p>这里像工作台上的传送门：完整作品集、个人助手、AI 学习雷达和联系方式。</p>
+        </div>
+        <div class="space-workbench">
+          <a class="space-work-object space-work-object--portfolio" href="../index.html">
+            <span>MAIN ROOM</span>
+            <img src="../assets/projects/storageops-overview.png" alt="完整作品集入口预览截图" />
+            <div><strong>完整作品集</strong><span>进入当前已验收的 6 个沉浸式项目场景</span></div>
+          </a>
+          <a class="space-work-object space-work-object--assistant" href="../index.html#assistant">
+            <span>OPEN</span>
+            <img src="../assets/personal-agent-rules.png" alt="个人助手规则与记忆结构截图" />
+            <div><strong>个人助手</strong><span>看我如何把长期记忆、规则约束和项目复盘做成 AI 工作系统</span></div>
+          </a>
+          <a class="space-work-object space-work-object--learning" href="../index.html#news">
+            <span>OPEN</span>
+            <img src="../assets/projects/ai-learning-dashboard.png" alt="AI Learning Pulse 学习仪表盘截图" />
+            <div><strong>AI 学习雷达</strong><span>看我如何持续收集 AI 信息、筛选、摘要并沉淀学习记录</span></div>
+          </a>
+          <a class="space-work-object space-work-object--contact" href="#space-contact">
+            <span>EXIT</span>
+            <img src="../assets/projects/snipclip-pin.png" alt="SnipClip 贴图悬浮截图" />
+            <div><strong>联系我</strong><span>如果你在找 AI 产品经理，可以直接到出口终端复制联系方式</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="space-room space-room--contact" id="space-contact">
+        <div class="space-contact-copy">
+          <span>CONTACT TERMINAL</span>
+          <h2>如果你在找 AI 产品经理，我们可以直接聊。</h2>
+        </div>
+        <div class="space-contact-terminal" aria-label="联系方式">
+          <a href="mailto:18910212897@163.com"><span>邮箱</span><strong>18910212897@163.com</strong></a>
+          <a href="tel:18910212897"><span>电话</span><strong>18910212897</strong></a>
+          <div><span>微信</span><strong>fengtao97071</strong></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
