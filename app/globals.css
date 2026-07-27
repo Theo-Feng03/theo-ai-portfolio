@@ -2679,18 +2679,39 @@ main {
   }
 
   .snipclip-heading {
+    background:
+      linear-gradient(90deg, rgba(238, 247, 247, .94), rgba(238, 247, 247, .72) 78%, rgba(238, 247, 247, 0));
+    border-radius: 18px;
     left: 20px;
     max-width: calc(100vw - 40px);
-    opacity: clamp(0, (.2 - var(--snipclip-progress)) * 7, 1);
+    opacity: clamp(.86, (.42 - var(--snipclip-progress)) * 4, 1);
+    padding: 14px 16px 16px;
     top: 7svh;
   }
 
+  .snipclip-heading > span {
+    color: #ff4d2e;
+    font-weight: 500;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
+  }
+
   .snipclip-heading h2 {
+    color: #07171d;
     font-size: clamp(44px, 17vw, 68px);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
   }
 
   .snipclip-heading > p {
+    color: #243940;
     font-size: 15px;
+    font-weight: 500;
+  }
+
+  .snipclip-heading .tag-row span {
+    background: rgba(255, 255, 255, .9);
+    border-color: rgba(7, 23, 29, .22);
+    color: #102329;
+    font-weight: 500;
   }
 
   .snipclip-desktop {
@@ -2732,6 +2753,9 @@ main {
   }
 
   .snipclip-callout {
+    background: rgba(255, 255, 255, .98);
+    border-color: rgba(7, 23, 29, .88);
+    box-shadow: 6px 7px 0 rgba(255, 77, 46, .88);
     bottom: 3% !important;
     left: 50% !important;
     max-width: min(260px, 78vw);
@@ -2742,7 +2766,18 @@ main {
   }
 
   .snipclip-callout p {
-    font-size: 10px;
+    color: #243940;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .snipclip-callout strong {
+    color: #07171d;
+  }
+
+  .snipclip-callout span {
+    color: #ff4d2e;
+    font-weight: 600;
   }
 
   .snipclip-callout--annotation {
