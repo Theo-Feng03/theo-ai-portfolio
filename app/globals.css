@@ -1441,10 +1441,10 @@ main {
   align-items: center;
   display: grid;
   gap: clamp(28px, 4vw, 64px);
-  grid-template-columns: minmax(280px, .38fr) minmax(0, .62fr);
+  grid-template-columns: minmax(280px, .32fr) minmax(0, .68fr);
   height: 100dvh;
   margin: 0 auto;
-  max-width: 1380px;
+  max-width: 1460px;
   overflow: hidden;
   padding: 44px 28px 64px;
   position: sticky;
@@ -1498,7 +1498,7 @@ main {
 .travel-ticket i { color: #ef6a49; font-style: normal; grid-row: 2; }
 
 .travel-device-stage {
-  height: min(84dvh, 780px);
+  height: min(90dvh, 840px);
   position: relative;
   transform: rotate(-1deg);
 }
@@ -1508,12 +1508,12 @@ main {
   border: 8px solid #17262b;
   border-radius: 34px;
   box-shadow: 0 24px 60px rgba(23, 38, 43, .16);
-  height: min(64dvh, 590px);
+  height: min(60dvh, 560px);
   margin: 0;
   overflow: hidden;
   position: absolute;
   top: 50%;
-  width: min(22vw, 290px);
+  width: min(19vw, 260px);
   z-index: 1;
 }
 
@@ -1526,8 +1526,8 @@ main {
 }
 
 .travel-echo--weather {
-  left: 5%;
-  opacity: clamp(.12, (.58 - var(--travel-progress)) * 1.5, .42);
+  left: 2%;
+  opacity: clamp(.08, (.58 - var(--travel-progress)) * 1.25, .3);
   transform:
     translate3d(calc((.35 - var(--travel-progress)) * -36px), -50%, 0)
     rotate(-6deg)
@@ -1535,8 +1535,8 @@ main {
 }
 
 .travel-echo--route {
-  opacity: clamp(.1, (var(--travel-progress) - .32) * 1.45, .42);
-  right: 5%;
+  opacity: clamp(.08, (var(--travel-progress) - .32) * 1.2, .3);
+  right: 2%;
   transform:
     translate3d(calc((.58 - var(--travel-progress)) * 36px), -50%, 0)
     rotate(5deg)
@@ -1545,10 +1545,10 @@ main {
 
 .travel-phone {
   background: #17262b;
-  border: 10px solid #17262b;
-  border-radius: 42px;
-  box-shadow: 16px 20px 0 #ef6a49;
-  height: min(75dvh, 690px);
+  border: 11px solid #17262b;
+  border-radius: 46px;
+  box-shadow: 18px 22px 0 #ef6a49;
+  height: min(84dvh, 790px);
   left: 50%;
   overflow: hidden;
   position: absolute;
@@ -1557,7 +1557,7 @@ main {
     translate3d(-50%, -50%, 0)
     rotate(calc(-2.2deg + var(--travel-progress) * 4.8deg))
     scale(calc(.95 + var(--travel-progress) * .035));
-  width: min(25vw, 340px);
+  width: min(34vw, 430px);
   z-index: 2;
 }
 
@@ -1569,7 +1569,7 @@ main {
   position: absolute;
   top: 7px;
   transform: translateX(-50%);
-  width: 84px;
+  width: 96px;
   z-index: 4;
 }
 
@@ -1601,7 +1601,7 @@ main {
   box-shadow: 6px 7px 0 #ef6a49;
   display: grid;
   gap: 4px;
-  max-width: 250px;
+  max-width: 220px;
   padding: 13px 15px;
   position: absolute;
   z-index: 3;
@@ -1618,16 +1618,16 @@ main {
 .travel-callout span { color: #ef6a49; font-family: "SFMono-Regular", Consolas, monospace; font-size: 9px; }
 .travel-callout strong { font-size: 17px; font-weight: 500; }
 .travel-callout p { color: #526a70; font-size: 12px; line-height: 1.45; margin: 0; }
-.travel-callout--1 { left: 2%; top: 12%; transform: rotate(-2deg); }
+.travel-callout--1 { left: 0; top: 8%; transform: rotate(-2deg); }
 .travel-callout--1 { opacity: clamp(0, min(var(--travel-progress) * 18, (.3 - var(--travel-progress)) * 18), 1); }
 .travel-callout--1::after { left: 100%; top: 58%; transform: rotate(12deg); }
-.travel-callout--2 { right: 1%; top: 17%; transform: rotate(2deg); }
+.travel-callout--2 { right: -1%; top: 13%; transform: rotate(2deg); }
 .travel-callout--2 { opacity: clamp(0, min((var(--travel-progress) - .24) * 18, (.56 - var(--travel-progress)) * 18), 1); }
 .travel-callout--2::after { right: 100%; top: 55%; transform: rotate(168deg); }
-.travel-callout--3 { bottom: 15%; left: 1%; transform: rotate(2deg); }
+.travel-callout--3 { bottom: 10%; left: 0; transform: rotate(2deg); }
 .travel-callout--3 { opacity: clamp(0, min((var(--travel-progress) - .56) * 18, (.8 - var(--travel-progress)) * 18), 1); }
 .travel-callout--3::after { left: 100%; top: 42%; transform: rotate(-12deg); }
-.travel-callout--4 { bottom: 10%; right: 0; transform: rotate(-2deg); }
+.travel-callout--4 { bottom: 7%; right: -1%; transform: rotate(-2deg); }
 .travel-callout--4 { opacity: clamp(0, min((var(--travel-progress) - .76) * 18, (1.04 - var(--travel-progress)) * 18), 1); }
 .travel-callout--4::after { right: 100%; top: 45%; transform: rotate(188deg); }
 
@@ -2587,17 +2587,17 @@ main {
   .travel-heading p { font-size: 13px; line-height: 1.45; }
   .travel-ticket { margin-top: 10px; padding: 9px 11px; }
   .travel-device-stage {
-    height: 58dvh;
+    height: 64dvh;
     transform: rotate(-1deg);
     width: 100%;
   }
   .travel-echo {
     border-radius: 26px;
     border-width: 6px;
-    height: 45dvh;
-    opacity: .18;
+    height: 43dvh;
+    opacity: .12;
     top: 48%;
-    width: min(42vw, 210px);
+    width: min(36vw, 180px);
   }
   .travel-echo--weather {
     left: 4%;
@@ -2611,8 +2611,8 @@ main {
     border-radius: 30px;
     border-width: 7px;
     box-shadow: 9px 11px 0 #ef6a49;
-    height: 54dvh;
-    width: min(55vw, 280px);
+    height: 61dvh;
+    width: min(72vw, 330px);
   }
   .travel-callout {
     bottom: 2% !important;
