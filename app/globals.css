@@ -1498,8 +1498,49 @@ main {
 .travel-ticket i { color: #ef6a49; font-style: normal; grid-row: 2; }
 
 .travel-device-stage {
-  height: min(82dvh, 760px);
+  height: min(84dvh, 780px);
   position: relative;
+  transform: rotate(-1deg);
+}
+
+.travel-echo {
+  background: #f8faf7;
+  border: 8px solid #17262b;
+  border-radius: 34px;
+  box-shadow: 0 24px 60px rgba(23, 38, 43, .16);
+  height: min(64dvh, 590px);
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  width: min(22vw, 290px);
+  z-index: 1;
+}
+
+.travel-echo img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+}
+
+.travel-echo--weather {
+  left: 5%;
+  opacity: clamp(.12, (.58 - var(--travel-progress)) * 1.5, .42);
+  transform:
+    translate3d(calc((.35 - var(--travel-progress)) * -36px), -50%, 0)
+    rotate(-6deg)
+    scale(.9);
+}
+
+.travel-echo--route {
+  opacity: clamp(.1, (var(--travel-progress) - .32) * 1.45, .42);
+  right: 5%;
+  transform:
+    translate3d(calc((.58 - var(--travel-progress)) * 36px), -50%, 0)
+    rotate(5deg)
+    scale(.9);
 }
 
 .travel-phone {
@@ -1507,13 +1548,16 @@ main {
   border: 10px solid #17262b;
   border-radius: 42px;
   box-shadow: 16px 20px 0 #ef6a49;
-  height: min(76dvh, 700px);
+  height: min(75dvh, 690px);
   left: 50%;
   overflow: hidden;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%) rotate(calc(-3deg + var(--travel-progress) * 6deg));
-  width: min(27vw, 360px);
+  transform:
+    translate3d(-50%, -50%, 0)
+    rotate(calc(-2.2deg + var(--travel-progress) * 4.8deg))
+    scale(calc(.95 + var(--travel-progress) * .035));
+  width: min(25vw, 340px);
   z-index: 2;
 }
 
@@ -1575,12 +1619,16 @@ main {
 .travel-callout strong { font-size: 17px; font-weight: 500; }
 .travel-callout p { color: #526a70; font-size: 12px; line-height: 1.45; margin: 0; }
 .travel-callout--1 { left: 2%; top: 12%; transform: rotate(-2deg); }
+.travel-callout--1 { opacity: clamp(0, min(var(--travel-progress) * 18, (.3 - var(--travel-progress)) * 18), 1); }
 .travel-callout--1::after { left: 100%; top: 58%; transform: rotate(12deg); }
 .travel-callout--2 { right: 1%; top: 17%; transform: rotate(2deg); }
+.travel-callout--2 { opacity: clamp(0, min((var(--travel-progress) - .24) * 18, (.56 - var(--travel-progress)) * 18), 1); }
 .travel-callout--2::after { right: 100%; top: 55%; transform: rotate(168deg); }
 .travel-callout--3 { bottom: 15%; left: 1%; transform: rotate(2deg); }
+.travel-callout--3 { opacity: clamp(0, min((var(--travel-progress) - .56) * 18, (.8 - var(--travel-progress)) * 18), 1); }
 .travel-callout--3::after { left: 100%; top: 42%; transform: rotate(-12deg); }
 .travel-callout--4 { bottom: 10%; right: 0; transform: rotate(-2deg); }
+.travel-callout--4 { opacity: clamp(0, min((var(--travel-progress) - .76) * 18, (1.04 - var(--travel-progress)) * 18), 1); }
 .travel-callout--4::after { right: 100%; top: 45%; transform: rotate(188deg); }
 
 .travel-pass {
@@ -2538,12 +2586,46 @@ main {
   .travel-heading h2 { font-size: clamp(40px, 10vw, 58px); margin: 9px 0 10px; }
   .travel-heading p { font-size: 13px; line-height: 1.45; }
   .travel-ticket { margin-top: 10px; padding: 9px 11px; }
-  .travel-device-stage { height: 56dvh; }
-  .travel-phone { border-radius: 30px; border-width: 7px; box-shadow: 9px 11px 0 #ef6a49; height: 53dvh; width: min(48vw, 270px); }
-  .travel-callout { max-width: min(205px, 46%); padding: 9px 10px; }
+  .travel-device-stage {
+    height: 58dvh;
+    transform: rotate(-1deg);
+    width: 100%;
+  }
+  .travel-echo {
+    border-radius: 26px;
+    border-width: 6px;
+    height: 45dvh;
+    opacity: .18;
+    top: 48%;
+    width: min(42vw, 210px);
+  }
+  .travel-echo--weather {
+    left: 4%;
+    transform: translate3d(0, -50%, 0) rotate(-6deg) scale(.88);
+  }
+  .travel-echo--route {
+    right: 4%;
+    transform: translate3d(0, -50%, 0) rotate(5deg) scale(.88);
+  }
+  .travel-phone {
+    border-radius: 30px;
+    border-width: 7px;
+    box-shadow: 9px 11px 0 #ef6a49;
+    height: 54dvh;
+    width: min(55vw, 280px);
+  }
+  .travel-callout {
+    bottom: 2% !important;
+    left: 50% !important;
+    max-width: min(260px, 78vw);
+    padding: 10px 12px;
+    right: auto !important;
+    top: auto !important;
+    transform: translate3d(-50%, 0, 0) !important;
+  }
   .travel-callout strong { font-size: 14px; }
   .travel-callout p { font-size: 10px; }
-  .travel-callout::after { width: 34px; }
+  .travel-callout::after { display: none; }
   .travel-pass { display: none; }
 
   .evidence-strip {

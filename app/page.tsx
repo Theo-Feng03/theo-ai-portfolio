@@ -485,6 +485,12 @@ function TravelFeature({ project }: { project: Project }) {
           <div className="travel-ticket"><span>FROM</span><strong>一句话</strong><i>→</i><span>TO</span><strong>准备完成</strong></div>
         </header>
         <div className="travel-device-stage">
+          <figure className="travel-echo travel-echo--weather" aria-hidden="true">
+            <img src="/assets/projects/travel-weather-list.png" alt="" />
+          </figure>
+          <figure className="travel-echo travel-echo--route" aria-hidden="true">
+            <img src="/assets/projects/travel-rail-query.png" alt="" />
+          </figure>
           <div className="travel-phone">
             <div className="travel-speaker" />
             <div className="travel-screen-track">
