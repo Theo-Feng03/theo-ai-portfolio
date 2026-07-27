@@ -7,9 +7,9 @@ const navItems = [
   { id: "assistant", label: "个人助手", short: "01", hint: "重点作品：个人助手系统" },
   { id: "ops", label: "运维平台 Demo", short: "02", hint: "Agent 产品与运维闭环" },
   { id: "news", label: "AI Learning Pulse", short: "03", hint: "AI 资讯到学习闭环" },
-  { id: "about", label: "关于我", short: "04", hint: "学习速度与落地方式" },
-  { id: "tech-map", label: "AI 技术图谱", short: "05", hint: "我的 AI 技术实践版图" },
-  { id: "botc", label: "血染钟楼 RAG Agent", short: "06", hint: "本地知识库与规则问答" },
+  { id: "botc", label: "血染钟楼 RAG Agent", short: "04", hint: "本地知识库与规则问答" },
+  { id: "about", label: "关于我", short: "05", hint: "学习速度与落地方式" },
+  { id: "tech-map", label: "AI 技术图谱", short: "06", hint: "我的 AI 技术实践版图" },
   { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
   { id: "toolbox", label: "SnipClip", short: "08", hint: "截图与剪贴板小工具" },
   { id: "contact", label: "联系我", short: "09", hint: "微信、邮箱与电话" },
@@ -131,6 +131,7 @@ function ScrollGalleryMotion() {
     const assistantStory = document.querySelector<HTMLElement>(".assistant-feature");
     const opsStory = document.querySelector<HTMLElement>(".ops-feature");
     const learningStory = document.querySelector<HTMLElement>(".learning-feature");
+    const ragStory = document.querySelector<HTMLElement>(".rag-feature");
     let frame = 0;
 
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -165,6 +166,13 @@ function ScrollGalleryMotion() {
         const learningTravel = Math.max(1, learningStory.offsetHeight - viewportHeight);
         const learningProgress = clamp(-learningRect.top / learningTravel);
         learningStory.style.setProperty("--learning-progress", learningProgress.toFixed(3));
+      }
+
+      if (ragStory) {
+        const ragRect = ragStory.getBoundingClientRect();
+        const ragTravel = Math.max(1, ragStory.offsetHeight - viewportHeight);
+        const ragProgress = clamp(-ragRect.top / ragTravel);
+        ragStory.style.setProperty("--rag-progress", ragProgress.toFixed(3));
       }
 
       sections.forEach((section, index) => {
@@ -489,6 +497,42 @@ function LearningPulseFeature({ project }: { project: Project }) {
   );
 }
 
+function RagRulesFeature({ project }: { project: Project }) {
+  if (!("evidence" in project)) return null;
+  const demos = [
+    ["复杂规则知识库", "把官方 Wiki 拆成可检索的角色、能力、阵营和规则证据。", "/assets/projects/botc-knowledge-base.png", "血染钟楼 RAG Agent 知识库"],
+    ["角色与规则检索", "面对多角色交互，先找相关规则，再组合可能的判断分支。", "/assets/projects/botc-hard-question.png", "血染钟楼 RAG Agent 复杂规则检索"],
+    ["自然语言问答", "用户直接描述游戏情境，系统用易懂语言回答并附上依据。", "/assets/projects/botc-answer-philosopher.png", "血染钟楼 RAG Agent 自然语言问答"],
+    ["降低新手门槛", "识别歧义、保守回答，让新手不用先读完整本规则书。", "/assets/projects/botc-answer-philosopher.png", "血染钟楼 RAG Agent 新手解释"],
+  ];
+
+  return (
+    <section id="botc" className="rag-feature">
+      <div className="rag-stage">
+        <header className="rag-heading">
+          <span>04 / RULES REASONING ARCHIVE</span>
+          <h2>血染钟楼<br />RAG Agent</h2>
+          <p>把复杂规则书变成能追问、能引用、知道何时保守回答的知识助手。</p>
+          <div className="rag-proof"><span>3019 CHUNKS</span><span>362 ENTRIES</span><span>CITED ANSWERS</span></div>
+        </header>
+        <div className="rag-casefile">
+          <div className="rag-casefile-bar"><span>CASE FILE / RULES EVIDENCE</span><strong>RETRIEVAL VERIFIED</strong></div>
+          <div className="rag-track">
+            {demos.map(([title, body, image, alt], index) => (
+              <figure className="rag-shot" key={title}>
+                <img src={image} alt={alt} />
+                <div className={`rag-callout rag-callout--${index + 1}`}><span>EXHIBIT 0{index + 1}</span><strong>{title}</strong><p>{body}</p></div>
+                <figcaption>{title}：{body}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+        <div className="rag-thread" aria-hidden="true"><i /><i /><i /></div>
+      </div>
+    </section>
+  );
+}
+
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
   const displayCount = project.evidence.length + 1;
@@ -548,7 +592,7 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Home() {
-  const [assistant, ops, learning, ...caseProjects] = projects;
+  const [assistant, ops, learning, rag, ...caseProjects] = projects;
 
   return (
     <main>
@@ -577,6 +621,7 @@ export default function Home() {
       <FeaturedAssistant project={assistant} />
       <StorageOpsFeature project={ops} />
       <LearningPulseFeature project={learning} />
+      <RagRulesFeature project={rag} />
 
       <section id="about" className="about-section">
         <div className="section-intro">
@@ -612,7 +657,7 @@ export default function Home() {
         </div>
         <div className="case-stack">
           {caseProjects.map((project, index) => (
-            <ProjectCase key={project.id} project={project} index={index + 4} />
+            <ProjectCase key={project.id} project={project} index={index + 5} />
           ))}
         </div>
       </section>
