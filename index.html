@@ -17,10 +17,10 @@
           <a class="nav-tick" href="#ops" aria-label="跳转到运维平台 Demo"><span class="nav-tick-line"></span><span class="nav-card"><span>02</span><strong>运维平台 Demo</strong><em>Agent 产品与运维闭环</em></span></a>
           <a class="nav-tick" href="#news" aria-label="跳转到AI Learning Pulse"><span class="nav-tick-line"></span><span class="nav-card"><span>03</span><strong>AI Learning Pulse</strong><em>AI 资讯到学习闭环</em></span></a>
           <a class="nav-tick" href="#botc" aria-label="跳转到血染钟楼 RAG Agent"><span class="nav-tick-line"></span><span class="nav-card"><span>04</span><strong>血染钟楼 RAG Agent</strong><em>本地知识库与规则问答</em></span></a>
-          <a class="nav-tick" href="#about" aria-label="跳转到关于我"><span class="nav-tick-line"></span><span class="nav-card"><span>05</span><strong>关于我</strong><em>学习速度与落地方式</em></span></a>
-          <a class="nav-tick" href="#tech-map" aria-label="跳转到AI 技术图谱"><span class="nav-tick-line"></span><span class="nav-card"><span>06</span><strong>AI 技术图谱</strong><em>我的 AI 技术实践版图</em></span></a>
-          <a class="nav-tick" href="#travel" aria-label="跳转到出行准备工具"><span class="nav-tick-line"></span><span class="nav-card"><span>07</span><strong>出行准备工具</strong><em>场景化清单 MVP</em></span></a>
-          <a class="nav-tick" href="#toolbox" aria-label="跳转到SnipClip"><span class="nav-tick-line"></span><span class="nav-card"><span>08</span><strong>SnipClip</strong><em>截图与剪贴板小工具</em></span></a>
+          <a class="nav-tick" href="#travel" aria-label="跳转到出行准备工具"><span class="nav-tick-line"></span><span class="nav-card"><span>05</span><strong>出行准备工具</strong><em>场景化清单 MVP</em></span></a>
+          <a class="nav-tick" href="#toolbox" aria-label="跳转到SnipClip"><span class="nav-tick-line"></span><span class="nav-card"><span>06</span><strong>SnipClip</strong><em>截图与剪贴板小工具</em></span></a>
+          <a class="nav-tick" href="#about" aria-label="跳转到关于我"><span class="nav-tick-line"></span><span class="nav-card"><span>07</span><strong>关于我</strong><em>学习速度与落地方式</em></span></a>
+          <a class="nav-tick" href="#tech-map" aria-label="跳转到AI 技术图谱"><span class="nav-tick-line"></span><span class="nav-card"><span>08</span><strong>AI 技术图谱</strong><em>我的 AI 技术实践版图</em></span></a>
           <a class="nav-tick" href="#contact" aria-label="跳转到联系我"><span class="nav-tick-line"></span><span class="nav-card"><span>09</span><strong>联系我</strong><em>微信、邮箱与电话</em></span></a>
         </nav>
       </aside>
@@ -125,6 +125,25 @@
         </div>
       </section>
 
+      <section id="travel" class="travel-feature">
+        <div class="travel-stage">
+          <header class="travel-heading"><span>05 / TRIP PREP COMPANION</span><h2>出行准备<br />小工具</h2><p>把一句出行计划变成天气、交通和行李都考虑到的可执行清单。</p><div class="travel-ticket"><span>FROM</span><strong>一句话</strong><i>→</i><span>TO</span><strong>准备完成</strong></div></header>
+          <div class="travel-device-stage">
+            <div class="travel-phone"><div class="travel-speaker"></div><div class="travel-screen-track">
+              <figure class="travel-screen"><img src="assets/projects/travel-dialog.png" alt="出行准备工具行程信息解析" /></figure>
+              <figure class="travel-screen"><img src="assets/projects/travel-weather-list.png" alt="出行准备工具天气与行李建议" /></figure>
+              <figure class="travel-screen"><img src="assets/projects/travel-rail-query.png" alt="出行准备工具交通路线准备" /></figure>
+              <figure class="travel-screen"><img src="assets/projects/travel-scenario-compare.png" alt="出行准备工具场景化清单" /></figure>
+            </div></div>
+            <div class="travel-callout travel-callout--1"><span>01</span><strong>行程信息解析</strong><p>从一句话识别出发地、目的地和时间，信息不够时继续追问。</p></div>
+            <div class="travel-callout travel-callout--2"><span>02</span><strong>天气与行李建议</strong><p>把温度和降雨转成具体物品建议，而不是只展示天气数字。</p></div>
+            <div class="travel-callout travel-callout--3"><span>03</span><strong>交通与路线准备</strong><p>接入车票查询与出发提醒，把路线准备放进同一份清单。</p></div>
+            <div class="travel-callout travel-callout--4"><span>04</span><strong>场景化 Checklist</strong><p>亲子度假与商务出差会生成不同清单，避免模板化推荐。</p></div>
+            <div class="travel-pass" aria-hidden="true"><span>TRIP READY</span><strong>WEATHER · ROUTE · CHECKLIST</strong></div>
+          </div>
+        </div>
+      </section>
+
       <section id="about" class="about-section">
         <div class="section-intro">
           <p class="eyebrow">Positioning</p>
@@ -163,17 +182,6 @@
           <p>页面仍然正常向下滚动。进入项目展示后，大框会固定在屏幕里，截图轨道在框内移动，展示完一组后再进入下一个项目。</p>
         </div>
         <div class="case-stack">
-          <section id="travel" class="case-section case-section--phone">
-            <div class="case-copy"><span class="case-index">05</span><p class="eyebrow">Mobile MVP</p><h2>出行清单工具</h2><span class="status-pill">已完成</span><p>手机端出行准备 MVP，通过对话补全目的地、时间、天数和出行目的，结合天气、交通与周边信息生成场景化清单。</p><div class="tag-row"><span>多轮补全</span><span>天气交通</span><span>场景清单</span></div></div>
-            <div class="case-pin"><div class="case-media"><div class="phone-case-layout"><div class="phone-case-copy"><span>手机端证据流</span><h3>把手机截图放回手机场景里看。</h3><p>从一句自然语言出发，补全信息后生成出行清单，并支持车票、周边和出发前核对。</p><div class="phone-case-steps"><span>01 · 主流程</span><span>02 · 轻量入口</span><span>03 · 对话补全</span><span>04 · 天气影响清单</span><span>05 · 场景差异</span></div></div><div class="phone-stage" aria-label="出行清单工具 手机截图展示"><div class="phone-shell"><div class="phone-speaker"></div><div class="phone-screen"><div class="phone-track" style="--phone-count: 5">
-              <article class="phone-shot phone-shot--main"><img src="assets/projects/travel-demo.gif" alt="出行清单工具主流程动图" loading="lazy" /><div><strong>主流程</strong><span>从一句自然语言出发，补全信息后生成出行清单，并支持车票、周边和出发前核对。</span></div></article>
-              <article class="phone-shot"><img src="assets/projects/travel-home.png" alt="出行清单工具首页入口截图" loading="lazy" /><div><strong>轻量入口</strong><span>首页给出示例场景和输入框，降低从空白开始描述行程的成本。</span></div></article>
-              <article class="phone-shot"><img src="assets/projects/travel-dialog.png" alt="出行清单工具对话追问补全截图" loading="lazy" /><div><strong>对话补全</strong><span>当目的地、时间或目的不完整时，先追问关键信息，再生成清单。</span></div></article>
-              <article class="phone-shot"><img src="assets/projects/travel-weather-list.png" alt="出行清单工具天气影响清单截图" loading="lazy" /><div><strong>天气影响清单</strong><span>把天气、温度和降雨概率直接转化为物品建议。</span></div></article>
-              <article class="phone-shot"><img src="assets/projects/travel-scenario-compare.png" alt="出行清单工具亲子度假和商务出差场景对比截图" loading="lazy" /><div><strong>场景差异</strong><span>支持 12306 查询，也能对亲子度假和商务出差生成不同清单。</span></div></article>
-            </div></div></div><p class="phone-caption">继续向下滚动，手机屏内截图会横向切换。</p></div></div></div></div>
-          </section>
-
           <section id="toolbox" class="case-section">
             <div class="case-copy"><span class="case-index">06</span><p class="eyebrow">Vibe Coding</p><h2>SnipClip</h2><span class="status-pill">已完成</span><p>macOS 菜单栏小工具，把剪贴板历史、区域截图、标注和贴图悬浮连成一个轻量工作流。</p><div class="tag-row"><span>剪贴板历史</span><span>截图标注</span><span>贴图悬浮</span></div></div>
             <div class="case-pin"><div class="case-media"><figure class="media-main"><video src="assets/projects/snipclip-flow.mp4" poster="assets/projects/snipclip-pin.png" autoplay loop muted playsinline></video><figcaption>F1 触发框选 → 标注 → 隐藏工具栏贴图 → 拖动悬浮 → 双击关闭。</figcaption></figure><div class="carousel-header"><span>向下滚动时斜向掠过截图</span><span>5 张</span></div><div class="evidence-strip" aria-label="SnipClip 滚动截图带">
@@ -208,6 +216,7 @@
         const opsStory = document.querySelector(".ops-feature");
         const learningStory = document.querySelector(".learning-feature");
         const ragStory = document.querySelector(".rag-feature");
+        const travelStory = document.querySelector(".travel-feature");
         sections.forEach((section) => {
           const slideCount = section.querySelectorAll(".evidence-item, .phone-shot").length;
           section.style.setProperty("--story-height", `${126 + slideCount * 78}vh`);
@@ -247,6 +256,12 @@
             const ragRect = ragStory.getBoundingClientRect();
             const ragTravel = Math.max(1, ragStory.offsetHeight - viewportHeight);
             ragStory.style.setProperty("--rag-progress", clamp(-ragRect.top / ragTravel).toFixed(3));
+          }
+
+          if (travelStory) {
+            const travelRect = travelStory.getBoundingClientRect();
+            const travelTravel = Math.max(1, travelStory.offsetHeight - viewportHeight);
+            travelStory.style.setProperty("--travel-progress", clamp(-travelRect.top / travelTravel).toFixed(3));
           }
 
           sections.forEach((section, index) => {

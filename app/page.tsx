@@ -8,10 +8,10 @@ const navItems = [
   { id: "ops", label: "运维平台 Demo", short: "02", hint: "Agent 产品与运维闭环" },
   { id: "news", label: "AI Learning Pulse", short: "03", hint: "AI 资讯到学习闭环" },
   { id: "botc", label: "血染钟楼 RAG Agent", short: "04", hint: "本地知识库与规则问答" },
-  { id: "about", label: "关于我", short: "05", hint: "学习速度与落地方式" },
-  { id: "tech-map", label: "AI 技术图谱", short: "06", hint: "我的 AI 技术实践版图" },
-  { id: "travel", label: "出行准备工具", short: "07", hint: "场景化清单 MVP" },
-  { id: "toolbox", label: "SnipClip", short: "08", hint: "截图与剪贴板小工具" },
+  { id: "travel", label: "出行准备工具", short: "05", hint: "场景化清单 MVP" },
+  { id: "toolbox", label: "SnipClip", short: "06", hint: "截图与剪贴板小工具" },
+  { id: "about", label: "关于我", short: "07", hint: "学习速度与落地方式" },
+  { id: "tech-map", label: "AI 技术图谱", short: "08", hint: "我的 AI 技术实践版图" },
   { id: "contact", label: "联系我", short: "09", hint: "微信、邮箱与电话" },
 ];
 
@@ -132,6 +132,7 @@ function ScrollGalleryMotion() {
     const opsStory = document.querySelector<HTMLElement>(".ops-feature");
     const learningStory = document.querySelector<HTMLElement>(".learning-feature");
     const ragStory = document.querySelector<HTMLElement>(".rag-feature");
+    const travelStory = document.querySelector<HTMLElement>(".travel-feature");
     let frame = 0;
 
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -173,6 +174,13 @@ function ScrollGalleryMotion() {
         const ragTravel = Math.max(1, ragStory.offsetHeight - viewportHeight);
         const ragProgress = clamp(-ragRect.top / ragTravel);
         ragStory.style.setProperty("--rag-progress", ragProgress.toFixed(3));
+      }
+
+      if (travelStory) {
+        const travelRect = travelStory.getBoundingClientRect();
+        const travelTravel = Math.max(1, travelStory.offsetHeight - viewportHeight);
+        const travelProgress = clamp(-travelRect.top / travelTravel);
+        travelStory.style.setProperty("--travel-progress", travelProgress.toFixed(3));
       }
 
       sections.forEach((section, index) => {
@@ -533,6 +541,43 @@ function RagRulesFeature({ project }: { project: Project }) {
   );
 }
 
+function TravelFeature({ project }: { project: Project }) {
+  if (!("evidence" in project)) return null;
+  const demos = [
+    ["行程信息解析", "从一句话识别出发地、目的地和时间，信息不够时继续追问。", "/assets/projects/travel-dialog.png", "出行准备工具行程信息解析"],
+    ["天气与行李建议", "把温度和降雨转成具体物品建议，而不是只展示天气数字。", "/assets/projects/travel-weather-list.png", "出行准备工具天气与行李建议"],
+    ["交通与路线准备", "接入车票查询与出发提醒，把路线准备放进同一份清单。", "/assets/projects/travel-rail-query.png", "出行准备工具交通路线准备"],
+    ["场景化 Checklist", "亲子度假与商务出差会生成不同清单，避免模板化推荐。", "/assets/projects/travel-scenario-compare.png", "出行准备工具场景化清单"],
+  ];
+
+  return (
+    <section id="travel" className="travel-feature">
+      <div className="travel-stage">
+        <header className="travel-heading">
+          <span>05 / TRIP PREP COMPANION</span>
+          <h2>出行准备<br />小工具</h2>
+          <p>把一句出行计划变成天气、交通和行李都考虑到的可执行清单。</p>
+          <div className="travel-ticket"><span>FROM</span><strong>一句话</strong><i>→</i><span>TO</span><strong>准备完成</strong></div>
+        </header>
+        <div className="travel-device-stage">
+          <div className="travel-phone">
+            <div className="travel-speaker" />
+            <div className="travel-screen-track">
+              {demos.map(([title, , image, alt]) => (
+                <figure className="travel-screen" key={title}><img src={image} alt={alt} /></figure>
+              ))}
+            </div>
+          </div>
+          {demos.map(([title, body], index) => (
+            <div className={`travel-callout travel-callout--${index + 1}`} key={title}><span>0{index + 1}</span><strong>{title}</strong><p>{body}</p></div>
+          ))}
+          <div className="travel-pass" aria-hidden="true"><span>TRIP READY</span><strong>WEATHER · ROUTE · CHECKLIST</strong></div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProjectCase({ project, index }: { project: Project; index: number }) {
   if (!("evidence" in project)) return null;
   const displayCount = project.evidence.length + 1;
@@ -592,7 +637,7 @@ function ProjectCase({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Home() {
-  const [assistant, ops, learning, rag, ...caseProjects] = projects;
+  const [assistant, ops, learning, rag, travel, ...caseProjects] = projects;
 
   return (
     <main>
@@ -622,6 +667,7 @@ export default function Home() {
       <StorageOpsFeature project={ops} />
       <LearningPulseFeature project={learning} />
       <RagRulesFeature project={rag} />
+      <TravelFeature project={travel} />
 
       <section id="about" className="about-section">
         <div className="section-intro">
@@ -657,7 +703,7 @@ export default function Home() {
         </div>
         <div className="case-stack">
           {caseProjects.map((project, index) => (
-            <ProjectCase key={project.id} project={project} index={index + 5} />
+            <ProjectCase key={project.id} project={project} index={index + 6} />
           ))}
         </div>
       </section>
